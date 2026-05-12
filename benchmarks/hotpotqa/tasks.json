@@ -1,0 +1,584 @@
+[
+  {
+    "id": "5a86458b5542991e771815ec",
+    "question": "What is the population of the city where the Akademisches Kunstmuseum is?",
+    "answer": "300,000",
+    "supporting_facts": [
+      [
+        "Akademisches Kunstmuseum",
+        0
+      ],
+      [
+        "Bonn",
+        0
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5a7a9b9a5542990198eaf160",
+    "question": "When was the Chinese American electronic musician and singer who collaborated on the album I Remember born?",
+    "answer": "1989",
+    "supporting_facts": [
+      [
+        "I Remember (AlunaGeorge album)",
+        2
+      ],
+      [
+        "Zhu (musician)",
+        0
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5ac2659b55429963665199a1",
+    "question": "How many laps did Harry Prowell run during the 10,000 metres race at the 1967 Pan American Games?",
+    "answer": "25 laps",
+    "supporting_facts": [
+      [
+        "Harry Prowell",
+        3
+      ],
+      [
+        "10,000 metres",
+        2
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5ac2758b55429963665199c3",
+    "question": "The organization that Nicolae Titulescu served two terms as president was founded on what date?",
+    "answer": "10 January 1920",
+    "supporting_facts": [
+      [
+        "Nicolae Titulescu",
+        0
+      ],
+      [
+        "League of Nations",
+        0
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5a8a575a554299515336136e",
+    "question": "Rynella is an unincorporated community named after the daughters of a conservationist who presided of the maker of a brand of hot sauce made from vinegar, salt and what kind of peppers? ",
+    "answer": "tabasco peppers",
+    "supporting_facts": [
+      [
+        "Rynella, Louisiana",
+        0
+      ],
+      [
+        "Rynella, Louisiana",
+        1
+      ],
+      [
+        "Rynella, Louisiana",
+        2
+      ],
+      [
+        "Tabasco sauce",
+        0
+      ],
+      [
+        "Tabasco sauce",
+        1
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5adf75e35542993344016c98",
+    "question": "What American horror film directed by Sidney J. Furie was based off an alleged haunting which occurred in 1974 at Culver City, California?",
+    "answer": "The Entity",
+    "supporting_facts": [
+      [
+        "Doris Bither case",
+        0
+      ],
+      [
+        "The Entity",
+        0
+      ],
+      [
+        "The Entity",
+        3
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5abaee845542996606241696",
+    "question": "On February 25, 2017 tony Harrison lost the the International Boxing Federation light middleweight world title to a boxer from what state?",
+    "answer": "Maryland",
+    "supporting_facts": [
+      [
+        "Tony Harrison (boxer)",
+        0
+      ],
+      [
+        "Jarrett Hurd",
+        0
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5ac3bab155429939154138fb",
+    "question": "The House of Hanover held the British throne until after Victoria's death, when it was past to the dynasty that ruled which duchy?",
+    "answer": "Ernestine",
+    "supporting_facts": [
+      [
+        "House of Hanover",
+        1
+      ],
+      [
+        "House of Saxe-Coburg and Gotha",
+        0
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5abdff775542993f32c2a082",
+    "question": "At what theater is the composer and lyricist for the musical Big Fish a residential artist?",
+    "answer": "Ars Nova Theater",
+    "supporting_facts": [
+      [
+        "Big Fish (musical)",
+        0
+      ],
+      [
+        "Andrew Lippa",
+        1
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5a728dc65542992359bc30ef",
+    "question": "What fellow Turkish footballer did Darko Kovačević form an offensive partnership with during his tenure at Real Sociedad?",
+    "answer": "Nihat Kahveci",
+    "supporting_facts": [
+      [
+        "Darko Kovačević",
+        3
+      ],
+      [
+        "Nihat Kahveci",
+        0
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5ae694a15542991bbc976141",
+    "question": "Why is Minister Pool important to Black Country and the West Midlands in England?",
+    "answer": "defence of the Cathedral",
+    "supporting_facts": [
+      [
+        "Minster Pool",
+        1
+      ],
+      [
+        "Lichfield Cathedral",
+        2
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5add016e5542992c1e3a250b",
+    "question": "What made the man who abolished the Consell in 1718 resume the throne?",
+    "answer": "upon his son's death",
+    "supporting_facts": [
+      [
+        "Gran i General Consell",
+        3
+      ],
+      [
+        "Philip V of Spain",
+        0
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5ac3090d5542990b17b154fc",
+    "question": "Operalia, The World Opera Competition helped launch the career of an operatic soprano of what nationality?",
+    "answer": "Bulgarian",
+    "supporting_facts": [
+      [
+        "Operalia, The World Opera Competition",
+        0
+      ],
+      [
+        "Operalia, The World Opera Competition",
+        1
+      ],
+      [
+        "Sonya Yoncheva",
+        0
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5a7133565542994082a3e65c",
+    "question": "What Kentucky county has a population of 60,316 and features the Lake Louisvilla neighborhood?",
+    "answer": "Oldham County",
+    "supporting_facts": [
+      [
+        "Lake Louisvilla, Louisville",
+        0
+      ],
+      [
+        "Lake Louisvilla, Louisville",
+        1
+      ],
+      [
+        "Oldham County, Kentucky",
+        0
+      ],
+      [
+        "Oldham County, Kentucky",
+        1
+      ],
+      [
+        "Oldham County, Kentucky",
+        4
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5ae7edee554299540e5a56ad",
+    "question": "The Church of the Guanche People was founded in the city that is on the most populated island of what larger area?",
+    "answer": "Macaronesia",
+    "supporting_facts": [
+      [
+        "Church of the Guanche People",
+        0
+      ],
+      [
+        "Tenerife",
+        2
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5ac079e9554299294b218fff",
+    "question": "What organization does Rosyth Dockyard and Queen Elizabeth-class aircraft carrier have in common?",
+    "answer": "Navy",
+    "supporting_facts": [
+      [
+        "Rosyth Dockyard",
+        0
+      ],
+      [
+        "Queen Elizabeth-class aircraft carrier",
+        0
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5ab6ba045542995eadef007e",
+    "question": "Dorian Gray is the main character of what philosophical novel whose editor feared the story was indecent, and deleted roughly five hundred words before publication?",
+    "answer": "The Picture of Dorian Gray",
+    "supporting_facts": [
+      [
+        "Dorian Gray (disambiguation)",
+        0
+      ],
+      [
+        "The Picture of Dorian Gray",
+        0
+      ],
+      [
+        "The Picture of Dorian Gray",
+        1
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5a7a15d35542996a35c170c4",
+    "question": "In what city does a Christian minister who won the singles title with Jan Kodes in the 1970 French Open currently reside?",
+    "answer": "Perth, Western Australia",
+    "supporting_facts": [
+      [
+        "1970 French Open",
+        2
+      ],
+      [
+        "Margaret Court",
+        1
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5abbcfaf5542993f40c73ba9",
+    "question": "Nicole Gordon won a silver medal with Sara Petersen int he women's doubles at a competition held in what city?",
+    "answer": "Manchester",
+    "supporting_facts": [
+      [
+        "Nicole Gordon (badminton)",
+        1
+      ],
+      [
+        "2002 Commonwealth Games",
+        0
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5ade8b2655429975fa854eff",
+    "question": "What is the nickname of this American retired airline captain celebrated for his water landing with Jeffrey Skiles, after a bird strike and being unable to reach an airport?",
+    "answer": "Sully",
+    "supporting_facts": [
+      [
+        "US Airways Flight 1549",
+        0
+      ],
+      [
+        "US Airways Flight 1549",
+        1
+      ],
+      [
+        "Chesley Sullenberger",
+        0
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5adea9ea55429939a52fe934",
+    "question": "What was the name of the fanzine that interviewed the Sex Pistols bassist when he was in the band \"The Flowers of Romance?\"",
+    "answer": "SKUM",
+    "supporting_facts": [
+      [
+        "The Flowers of Romance (band)",
+        1
+      ],
+      [
+        "The Flowers of Romance (band)",
+        2
+      ],
+      [
+        "Sid Vicious",
+        0
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5ade636255429939a52fe896",
+    "question": "Kresy, which roughly was a part of the land beyond the so-called Curson Line, was drawn for what reason?",
+    "answer": "demarcation line between the newly emerging states, the Second Polish Republic, and the Soviet Union",
+    "supporting_facts": [
+      [
+        "Kresy",
+        0
+      ],
+      [
+        "Curzon Line",
+        1
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5a7f53ff5542992097ad2f17",
+    "question": "In addition to the best known comic servant from Commedia dell'arte, who else is featured in La Surprise de l'amour?",
+    "answer": "Columbine",
+    "supporting_facts": [
+      [
+        "La Surprise de l'amour",
+        0
+      ],
+      [
+        "La Surprise de l'amour",
+        1
+      ],
+      [
+        "Harlequin",
+        0
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5a7730015542994aec3b7210",
+    "question": "Which TV series, written by the creators of Robocalypse, is set in Bikini Bottom?",
+    "answer": "SpongeBob SquarePants",
+    "supporting_facts": [
+      [
+        "Robocalypse",
+        2
+      ],
+      [
+        "SpongeBob SquarePants",
+        1
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5ac325495542995ef918c12e",
+    "question": "Which region of Ghana was the city where Akrofuom is located? ",
+    "answer": "Ashanti Region of Ghana",
+    "supporting_facts": [
+      [
+        "Akrofuom (Ghana parliament constituency)",
+        2
+      ],
+      [
+        "Obuasi Municipal District",
+        0
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5a7dbc175542995ed0d1666b",
+    "question": "What russian Marxist revolutionary born in 1875 was part of the Vpered organization?",
+    "answer": "Anatoly Vasilyevich Lunacharsky",
+    "supporting_facts": [
+      [
+        "Vpered",
+        2
+      ],
+      [
+        "Anatoly Lunacharsky",
+        0
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5ac514d05542994611c8b372",
+    "question": "What is the name of the person that named Moltke Nunatak after the Chief of the German General staff that served from 1906 to 1914?",
+    "answer": "Second German Antarctic Expedition of 1911–12 under Wilhelm Filchner.",
+    "supporting_facts": [
+      [
+        "Moltke Nunataks",
+        1
+      ],
+      [
+        "Moltke Nunataks",
+        2
+      ],
+      [
+        "Helmuth von Moltke the Younger",
+        0
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5a8ec02e5542995a26add501",
+    "question": "Which American sketch comedy television series starring John C. Reilly was produced by Abso Lutely Productions?",
+    "answer": "Check It Out!",
+    "supporting_facts": [
+      [
+        "Abso Lutely Productions",
+        1
+      ],
+      [
+        "Abso Lutely Productions",
+        2
+      ],
+      [
+        "Abso Lutely Productions",
+        3
+      ],
+      [
+        "Check It Out! with Dr. Steve Brule",
+        0
+      ],
+      [
+        "Check It Out! with Dr. Steve Brule",
+        1
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5a7220f055429971e9dc92ac",
+    "question": "What was the Volvo S70 essentially modeled after and was the first all wheel drive Volvo?",
+    "answer": "Volvo 850",
+    "supporting_facts": [
+      [
+        "Volvo S70",
+        1
+      ],
+      [
+        "Volvo 850",
+        0
+      ],
+      [
+        "Volvo 850",
+        2
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  },
+  {
+    "id": "5a8db348554299068b959dc2",
+    "question": "What is the subsidiary of the record company who released \"Love Incredible?\"",
+    "answer": "Vivendi S.A.",
+    "supporting_facts": [
+      [
+        "Love Incredible",
+        0
+      ],
+      [
+        "Love Incredible",
+        1
+      ],
+      [
+        "Interscope Records",
+        1
+      ]
+    ],
+    "type": "bridge",
+    "level": "hard"
+  }
+]
