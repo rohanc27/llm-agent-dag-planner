@@ -168,7 +168,36 @@ _PLANNER_INSTRUCTIONS: str = (
     "Plan greedily for parallelism: tasks that don't actually depend on each "
     "other should have empty depends_on lists so they execute concurrently. "
     "Only add a dependency when the result of one task is genuinely needed "
-    "to build the args of another."
+    "to build the args of another.\n"
+    "\n"
+    "PLACEHOLDER SYNTAX (strict):\n"
+    "A placeholder must be EXACTLY one of:\n"
+    "  - \"$task_<id>\"           — the entire output of an earlier task\n"
+    "  - \"$task_<id>.<path>\"    — a field / list-index path on that output\n"
+    "and it must be the ENTIRE value of the arg field. You CANNOT embed extra "
+    "words, transformations, or descriptions inside or alongside it.\n"
+    "  VALID:    \"$task_1\", \"$task_0.0\", \"$task_3.title\"\n"
+    "  INVALID:  \"$task_1 record label subsidiary\"   (extra words after)\n"
+    "  INVALID:  \"$task_1.subsidiary parent company\" (extra words after)\n"
+    "  INVALID:  \"the article about $task_1\"          (embedded mid-string)\n"
+    "If you need to use a task's output as part of a more complex query for "
+    "a later task, pass the placeholder as the whole arg value to a search/"
+    "fetch tool and let that tool surface what you need. Do not try to "
+    "interpolate placeholders inside larger strings.\n"
+    "\n"
+    "MULTI-HOP PLANNING:\n"
+    "For questions whose answer is a property of an entity that must first "
+    "be identified through another entity (e.g. \"the X of the Y of Z\"), "
+    "plan at least two search+fetch pairs at different levels of the DAG. "
+    "Be speculative: include extra fetch tasks at higher topological levels "
+    "rather than fewer — unused tasks are cheap, missing tasks make the "
+    "question unanswerable.\n"
+    "\n"
+    "Example plan structure for a 3-hop question:\n"
+    "  Level 0: search for entity Z\n"
+    "  Level 1: fetch the article identified in level 0 (placeholder $task_0.0)\n"
+    "  Level 2: search for entity Y mentioned in Z's article\n"
+    "  Level 3: fetch the article identified in level 2 (placeholder $task_2.0)\n"
 )
 
 
@@ -284,23 +313,49 @@ async def _run_single_task(
     tools_by_name: dict[str, Tool],
     outputs: dict[int, Any],
     metrics: AggregateMetrics,
+    task_debug: Optional[dict[str, Any]] = None,
 ) -> tuple[int, Any]:
+    """Execute one task. ``task_debug`` is an optional per-task sink that,
+    if provided, is populated with ``task_id``/``tool``/``args_raw``/
+    ``depends_on``/``args_substituted``/``output``. Pure addition for the
+    diagnostic script — does not affect execution behavior."""
+    if task_debug is not None:
+        task_debug["task_id"] = task.id
+        task_debug["tool"] = task.tool
+        task_debug["args_raw"] = task.args
+        task_debug["depends_on"] = list(task.depends_on)
+        task_debug["args_substituted"] = None
+        task_debug["output"] = None
+
     tool = tools_by_name.get(task.tool)
     if tool is None:
-        return task.id, {"error": f"unknown tool {task.tool!r}"}
+        out: Any = {"error": f"unknown tool {task.tool!r}"}
+        if task_debug is not None:
+            task_debug["output"] = out
+        return task.id, out
 
     try:
         resolved_args = substitute_placeholders(task.args, outputs)
     except ValueError as exc:
-        return task.id, {"error": f"placeholder substitution failed: {exc}"}
+        out = {"error": f"placeholder substitution failed: {exc}"}
+        if task_debug is not None:
+            task_debug["output"] = out
+        return task.id, out
 
     if not isinstance(resolved_args, dict):
-        return task.id, {
+        out = {
             "error": (
                 f"resolved args for task {task.id} are not an object: "
                 f"{type(resolved_args).__name__}"
             )
         }
+        if task_debug is not None:
+            task_debug["args_substituted"] = resolved_args
+            task_debug["output"] = out
+        return task.id, out
+
+    if task_debug is not None:
+        task_debug["args_substituted"] = resolved_args
 
     # We're about to actually hit the external service — count it. Tasks
     # that bail out above (unknown tool, placeholder failure, malformed
@@ -310,7 +365,13 @@ async def _run_single_task(
     try:
         result = await tool.execute(**resolved_args)
     except Exception as exc:  # noqa: BLE001 — feed errors forward
-        return task.id, {"error": f"tool {task.tool} raised: {exc}"}
+        out = {"error": f"tool {task.tool} raised: {exc}"}
+        if task_debug is not None:
+            task_debug["output"] = out
+        return task.id, out
+
+    if task_debug is not None:
+        task_debug["output"] = result
 
     return task.id, result
 
@@ -320,6 +381,7 @@ async def _execute_dag(
     tools_by_name: dict[str, Tool],
     levels: list[list[Task]],
     metrics: AggregateMetrics,
+    debug_levels: Optional[list[dict[str, Any]]] = None,
 ) -> dict[int, Any]:
     """Execute ``dag`` level-by-level. Returns ``{task_id: output}``.
 
@@ -327,6 +389,9 @@ async def _execute_dag(
     Output dict is updated after each level so subsequent levels can
     resolve placeholders. ``metrics.n_tools_executed`` is incremented
     once per task that actually reaches its ``tool.execute()`` call.
+
+    ``debug_levels``: optional list to which one ``{"level", "tasks": [...]}``
+    entry is appended per level. Pure addition for the diagnostic script.
     """
     outputs: dict[int, Any] = {}
     for level_idx, level in enumerate(levels):
@@ -336,9 +401,23 @@ async def _execute_dag(
             len(level),
             [(t.id, t.tool) for t in level],
         )
+        task_debugs: list[Optional[dict[str, Any]]]
+        if debug_levels is not None:
+            task_debugs = [dict() for _ in level]
+        else:
+            task_debugs = [None] * len(level)
         level_results = await asyncio.gather(
-            *(_run_single_task(t, tools_by_name, outputs, metrics) for t in level)
+            *(
+                _run_single_task(
+                    t, tools_by_name, outputs, metrics, task_debug=td
+                )
+                for t, td in zip(level, task_debugs)
+            )
         )
+        if debug_levels is not None:
+            debug_levels.append(
+                {"level": level_idx, "tasks": [td for td in task_debugs]}
+            )
         for tid, output in level_results:
             outputs[tid] = output
     return outputs
@@ -376,6 +455,7 @@ async def _synthesize(
     outputs: dict[int, Any],
     llm: LLMProvider,
     metrics: AggregateMetrics,
+    debug: Optional[dict[str, Any]] = None,
 ) -> str:
     user_msg = (
         f"Question: {question}\n\n"
@@ -383,22 +463,32 @@ async def _synthesize(
         f"{_format_outputs_for_synthesis(dag, outputs)}\n\n"
         f"Using only the results above, give a concise final answer in plain text."
     )
+    if debug is not None:
+        debug["synth_system_prompt"] = REACT_SYSTEM_PROMPT
+        debug["synth_user_prompt"] = user_msg
     response, call_metrics = await llm.call(
         messages=[{"role": "user", "content": user_msg}],
         system=REACT_SYSTEM_PROMPT,
     )
     metrics.add_call(call_metrics, add_to_wall_clock=False)
-    return extract_text(response)
+    text = extract_text(response)
+    if debug is not None:
+        debug["synth_response"] = text
+    return text
 
 
 # -----------------------------------------------------------------------------
 # Top-level entrypoint
 # -----------------------------------------------------------------------------
+_EMPTY_RESULT_PREFIX: str = "DAG_PLANNER_EMPTY_RESULT"
+
+
 async def run_dag_planner(
     question: str,
     tools: list[Tool],
     llm: LLMProvider,
     trace: Optional[dict[str, Any]] = None,
+    debug: Optional[dict[str, Any]] = None,
 ) -> tuple[str, AggregateMetrics]:
     """Run plan → execute → synthesize on one question.
 
@@ -416,47 +506,117 @@ async def run_dag_planner(
     tuple
         ``(final_answer, AggregateMetrics)``. ``total_wall_clock_seconds``
         is the externally-measured wall clock across all three phases.
+
+    Empty-answer contract
+    ---------------------
+    This function NEVER returns ``("", metrics)``. If the planner emits a
+    structurally invalid plan, we catch :class:`PlanValidationError` and
+    surface it as ``"DAG_PLANNER_EMPTY_RESULT: <reason>"`` so the metrics
+    accumulated up to that point (e.g. the plan LLM call) survive into
+    the eval row. Likewise if synthesis returns empty text. Unexpected
+    exceptions (network, internal bugs) still propagate so they land in
+    the eval harness's ``error`` field for debugging.
     """
     tools_by_name = {t.name: t for t in tools}
     metrics = AggregateMetrics()
     final_answer: str = ""
+    dag_for_diag: Optional[DAG] = None
+    outputs_for_diag: dict[int, Any] = {}
+
+    planner_system_prompt = _planner_system_prompt(tools)
+
+    if debug is not None:
+        debug["planner_system_prompt"] = planner_system_prompt
+        debug["planner_user_prompt"] = question
+        debug["plan_raw"] = None
+        debug["plan_validation"] = None
+        debug["level_executions"] = []
+        debug["synth_system_prompt"] = None
+        debug["synth_user_prompt"] = None
+        debug["synth_response"] = None
 
     wall_clock_start = time.perf_counter()
     try:
-        # -- Phase 1: Plan ----------------------------------------------------
-        plan_response, plan_metrics = await llm.call(
-            messages=[{"role": "user", "content": question}],
-            tools=[SUBMIT_PLAN_TOOL_DEF],
-            system=_planner_system_prompt(tools),
-            forced_function_name="submit_plan",
-        )
-        metrics.add_call(plan_metrics, add_to_wall_clock=False)
-
-        plan_calls = extract_function_calls(plan_response)
-        if not plan_calls or plan_calls[0].name != "submit_plan":
-            raise PlanValidationError(
-                "planner did not emit submit_plan; got: "
-                f"{[c.name for c in plan_calls] or '(text-only)'}"
+        try:
+            # -- Phase 1: Plan -----------------------------------------------
+            plan_response, plan_metrics = await llm.call(
+                messages=[{"role": "user", "content": question}],
+                tools=[SUBMIT_PLAN_TOOL_DEF],
+                system=planner_system_prompt,
+                forced_function_name="submit_plan",
             )
+            metrics.add_call(plan_metrics, add_to_wall_clock=False)
 
-        plan_args = plan_calls[0].args
-        dag = _build_dag_from_plan(plan_args, tools_by_name)
-        levels = topological_levels(dag)
+            plan_calls = extract_function_calls(plan_response)
+            if not plan_calls or plan_calls[0].name != "submit_plan":
+                raise PlanValidationError(
+                    "planner did not emit submit_plan; got: "
+                    f"{[c.name for c in plan_calls] or '(text-only)'}"
+                )
 
-        if trace is not None:
-            trace["plan_raw"] = plan_args
-            trace["dag"] = dag
-            trace["levels"] = levels
+            plan_args = plan_calls[0].args
+            if debug is not None:
+                debug["plan_raw"] = plan_args
 
-        # -- Phase 2: Execute -------------------------------------------------
-        outputs = await _execute_dag(dag, tools_by_name, levels, metrics)
-        if trace is not None:
-            trace["outputs"] = outputs
+            dag = _build_dag_from_plan(plan_args, tools_by_name)
+            if debug is not None:
+                debug["plan_validation"] = "ok"
+            dag_for_diag = dag
+            levels = topological_levels(dag)
 
-        # -- Phase 3: Synthesize ---------------------------------------------
-        final_answer = await _synthesize(question, dag, outputs, llm, metrics)
-        if trace is not None:
-            trace["final_answer"] = final_answer
+            if trace is not None:
+                trace["plan_raw"] = plan_args
+                trace["dag"] = dag
+                trace["levels"] = levels
+
+            # -- Phase 2: Execute --------------------------------------------
+            outputs = await _execute_dag(
+                dag,
+                tools_by_name,
+                levels,
+                metrics,
+                debug_levels=(
+                    debug["level_executions"] if debug is not None else None
+                ),
+            )
+            outputs_for_diag = outputs
+            if trace is not None:
+                trace["outputs"] = outputs
+
+            # -- Phase 3: Synthesize -----------------------------------------
+            final_answer = await _synthesize(
+                question, dag, outputs, llm, metrics, debug=debug
+            )
+            if trace is not None:
+                trace["final_answer"] = final_answer
+        except PlanValidationError as exc:
+            reason = f"plan validation failed — {exc}"
+            logger.warning("dag_planner: %s", reason)
+            if debug is not None and (
+                debug.get("plan_validation") is None
+                or debug.get("plan_validation") == "ok"
+            ):
+                debug["plan_validation"] = f"error: {exc}"
+            final_answer = f"{_EMPTY_RESULT_PREFIX}: {reason}"
+
+        # Belt-and-suspenders: synth can legitimately return "" if Gemini
+        # filtered or produced an empty response despite reaching it.
+        if not final_answer or not final_answer.strip():
+            if dag_for_diag is not None:
+                n_err = sum(
+                    1
+                    for v in outputs_for_diag.values()
+                    if isinstance(v, dict) and "error" in v
+                )
+                reason = (
+                    f"synthesizer returned empty text "
+                    f"(plan had {len(dag_for_diag.tasks)} task(s); "
+                    f"{n_err} produced errors during execution)"
+                )
+            else:
+                reason = "no answer produced (planning never completed)"
+            logger.warning("dag_planner: %s", reason)
+            final_answer = f"{_EMPTY_RESULT_PREFIX}: {reason}"
     finally:
         metrics.total_wall_clock_seconds = time.perf_counter() - wall_clock_start
 
