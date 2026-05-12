@@ -29,14 +29,27 @@ HOTPOT_URL: str = (
 )
 
 # Layout. The raw file lives under ``raw/`` (gitignored); the sampled
-# tasks.json is committed for reproducibility.
+# per-type tasks files are committed for reproducibility.
 HERE: Path = Path(__file__).resolve().parent
 RAW_DIR: Path = HERE / "raw"
 RAW_PATH: Path = RAW_DIR / "hotpot_dev_distractor_v1.json"
-TASKS_PATH: Path = HERE / "tasks.json"
+
+# HotpotQA's ``type`` field is one of ``bridge`` or ``comparison``. We
+# keep a separate sampled-tasks file per type so both can coexist in the
+# repo and ``run_eval`` can target either.
+TASKS_FILENAMES: dict[str, str] = {
+    "bridge": "tasks.json",
+    "comparison": "tasks_comparison.json",
+}
+TASKS_PATH: Path = HERE / TASKS_FILENAMES["bridge"]  # legacy / bridge default
 
 DEFAULT_N: int = 30
 DEFAULT_SEED: int = 42
+DEFAULT_TYPE: str = "bridge"
+
+
+def _tasks_path_for(task_type: str) -> Path:
+    return HERE / TASKS_FILENAMES[task_type]
 
 
 def download_raw(
@@ -94,11 +107,17 @@ def filter_and_sample(
     raw_path: Path,
     n: int = DEFAULT_N,
     seed: int = DEFAULT_SEED,
+    task_type: str = DEFAULT_TYPE,
 ) -> list[dict[str, Any]]:
-    """Load raw JSON, keep ``type == "bridge"``, sample ``n`` with ``seed``.
+    """Load raw JSON, keep ``type == task_type``, sample ``n`` with ``seed``.
 
     Output records use the schema documented in SPEC.md § 3 Step 4.
+    ``task_type`` must be one of ``"bridge"`` or ``"comparison"``.
     """
+    if task_type not in TASKS_FILENAMES:
+        raise ValueError(
+            f"Unknown task_type {task_type!r}; expected one of {sorted(TASKS_FILENAMES)}."
+        )
     with open(raw_path, "r", encoding="utf-8") as f:
         data = json.load(f)
     if not isinstance(data, list):
@@ -106,15 +125,15 @@ def filter_and_sample(
             f"Expected a JSON array in {raw_path}, got {type(data).__name__}."
         )
 
-    bridge = [ex for ex in data if ex.get("type") == "bridge"]
-    if len(bridge) < n:
+    filtered = [ex for ex in data if ex.get("type") == task_type]
+    if len(filtered) < n:
         raise ValueError(
-            f"Only {len(bridge)} bridge examples available in {raw_path}; "
+            f"Only {len(filtered)} {task_type} examples available in {raw_path}; "
             f"cannot sample {n}."
         )
 
     rng = random.Random(seed)
-    sample = rng.sample(bridge, n)
+    sample = rng.sample(filtered, n)
 
     return [
         {
@@ -144,7 +163,17 @@ def _display_path(p: Path) -> str:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Sample HotpotQA bridge tasks.")
+    parser = argparse.ArgumentParser(description="Sample HotpotQA tasks.")
+    parser.add_argument(
+        "--type",
+        choices=sorted(TASKS_FILENAMES),
+        default=DEFAULT_TYPE,
+        help=(
+            "HotpotQA question type to filter for. 'bridge' (default) is the "
+            "adaptive multi-hop set; 'comparison' is the inherently-parallel "
+            "X-vs-Y set."
+        ),
+    )
     parser.add_argument("--n", type=int, default=DEFAULT_N, help="How many tasks to sample.")
     parser.add_argument(
         "--seed", type=int, default=DEFAULT_SEED, help="Random seed for sampling."
@@ -163,15 +192,17 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     raw = download_raw(url=args.url, force=args.force_download)
-    tasks = filter_and_sample(raw, n=args.n, seed=args.seed)
-    save_tasks(tasks, TASKS_PATH)
+    tasks = filter_and_sample(raw, n=args.n, seed=args.seed, task_type=args.type)
+    out_path = _tasks_path_for(args.type)
+    save_tasks(tasks, out_path)
 
     print(
-        f"\nSampled {len(tasks)} bridge tasks from HotpotQA dev set "
-        f"(saved to {_display_path(TASKS_PATH)})"
+        f"\nSampled {len(tasks)} {args.type} tasks from HotpotQA dev set "
+        f"(saved to {_display_path(out_path)})"
     )
-    print("\nFirst 2 tasks (sanity check):")
-    print(json.dumps(tasks[:2], indent=2, ensure_ascii=False))
+    n_preview = 5 if args.type == "comparison" else 2
+    print(f"\nFirst {n_preview} tasks (sanity check):")
+    print(json.dumps(tasks[:n_preview], indent=2, ensure_ascii=False))
     return 0
 
 

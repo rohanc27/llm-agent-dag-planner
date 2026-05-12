@@ -58,14 +58,17 @@ STRATEGIES: dict[str, StrategyFn] = {
 
 BENCHMARK_PATHS: dict[str, Path] = {
     "hotpotqa": REPO_ROOT / "benchmarks" / "hotpotqa" / "tasks.json",
+    "hotpotqa_comparison": REPO_ROOT / "benchmarks" / "hotpotqa" / "tasks_comparison.json",
     "github": REPO_ROOT / "benchmarks" / "github" / "tasks.json",
 }
 
 # Each benchmark uses ONLY its own tool set — Wikipedia tools never leak
 # into a GitHub task and vice versa. Strategies receive the per-benchmark
-# slice via the dispatch in run_eval().
+# slice via the dispatch in run_eval(). The two HotpotQA subsets share
+# the Wikipedia tools.
 TOOLS_FOR_BENCHMARK: dict[str, list[Tool]] = {
     "hotpotqa": WIKIPEDIA_TOOLS,
+    "hotpotqa_comparison": WIKIPEDIA_TOOLS,
     "github": GITHUB_TOOLS,
 }
 

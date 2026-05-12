@@ -1,0 +1,564 @@
+[
+  {
+    "id": "5ab6d04c554299710c8d1f70",
+    "question": "What family are the genus' Sinofranchetia and Stauntonia from?",
+    "answer": "a genus of flowering plant in the Lardizabalaceae family",
+    "supporting_facts": [
+      [
+        "Sinofranchetia",
+        0
+      ],
+      [
+        "Stauntonia",
+        0
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5ae3790f5542992e3233c415",
+    "question": "Are Leopold Lummerstorfer and Valeria Sarmiento both authors?",
+    "answer": "no",
+    "supporting_facts": [
+      [
+        "Leopold Lummerstorfer",
+        0
+      ],
+      [
+        "Valeria Sarmiento",
+        0
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5a7555215542996c70cfaee1",
+    "question": "Which came to market first, \"Hey Pa! There's a Goat on the Roof\" or \"Poleconomy\"",
+    "answer": "Hey Pa! There's a Goat on the Roof",
+    "supporting_facts": [
+      [
+        "Hey Pa! There's a Goat on the Roof",
+        1
+      ],
+      [
+        "Poleconomy",
+        0
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5a7ae38c5542992d025e6721",
+    "question": "Who was older when they died, Teinosuke Kinugasa or Don O. Newland",
+    "answer": "Teinosuke Kinugasa",
+    "supporting_facts": [
+      [
+        "Teinosuke Kinugasa",
+        0
+      ],
+      [
+        "Don O. Newland",
+        0
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5a8482e55542997175ce1edc",
+    "question": "Are Trent Edwards and Lucy Saroyan both football players?",
+    "answer": "no",
+    "supporting_facts": [
+      [
+        "Trent Edwards",
+        0
+      ],
+      [
+        "Lucy Saroyan",
+        0
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5a8b82a05542995d1e6f13d0",
+    "question": "Are University of Virginia and Massachusetts Institute of Technology in the same country?",
+    "answer": "yes",
+    "supporting_facts": [
+      [
+        "University of Virginia",
+        0
+      ],
+      [
+        "University of Virginia",
+        1
+      ],
+      [
+        "Massachusetts Institute of Technology",
+        0
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5a739323554299623ed4abff",
+    "question": "Which famous mine was in service first, the Salmita Mine or the Kanichee Mine?",
+    "answer": "Kanichee Mine",
+    "supporting_facts": [
+      [
+        "Salmita Mine",
+        1
+      ],
+      [
+        "Kanichee Mine",
+        2
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5a844fd35542990548d0b274",
+    "question": "What occupation did Nicholas Christopher and Roger Ebert share?",
+    "answer": "author",
+    "supporting_facts": [
+      [
+        "Nicholas Christopher",
+        0
+      ],
+      [
+        "Roger Ebert",
+        0
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5a8835245542994846c1ce27",
+    "question": "Do Tropical Fish Hobbyist and Curve cover the same topic?",
+    "answer": "no",
+    "supporting_facts": [
+      [
+        "Tropical Fish Hobbyist",
+        0
+      ],
+      [
+        "Curve (magazine)",
+        0
+      ],
+      [
+        "Curve (magazine)",
+        1
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5abb8afe5542993f40c73b1e",
+    "question": "Were both Roger Donaldson and André Cayatte french filmmakers?",
+    "answer": "no",
+    "supporting_facts": [
+      [
+        "Roger Donaldson",
+        0
+      ],
+      [
+        "André Cayatte",
+        0
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5adf39295542992d7e9f92df",
+    "question": "Which genus has more species, Apium or Elodea?",
+    "answer": "Apium",
+    "supporting_facts": [
+      [
+        "Apium",
+        0
+      ],
+      [
+        "Elodea",
+        0
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5abaa954554299232ef4a362",
+    "question": "Are the writing from Maurice Level and Alice Hoffman focused on different audieces?",
+    "answer": "yes",
+    "supporting_facts": [
+      [
+        "Maurice Level",
+        0
+      ],
+      [
+        "Alice Hoffman",
+        0
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5ae12bcc5542997b2ef7d11a",
+    "question": "Are Benjamin Britten and Béla Bartók from the same country?",
+    "answer": "no",
+    "supporting_facts": [
+      [
+        "Benjamin Britten",
+        0
+      ],
+      [
+        "Béla Bartók",
+        0
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5ab85a1155429934fafe6d7c",
+    "question": "Are both Rutgers University and Carnegie Mellon University located in America?",
+    "answer": "yes",
+    "supporting_facts": [
+      [
+        "Rutgers University",
+        0
+      ],
+      [
+        "Carnegie Mellon University",
+        0
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5ab5b6c1554299637185c5e5",
+    "question": "Did Franki Valli sing with Hellogoodbye or The Four Seasons?",
+    "answer": "The Four Seasons",
+    "supporting_facts": [
+      [
+        "Hellogoodbye",
+        0
+      ],
+      [
+        "The Four Seasons (band)",
+        0
+      ],
+      [
+        "The Four Seasons (band)",
+        2
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5ae383e15542992f92d822fb",
+    "question": "Which film is newer, The Apple Dumpling Gang or Heavyweights?",
+    "answer": "Heavyweights",
+    "supporting_facts": [
+      [
+        "The Apple Dumpling Gang (film)",
+        0
+      ],
+      [
+        "Heavyweights",
+        0
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5a80caac554299260e20a161",
+    "question": "Were both Prince and Patty Jenkins have been inducted into the Rock and Roll Hall of Fame?",
+    "answer": "no",
+    "supporting_facts": [
+      [
+        "Prince (musician)",
+        5
+      ],
+      [
+        "Patty Jenkins",
+        0
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5a87136e5542991e771816b2",
+    "question": "Does Il trovatore have less acts than La rondine",
+    "answer": "no",
+    "supporting_facts": [
+      [
+        "Il trovatore",
+        0
+      ],
+      [
+        "La rondine",
+        0
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5a8841ee5542994846c1ce6b",
+    "question": "Which is farther west, Sheridan County, Montana or Chandra Taal?",
+    "answer": "Sheridan County",
+    "supporting_facts": [
+      [
+        "Sheridan County, Montana",
+        0
+      ],
+      [
+        "Chandra Taal",
+        0
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5ac41b9e5542995c82c4acc4",
+    "question": "what species of plants are Chamelaucium and Vanilla derived from?",
+    "answer": "flowers",
+    "supporting_facts": [
+      [
+        "Chamelaucium",
+        0
+      ],
+      [
+        "Chamelaucium",
+        1
+      ],
+      [
+        "Vanilla",
+        0
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5a7ec61a55429934daa2fc5f",
+    "question": "Are Staten Island Catapult and This Is Elvis both documentaries?",
+    "answer": "yes",
+    "supporting_facts": [
+      [
+        "Staten Island Catapult",
+        0
+      ],
+      [
+        "This Is Elvis",
+        0
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5a7296815542991f9a20c515",
+    "question": "Who brewed the first espresso coffee in space, Patrick Baudry or Samantha Cristoforetti?",
+    "answer": "Samantha Cristoforetti",
+    "supporting_facts": [
+      [
+        "Patrick Baudry",
+        0
+      ],
+      [
+        "Patrick Baudry",
+        1
+      ],
+      [
+        "Samantha Cristoforetti",
+        0
+      ],
+      [
+        "Samantha Cristoforetti",
+        3
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5ac2a3c7554299218029dadb",
+    "question": "Which genus has more species in it, Othonna or Stangeria?",
+    "answer": "Othonna",
+    "supporting_facts": [
+      [
+        "Othonna",
+        0
+      ],
+      [
+        "Stangeria",
+        0
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5a82a1ae55429954d2e2eb89",
+    "question": "Between Aspidistra and Cyrtanthus, which genus of plant belongs to the Subfamily Amaryllidoideae?",
+    "answer": "Cyrtanthus",
+    "supporting_facts": [
+      [
+        "Aspidistra",
+        0
+      ],
+      [
+        "Cyrtanthus",
+        0
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5a7f96a95542995d8a8ddead",
+    "question": "IS Universidad de Oriente part of the same public university system as California State University, Dominguez Hills?",
+    "answer": "no",
+    "supporting_facts": [
+      [
+        "Universidad de Oriente",
+        0
+      ],
+      [
+        "California State University, Dominguez Hills",
+        0
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5a81028b55429938b614228a",
+    "question": "For which film did the Director team with NASA scientists, Aliens of the Deep or Poetry in Motion?",
+    "answer": "Aliens of the Deep",
+    "supporting_facts": [
+      [
+        "Aliens of the Deep",
+        0
+      ],
+      [
+        "Aliens of the Deep",
+        2
+      ],
+      [
+        "Poetry in Motion (film)",
+        0
+      ],
+      [
+        "Poetry in Motion (film)",
+        1
+      ],
+      [
+        "Poetry in Motion (film)",
+        2
+      ],
+      [
+        "Poetry in Motion (film)",
+        3
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5ab6d9b25542995eadef00c8",
+    "question": "Which opera has more acts, Don Quichotte or Tosca?",
+    "answer": "Don Quichotte",
+    "supporting_facts": [
+      [
+        "Tosca",
+        0
+      ],
+      [
+        "Don Quichotte",
+        0
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5a7a77425542995eb53be83e",
+    "question": "Who has released more solo albums, Nick Carter or Brady Seals?",
+    "answer": "Brady Seals",
+    "supporting_facts": [
+      [
+        "Nick Carter (musician)",
+        0
+      ],
+      [
+        "Nick Carter (musician)",
+        2
+      ],
+      [
+        "Brady Seals",
+        0
+      ],
+      [
+        "Brady Seals",
+        5
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5a7f68365542994857a7672e",
+    "question": "Which band was formed at an earlier date, Unwritten Law or Jon Spencer Blues Explosion?",
+    "answer": "Unwritten Law",
+    "supporting_facts": [
+      [
+        "Unwritten Law",
+        0
+      ],
+      [
+        "Jon Spencer Blues Explosion",
+        0
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  },
+  {
+    "id": "5ab846e155429919ba4e229c",
+    "question": "Who won more Grand Slam doubles titles, Tony Roche or Jamie Murray?",
+    "answer": "Anthony Dalton Roche",
+    "supporting_facts": [
+      [
+        "Tony Roche",
+        0
+      ],
+      [
+        "Tony Roche",
+        2
+      ],
+      [
+        "Jamie Murray",
+        1
+      ]
+    ],
+    "type": "comparison",
+    "level": "hard"
+  }
+]
