@@ -65,6 +65,56 @@ JUDGE_SYSTEM_PROMPT: str = (
 )
 
 
+# -----------------------------------------------------------------------------
+# Per-answer-type emphasis appended to the system prompt for the GitHub
+# benchmark. None of these override the base rules above — they tighten or
+# loosen scoring along the dimensions documented in the SPEC for Step 9.
+# -----------------------------------------------------------------------------
+_ANSWER_TYPE_HINTS: dict[str, str] = {
+    "count": (
+        "ANSWER TYPE: count (numeric).\n"
+        "Treat the gold as a number. Accept predictions within ±10% "
+        "tolerance — for example, gold '85' accepts any prediction in "
+        "the range [76, 94]. Approximation language ('around', 'about', "
+        "'roughly', 'exceeds', 'over', 'more than', 'nearly') around the "
+        "cited number is acceptable as long as the cited number itself is "
+        "within tolerance. Numbers substantially outside ±10% are wrong "
+        "regardless of hedging."
+    ),
+    "name": (
+        "ANSWER TYPE: name (single entity / value).\n"
+        "Apply the standard semantic-equivalence and name-variant rules. "
+        "A prediction that contains the gold name (possibly with extra "
+        "phrasing around it) is correct."
+    ),
+    "list": (
+        "ANSWER TYPE: list (set-match semantics).\n"
+        "The gold is a list of items, often as 'key: value' pairs. Mark "
+        "correct when EVERY gold item appears somewhere in the prediction "
+        "with its associated value matching (case-insensitive for typical "
+        "names / languages). Order does NOT matter. Extra items or extra "
+        "phrasing in the prediction are fine unless they directly "
+        "contradict a gold item. Missing any required item is wrong."
+    ),
+    "comparison": (
+        "ANSWER TYPE: comparison (winner of a comparison).\n"
+        "The gold names the entity that wins the comparison. Mark correct "
+        "if the prediction unambiguously identifies the SAME winner — "
+        "even if it adds reasoning, numbers, or supporting context around "
+        "the answer. If the prediction names a different winner, or hedges "
+        "between two candidates, mark wrong."
+    ),
+}
+
+
+def _build_judge_system_prompt(answer_type: Optional[str]) -> str:
+    """Return the base prompt, optionally with an answer-type addendum."""
+    hint = _ANSWER_TYPE_HINTS.get(answer_type) if answer_type else None
+    if hint is None:
+        return JUDGE_SYSTEM_PROMPT
+    return f"{JUDGE_SYSTEM_PROMPT}\n{hint}\n"
+
+
 def _first_balanced_object(s: str) -> Optional[str]:
     """Return the first balanced ``{...}`` substring, or ``None``.
 
@@ -195,16 +245,23 @@ async def judge_answer(
     gold: str,
     predicted: str,
     llm: LLMProvider,
+    answer_type: Optional[str] = None,
 ) -> dict[str, Any]:
     """Grade ``predicted`` against ``gold`` for ``question``.
 
     Returns ``{"correct": bool, "rationale": str}``.
+
+    ``answer_type`` (optional): when set to one of ``"count" | "name" |
+    "list" | "comparison"`` (the GitHub benchmark's per-task annotation),
+    a type-specific rule emphasis is appended to the system prompt.
+    Default ``None`` preserves the original HotpotQA-shaped behavior.
 
     On a parse failure, retries once with a stricter user-side instruction.
     If both attempts fail, returns ``{"correct": False, "rationale":
     "JUDGE_PARSE_ERROR: <raw>"}`` so the failure is visible in the eval
     rather than silently dropped.
     """
+    system_prompt = _build_judge_system_prompt(answer_type)
     raw_text: str = ""
     for attempt in range(2):
         response, _ = await llm.call(
@@ -216,7 +273,7 @@ async def judge_answer(
                     ),
                 }
             ],
-            system=JUDGE_SYSTEM_PROMPT,
+            system=system_prompt,
             max_tokens=_JUDGE_MAX_TOKENS,
         )
         raw_text = extract_text(response)

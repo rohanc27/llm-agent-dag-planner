@@ -42,6 +42,7 @@ from src.strategies.dag_planner import run_dag_planner
 from src.strategies.native_parallel import run_native_parallel
 from src.strategies.react import run_react
 from src.tools.base import Tool
+from src.tools.github import GITHUB_TOOLS
 from src.tools.wikipedia import WIKIPEDIA_TOOLS
 
 REPO_ROOT: Path = Path(__file__).resolve().parent.parent
@@ -57,10 +58,15 @@ STRATEGIES: dict[str, StrategyFn] = {
 
 BENCHMARK_PATHS: dict[str, Path] = {
     "hotpotqa": REPO_ROOT / "benchmarks" / "hotpotqa" / "tasks.json",
+    "github": REPO_ROOT / "benchmarks" / "github" / "tasks.json",
 }
 
+# Each benchmark uses ONLY its own tool set — Wikipedia tools never leak
+# into a GitHub task and vice versa. Strategies receive the per-benchmark
+# slice via the dispatch in run_eval().
 TOOLS_FOR_BENCHMARK: dict[str, list[Tool]] = {
     "hotpotqa": WIKIPEDIA_TOOLS,
+    "github": GITHUB_TOOLS,
 }
 
 
@@ -120,6 +126,13 @@ async def _run_one_task(
             "metrics": _empty_metrics_dict(),
             "error": None,
         }
+        # Pass-through fields from the benchmark (currently only present
+        # on GitHub tasks; HotpotQA omits them and the judge defaults
+        # back to its original HotpotQA-shaped behavior).
+        if "answer_type" in task:
+            record["answer_type"] = task["answer_type"]
+        if "category" in task:
+            record["category"] = task["category"]
         try:
             predicted, metrics = await strategy_fn(
                 question=task["question"],
@@ -134,6 +147,7 @@ async def _run_one_task(
                 gold=task["answer"],
                 predicted=predicted,
                 llm=llm,
+                answer_type=task.get("answer_type"),
             )
             record["judge_correct"] = bool(verdict.get("correct", False))
             record["judge_rationale"] = verdict.get("rationale", "")

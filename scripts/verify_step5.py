@@ -1,8 +1,11 @@
 from __future__ import annotations
 
-"""Verify Step 5 — the judge's semantic-equivalence behavior on 9 cases.
+"""Verify Step 5 — the judge's semantic-equivalence behavior on 13 cases.
 
-Cases:
+Cases 1-9 are HotpotQA-shaped (no ``answer_type`` — the judge runs in
+its original mode). Cases 10-13 are GitHub-shaped, exercising the four
+``answer_type`` modes added for Step 9.
+
   1. exact match                         → expect correct=True
   2. semantic match                      → expect correct=True
   3. format variation (#)                → expect correct=True
@@ -12,13 +15,12 @@ Cases:
   7. numeric hedge, "about"              → expect correct=True   (rule 7)
   8. numeric hedge, close value          → expect correct=True   (rule 7)
   9. numeric hedge, far-off value        → expect correct=False  (rule 7)
+ 10. answer_type=count, exact            → expect correct=True
+ 11. answer_type=count, within ±10%      → expect correct=True
+ 12. answer_type=list, all items present → expect correct=True
+ 13. answer_type=comparison, named winner→ expect correct=True
 
-Cases 6-9 cover the Step 6 Bonn bug regression: Wikipedia population /
-quantity answers are inherently approximate, so a hedged prediction with
-a reasonable cited number should grade correct, but the hedge does not
-save a substantially-wrong number.
-
-Prints each result. Prints PASS if all 9 verdicts match expectations,
+Prints each result. Prints PASS if all 13 verdicts match expectations,
 FAIL otherwise.
 
 Run:
@@ -105,6 +107,39 @@ CASES: list[dict] = [
         "predicted": "exceeds 500,000",
         "expected": False,
     },
+    # ---- GitHub answer_type cases (Step 9) --------------------------------
+    {
+        "label": "answer_type=count, exact",
+        "question": "How many open issues does twentyhq/twenty have?",
+        "gold": "85",
+        "predicted": "There are 85 open issues.",
+        "expected": True,
+        "answer_type": "count",
+    },
+    {
+        "label": "answer_type=count, within ±10%",
+        "question": "How many open issues does twentyhq/twenty have?",
+        "gold": "85",
+        "predicted": "around 80",
+        "expected": True,
+        "answer_type": "count",
+    },
+    {
+        "label": "answer_type=list, all items present (different phrasing)",
+        "question": "What is the primary language of django/django, rails/rails, expressjs/express, laravel/laravel?",
+        "gold": "Python, Ruby, JavaScript, Blade",
+        "predicted": "Django is Python, Rails is Ruby, Express is JavaScript, Laravel is Blade",
+        "expected": True,
+        "answer_type": "list",
+    },
+    {
+        "label": "answer_type=comparison, winner named with extra context",
+        "question": "Which has more open issues, facebook/react or vuejs/core?",
+        "gold": "facebook/react",
+        "predicted": "facebook/react has more open issues than vuejs/core",
+        "expected": True,
+        "answer_type": "comparison",
+    },
 ]
 
 
@@ -125,13 +160,15 @@ async def main() -> int:
             gold=case["gold"],
             predicted=case["predicted"],
             llm=llm,
+            answer_type=case.get("answer_type"),
         )
         actual = verdict.get("correct")
         ok = actual == case["expected"]
         matches.append(ok)
 
         tag = "OK" if ok else "MISMATCH"
-        print(f"[{tag}] Case {i}: {case['label']}")
+        atype = case.get("answer_type") or "—"
+        print(f"[{tag}] Case {i}: {case['label']}  (answer_type={atype})")
         print(f"        Q:         {case['question']}")
         print(f"        gold:      {case['gold']!r}")
         print(f"        predicted: {case['predicted']!r}")
