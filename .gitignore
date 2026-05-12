@@ -1,0 +1,24 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Results — keep the directory (via .gitkeep) but ignore raw run output
+results/*.json
+
+# HotpotQA raw download (the big dev set blob; tasks.json is committed)
+benchmarks/hotpotqa/hotpot_dev_*.json
+benchmarks/hotpotqa/raw/
+
+# OS / editor cruft
+.DS_Store
+.idea/
+.vscode/
