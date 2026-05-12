@@ -41,6 +41,20 @@ class CallMetrics:
     stop_reason: Optional[str]
 
 
+@dataclass
+class FunctionCall:
+    """Provider-neutral view of one tool call emitted by the model.
+
+    Provider modules expose helpers like
+    :func:`src.llm.gemini.extract_function_calls` that decode the native
+    response into a list of these. Strategies consume them without depending
+    on any provider's native call type.
+    """
+
+    name: str
+    args: dict[str, Any]
+
+
 class LLMProvider(ABC):
     """Abstract base for LLM providers.
 

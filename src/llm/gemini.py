@@ -20,7 +20,7 @@ from typing import Any, Optional
 from google import genai
 from google.genai import types
 
-from src.llm.base import CallMetrics, LLMProvider, ToolDef
+from src.llm.base import CallMetrics, FunctionCall, LLMProvider, ToolDef
 
 # -----------------------------------------------------------------------------
 # Gemini 2.5 Flash — Google AI Studio paid-tier pricing as of May 2026.
@@ -95,6 +95,66 @@ def _count_function_calls(response: Any) -> int:
     except (AttributeError, IndexError, TypeError):
         return 0
     return sum(1 for p in parts if getattr(p, "function_call", None))
+
+
+# -----------------------------------------------------------------------------
+# Public response-decoding helpers (used by strategies). These intentionally
+# live in the concrete provider module — strategies import what they need
+# rather than the abstract base growing a provider-specific surface.
+# -----------------------------------------------------------------------------
+def extract_function_calls(response: Any) -> list[FunctionCall]:
+    """Return every ``function_call`` part on the first candidate.
+
+    Each entry carries the tool ``name`` and a plain-dict ``args`` payload
+    (the SDK's ``MapComposite`` is converted to a regular ``dict``).
+    """
+    out: list[FunctionCall] = []
+    try:
+        parts = response.candidates[0].content.parts or []
+    except (AttributeError, IndexError, TypeError):
+        return out
+    for p in parts:
+        fc = getattr(p, "function_call", None)
+        if fc is None:
+            continue
+        args = dict(fc.args) if fc.args is not None else {}
+        out.append(FunctionCall(name=fc.name, args=args))
+    return out
+
+
+def extract_text(response: Any) -> str:
+    """Concatenate every text part on the first candidate's content."""
+    try:
+        parts = response.candidates[0].content.parts or []
+    except (AttributeError, IndexError, TypeError):
+        return ""
+    return "".join(getattr(p, "text", "") or "" for p in parts).strip()
+
+
+def assistant_turn_from_response(response: Any) -> dict[str, Any]:
+    """Wrap the model's response as a ``{"role": "assistant", ...}`` message.
+
+    Forwards the response's Parts list as-is so function_call Parts survive
+    the round-trip into the next call. :func:`_to_gemini_contents` translates
+    ``assistant`` → ``model`` and forwards Parts directly.
+    """
+    try:
+        parts = list(response.candidates[0].content.parts or [])
+    except (AttributeError, IndexError, TypeError):
+        parts = []
+    return {"role": "assistant", "content": parts}
+
+
+def function_response_message(name: str, result: Any) -> dict[str, Any]:
+    """Build a ``{"role": "user", ...}`` turn carrying one function_response.
+
+    Gemini requires the ``response`` payload to be a dict; scalars/lists get
+    wrapped as ``{"result": ...}`` so callers can pass strings, lists, or
+    dicts uniformly.
+    """
+    payload: dict[str, Any] = result if isinstance(result, dict) else {"result": result}
+    part = types.Part.from_function_response(name=name, response=payload)
+    return {"role": "user", "content": [part]}
 
 
 def _stop_reason(response: Any, n_tool_calls: int) -> Optional[str]:
