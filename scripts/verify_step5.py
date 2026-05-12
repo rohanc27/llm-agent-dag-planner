@@ -1,16 +1,25 @@
 from __future__ import annotations
 
-"""Verify Step 5 — the judge's semantic-equivalence behavior on 5 cases.
+"""Verify Step 5 — the judge's semantic-equivalence behavior on 9 cases.
 
-Cases (per the SPEC):
-  1. exact match              → expect correct=True
-  2. semantic match           → expect correct=True
-  3. format variation (#)     → expect correct=True
-  4. name variation           → expect correct=True
-  5. wrong year               → expect correct=False
+Cases:
+  1. exact match                         → expect correct=True
+  2. semantic match                      → expect correct=True
+  3. format variation (#)                → expect correct=True
+  4. name variation                      → expect correct=True
+  5. wrong year                          → expect correct=False
+  6. numeric hedge, exact value          → expect correct=True   (rule 7)
+  7. numeric hedge, "about"              → expect correct=True   (rule 7)
+  8. numeric hedge, close value          → expect correct=True   (rule 7)
+  9. numeric hedge, far-off value        → expect correct=False  (rule 7)
 
-Prints each result. Prints PASS if all 5 verdicts match the expected
-labels, FAIL otherwise.
+Cases 6-9 cover the Step 6 Bonn bug regression: Wikipedia population /
+quantity answers are inherently approximate, so a hedged prediction with
+a reasonable cited number should grade correct, but the hedge does not
+save a substantially-wrong number.
+
+Prints each result. Prints PASS if all 9 verdicts match expectations,
+FAIL otherwise.
 
 Run:
 
@@ -65,6 +74,35 @@ CASES: list[dict] = [
         "question": "When was Zhu (musician) born?",
         "gold": "1989",
         "predicted": "1990",
+        "expected": False,
+    },
+    # ---- Numeric-tolerance cases (Bonn-bug regression) ---------------------
+    {
+        "label": "numeric hedge — exceeds (exact value)",
+        "question": "What is the population of Bonn?",
+        "gold": "300,000",
+        "predicted": "exceeds 300,000",
+        "expected": True,
+    },
+    {
+        "label": "numeric hedge — about (exact value)",
+        "question": "What is the population of Bonn?",
+        "gold": "300,000",
+        "predicted": "about 300,000",
+        "expected": True,
+    },
+    {
+        "label": "numeric hedge — close value (within ~25%)",
+        "question": "What is the population of Bonn?",
+        "gold": "300,000",
+        "predicted": "around 250,000",
+        "expected": True,
+    },
+    {
+        "label": "numeric hedge — far-off value (hedge doesn't save it)",
+        "question": "What is the population of Bonn?",
+        "gold": "300,000",
+        "predicted": "exceeds 500,000",
         "expected": False,
     },
 ]

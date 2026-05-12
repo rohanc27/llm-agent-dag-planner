@@ -9,7 +9,7 @@ A benchmark study comparing strategies for orchestrating LLM tool calls — sequ
 ## 1. Stack
 
 - **Language:** Python 3.11+
-- **Primary LLM:** Gemini 2.5 Flash via `google-genai` SDK (Google AI Studio free tier; 1500 RPD / 15 RPM)
+- **Primary LLM:** Gemini 2.5 Flash via `google-genai` SDK (Google AI Studio Tier 1; ~1000 RPM, paid)
 - **Secondary LLM (Weekend 3):** Claude Sonnet 4.6 via `anthropic` SDK, for cross-provider validation
 - **Agent frameworks:** custom (from-scratch), LangGraph, Google ADK — all three call the same shared DAG executor
 - **Concurrency:** `asyncio`

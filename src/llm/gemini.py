@@ -13,7 +13,9 @@ strategies layer (Step 3 ReAct) also discards any extra function_call parts
 post-hoc. Belt and suspenders.
 """
 
+import asyncio
 import os
+import re
 import time
 from typing import Any, Optional
 
@@ -37,6 +39,39 @@ _SINGLE_CALL_HINT: str = (
     "When using tools, call exactly one function per turn, then wait for "
     "the result before deciding the next step."
 )
+
+# Rate-limit retry knobs. AI Studio free-tier limits on gemini-2.5-flash
+# observed empirically as 5 RPM and 20 RPD (the public docs sometimes list
+# different numbers). We honour Gemini's suggested ``retryDelay`` from the
+# 429 body when present, otherwise fall back to exponential backoff.
+#
+# Per-minute exhaustion clears in <60s, so retries usually succeed. Per-day
+# exhaustion implies the rolling-24h cap is full; retries may still progress
+# (slots age out one at a time) but each call needs a full wait, so we
+# bound it more tightly and surface a clearer error.
+_RPM_MAX_RETRIES: int = 5
+_RPD_MAX_RETRIES: int = 2
+_RATE_LIMIT_BACKOFF_BASE: float = 4.0
+_RATE_LIMIT_MAX_DELAY: float = 65.0  # cap suggested delays at this many seconds
+
+
+def _parse_retry_delay_seconds(exc_text: str) -> Optional[float]:
+    """Extract Gemini's suggested ``retryDelay`` (in seconds) from a 429 body."""
+    m = re.search(
+        r"['\"]retryDelay['\"]\s*:\s*['\"](\d+(?:\.\d+)?)s['\"]", exc_text
+    )
+    return float(m.group(1)) if m else None
+
+
+def _is_rate_limit_error(exc: BaseException) -> bool:
+    """True for the Gemini 429 / RESOURCE_EXHAUSTED quota-exceeded shape."""
+    msg = str(exc)
+    return "429" in msg and "RESOURCE_EXHAUSTED" in msg
+
+
+def _is_per_day_quota(exc_text: str) -> bool:
+    """True if the error is the daily (rolling-24h) free-tier cap."""
+    return "PerDay" in exc_text or "RequestsPerDay" in exc_text
 
 
 def _compute_cost(input_tokens: int, output_tokens: int) -> float:
@@ -186,6 +221,49 @@ class GeminiProvider(LLMProvider):
             api_key=api_key or os.environ.get("GEMINI_API_KEY")
         ).aio
 
+    async def _generate_with_retry(
+        self,
+        contents: list[types.Content],
+        config: types.GenerateContentConfig,
+    ) -> Any:
+        """``generate_content`` wrapped in 429-aware retry.
+
+        Honours Gemini's suggested ``retryDelay`` when present, otherwise
+        falls back to exponential backoff. Per-day exhaustion retries fewer
+        times because each retry needs a full wait for a slot to age out.
+        Non-429 errors propagate immediately.
+        """
+        attempt = 0
+        while True:
+            try:
+                return await self._client.models.generate_content(
+                    model=self.model,
+                    contents=contents,
+                    config=config,
+                )
+            except Exception as exc:  # noqa: BLE001
+                if not _is_rate_limit_error(exc):
+                    raise
+                exc_text = str(exc)
+                per_day = _is_per_day_quota(exc_text)
+                max_retries = _RPD_MAX_RETRIES if per_day else _RPM_MAX_RETRIES
+                if attempt >= max_retries:
+                    raise
+                suggested = _parse_retry_delay_seconds(exc_text)
+                if suggested is not None:
+                    delay = suggested + 1.0  # +1s margin
+                else:
+                    delay = _RATE_LIMIT_BACKOFF_BASE * (2 ** attempt)
+                delay = min(delay, _RATE_LIMIT_MAX_DELAY)
+                kind = "PerDay" if per_day else "PerMinute"
+                print(
+                    f"[gemini retry] 429 {kind} quota — sleeping {delay:.1f}s "
+                    f"(attempt {attempt + 1}/{max_retries})",
+                    flush=True,
+                )
+                await asyncio.sleep(delay)
+                attempt += 1
+
     async def call(
         self,
         messages: list[dict[str, Any]],
@@ -211,12 +289,11 @@ class GeminiProvider(LLMProvider):
 
         contents = _to_gemini_contents(messages)
 
+        # ``latency_seconds`` is measured around the full retry loop, so
+        # rate-limit waits show up in the benchmark numbers — that's the
+        # honest wall-clock cost of running on the free tier.
         start = time.perf_counter()
-        response = await self._client.models.generate_content(
-            model=self.model,
-            contents=contents,
-            config=config,
-        )
+        response = await self._generate_with_retry(contents=contents, config=config)
         latency = time.perf_counter() - start
 
         usage = getattr(response, "usage_metadata", None)
