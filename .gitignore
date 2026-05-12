@@ -12,7 +12,7 @@ venv/
 .pytest_cache/
 
 # Results — keep the directory (via .gitkeep) but ignore raw run output
-results/*.json
+results/raw/*.json
 
 # HotpotQA raw download (the big dev set blob; tasks.json is committed)
 benchmarks/hotpotqa/hotpot_dev_*.json

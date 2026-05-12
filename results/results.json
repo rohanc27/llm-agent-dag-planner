@@ -1,0 +1,662 @@
+[
+  {
+    "task_id": "5a86458b5542991e771815ec",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "What is the population of the city where the Akademisches Kunstmuseum is?",
+    "gold_answer": "300,000",
+    "predicted_answer": "The Akademisches Kunstmuseum is located in Bonn, Germany, which has a population exceeding 300,000.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer 'exceeding 300,000' is considered correct because it uses approximation language ('exceeding') and cites the exact numerical value of the gold answer, which falls within the acceptable range for Wikipedia quantity figures.",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 3752,
+      "output_tokens": 97,
+      "cost_usd": 0.0013681000000000001,
+      "total_wall_clock_seconds": 5.620731291
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a7a9b9a5542990198eaf160",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "When was the Chinese American electronic musician and singer who collaborated on the album I Remember born?",
+    "gold_answer": "1989",
+    "predicted_answer": "Steven Zhu, also known as Zhu, was born on April 28, 1989.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer accurately states the birth year as 1989, which matches the gold answer.",
+    "metrics": {
+      "n_llm_calls": 6,
+      "n_tool_calls": 5,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 4842,
+      "output_tokens": 115,
+      "cost_usd": 0.0017400999999999999,
+      "total_wall_clock_seconds": 15.137764958999998
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ac2659b55429963665199a1",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "How many laps did Harry Prowell run during the 10,000 metres race at the 1967 Pan American Games?",
+    "gold_answer": "25 laps",
+    "predicted_answer": "A standard 10,000 metres race consists of 25 laps on a 400-metre track. The Wikipedia articles available do not specify if Harry Prowell completed the 10,000 metres race at the 1967 Pan American Games, so the exact number of laps he ran is not ascertainable from the provided information.",
+    "judge_correct": false,
+    "judge_rationale": "The predicted answer hedges by stating that the exact number of laps Harry Prowell ran is not ascertainable, which contradicts the gold answer that provides a specific number of laps for him.",
+    "metrics": {
+      "n_llm_calls": 4,
+      "n_tool_calls": 3,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 2248,
+      "output_tokens": 161,
+      "cost_usd": 0.0010769,
+      "total_wall_clock_seconds": 6.271741208
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a86458b5542991e771815ec",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "What is the population of the city where the Akademisches Kunstmuseum is?",
+    "gold_answer": "300,000",
+    "predicted_answer": "The Akademisches Kunstmuseum is located in Bonn, Germany, which has a population exceeding 300,000.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer states the population as 'exceeding 300,000', which uses approximation language and is consistent with the gold answer of '300,000' based on rule #7 for Wikipedia quantity figures.",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 3752,
+      "output_tokens": 97,
+      "cost_usd": 0.0013681000000000001,
+      "total_wall_clock_seconds": 13.520814583
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a7a9b9a5542990198eaf160",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "When was the Chinese American electronic musician and singer who collaborated on the album I Remember born?",
+    "gold_answer": "1989",
+    "predicted_answer": "The Chinese American electronic musician and singer Zhu, who collaborated on the album \"I Remember\", was born on April 28, 1989.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer accurately states the birth year as 1989, matching the gold answer, and provides additional correct information without contradicting the core fact.",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 4309,
+      "output_tokens": 106,
+      "cost_usd": 0.0015577,
+      "total_wall_clock_seconds": 10.708982622999999
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ac2659b55429963665199a1",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "How many laps did Harry Prowell run during the 10,000 metres race at the 1967 Pan American Games?",
+    "gold_answer": "25 laps",
+    "predicted_answer": "Harry Prowell ran 25 laps during the 10,000 metres race at the 1967 Pan American Games, assuming a standard 400-meter track.",
+    "judge_correct": true,
+    "judge_rationale": "The prediction accurately states '25 laps', which matches the gold answer, and the additional clarifying phrase does not introduce any factual errors or ambiguity regarding the core answer.",
+    "metrics": {
+      "n_llm_calls": 4,
+      "n_tool_calls": 3,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 2248,
+      "output_tokens": 125,
+      "cost_usd": 0.0009869,
+      "total_wall_clock_seconds": 6.0052871649999995
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ac2758b55429963665199c3",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "The organization that Nicolae Titulescu served two terms as president was founded on what date?",
+    "gold_answer": "10 January 1920",
+    "predicted_answer": "The organization that Nicolae Titulescu served two terms as president, the League of Nations, was founded on January 10, 1920.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer accurately states the founding date as January 10, 1920, which is semantically equivalent to the gold answer '10 January 1920'.",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 4498,
+      "output_tokens": 110,
+      "cost_usd": 0.0016244,
+      "total_wall_clock_seconds": 7.249188499000002
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a8a575a554299515336136e",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "Rynella is an unincorporated community named after the daughters of a conservationist who presided of the maker of a brand of hot sauce made from vinegar, salt and what kind of peppers? ",
+    "gold_answer": "tabasco peppers",
+    "predicted_answer": "Rynella is an unincorporated community named after the daughters of Edward Avery McIlhenny, a conservationist who presided over the McIlhenny Company, maker of Tabasco brand hot sauce. Tabasco sauce is made from vinegar, salt, and tabasco peppers.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer correctly identifies 'tabasco peppers' as the kind of peppers used in the hot sauce, which is the specific information requested by the question, and provides additional accurate context.",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 2951,
+      "output_tokens": 124,
+      "cost_usd": 0.0011952999999999998,
+      "total_wall_clock_seconds": 6.216170206999999
+    },
+    "error": null
+  },
+  {
+    "task_id": "5adf75e35542993344016c98",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "What American horror film directed by Sidney J. Furie was based off an alleged haunting which occurred in 1974 at Culver City, California?",
+    "gold_answer": "The Entity",
+    "predicted_answer": "The American horror film directed by Sidney J. Furie, based on an alleged haunting that occurred in 1974, is *The Entity*.",
+    "judge_correct": true,
+    "judge_rationale": "The prediction correctly identifies 'The Entity' as the film, which is semantically equivalent to the gold answer.",
+    "metrics": {
+      "n_llm_calls": 3,
+      "n_tool_calls": 2,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 1460,
+      "output_tokens": 69,
+      "cost_usd": 0.0006104999999999999,
+      "total_wall_clock_seconds": 3.823981876000005
+    },
+    "error": null
+  },
+  {
+    "task_id": "5abaee845542996606241696",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "On February 25, 2017 tony Harrison lost the the International Boxing Federation light middleweight world title to a boxer from what state?",
+    "gold_answer": "Maryland",
+    "predicted_answer": "On February 25, 2017, Tony Harrison lost the International Boxing Federation light middleweight world title to Jarrett Hurd, who is from Maryland.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer correctly identifies 'Maryland' as the state, which directly answers the question and matches the gold answer.",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 4330,
+      "output_tokens": 112,
+      "cost_usd": 0.0015789999999999999,
+      "total_wall_clock_seconds": 5.363430168000004
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ac3bab155429939154138fb",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "The House of Hanover held the British throne until after Victoria's death, when it was past to the dynasty that ruled which duchy?",
+    "gold_answer": "Ernestine",
+    "predicted_answer": "After Victoria's death, the British throne passed to the House of Saxe-Coburg and Gotha, which ruled the Duchy of Saxe-Coburg and Gotha.",
+    "judge_correct": false,
+    "judge_rationale": "JUDGE_PARSE_ERROR: '{\"correct\": true, \"rationale\": \"The predicted answer correctly identifies the Duchy of Saxe-Coburg and Gotha as the duchy ruled by the dynasty that succeeded the House of'",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 4736,
+      "output_tokens": 117,
+      "cost_usd": 0.0017133,
+      "total_wall_clock_seconds": 6.015098082999998
+    },
+    "error": null
+  },
+  {
+    "task_id": "5abdff775542993f32c2a082",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "At what theater is the composer and lyricist for the musical Big Fish a residential artist?",
+    "gold_answer": "Ars Nova Theater",
+    "predicted_answer": "Andrew Lippa, the composer and lyricist for the musical *Big Fish*, is a resident artist at the Ars Nova Theater in New York City.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer accurately identifies the 'Ars Nova Theater,' which is the correct theater specified in the gold answer, while also providing additional accurate context.",
+    "metrics": {
+      "n_llm_calls": 6,
+      "n_tool_calls": 5,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 4656,
+      "output_tokens": 122,
+      "cost_usd": 0.0017017999999999998,
+      "total_wall_clock_seconds": 12.027769041000003
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a728dc65542992359bc30ef",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "What fellow Turkish footballer did Darko Kovačević form an offensive partnership with during his tenure at Real Sociedad?",
+    "gold_answer": "Nihat Kahveci",
+    "predicted_answer": "The fellow Turkish footballer Darko Kovačević formed an offensive partnership with during his tenure at Real Sociedad was Nihat Kahveci.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer directly states the correct name, Nihat Kahveci, which matches the gold answer.",
+    "metrics": {
+      "n_llm_calls": 3,
+      "n_tool_calls": 2,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 1530,
+      "output_tokens": 67,
+      "cost_usd": 0.0006265,
+      "total_wall_clock_seconds": 4.314731290999994
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ae694a15542991bbc976141",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "Why is Minister Pool important to Black Country and the West Midlands in England?",
+    "gold_answer": "defence of the Cathedral",
+    "predicted_answer": "I could not find any information about \"Minister Pool\" and its importance to the Black Country and the West Midlands in England. It is possible there might be a misspelling or the entity is not widely documented on Wikipedia.",
+    "judge_correct": false,
+    "judge_rationale": "The prediction states it could not find information, which does not answer the question or match the gold answer 'defence of the Cathedral'.",
+    "metrics": {
+      "n_llm_calls": 3,
+      "n_tool_calls": 2,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 804,
+      "output_tokens": 83,
+      "cost_usd": 0.0004487,
+      "total_wall_clock_seconds": 3.931823125000001
+    },
+    "error": null
+  },
+  {
+    "task_id": "5add016e5542992c1e3a250b",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "What made the man who abolished the Consell in 1718 resume the throne?",
+    "gold_answer": "upon his son's death",
+    "predicted_answer": "Philip V of Spain abolished the Consell in 1718. He resumed the throne in 1724 after abdicating in favor of his son, Louis I, who died later that same year.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer accurately states that the man resumed the throne after his son's death, which semantically matches the gold answer.",
+    "metrics": {
+      "n_llm_calls": 6,
+      "n_tool_calls": 5,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 5271,
+      "output_tokens": 145,
+      "cost_usd": 0.0019437999999999999,
+      "total_wall_clock_seconds": 13.771849376000006
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ac3090d5542990b17b154fc",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "Operalia, The World Opera Competition helped launch the career of an operatic soprano of what nationality?",
+    "gold_answer": "Bulgarian",
+    "predicted_answer": "Operalia, The World Opera Competition helped launch the career of a South African operatic soprano, Pretty Yende.",
+    "judge_correct": false,
+    "judge_rationale": "The predicted answer states 'South African' while the gold answer is 'Bulgarian', making it factually incorrect.",
+    "metrics": {
+      "n_llm_calls": 6,
+      "n_tool_calls": 5,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 7747,
+      "output_tokens": 116,
+      "cost_usd": 0.0026141000000000003,
+      "total_wall_clock_seconds": 12.646355583999998
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a7133565542994082a3e65c",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "What Kentucky county has a population of 60,316 and features the Lake Louisvilla neighborhood?",
+    "gold_answer": "Oldham County",
+    "predicted_answer": "Oldham County, Kentucky has a population of 67,607 as of the 2020 census and features the Lake Louisvilla neighborhood.",
+    "judge_correct": false,
+    "judge_rationale": "The predicted answer contradicts a specific numerical fact provided in the question as an identifier by stating a different population figure for the identified county.",
+    "metrics": {
+      "n_llm_calls": 6,
+      "n_tool_calls": 5,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 4841,
+      "output_tokens": 127,
+      "cost_usd": 0.0017698,
+      "total_wall_clock_seconds": 6.870754459000004
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ae7edee554299540e5a56ad",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "The Church of the Guanche People was founded in the city that is on the most populated island of what larger area?",
+    "gold_answer": "Macaronesia",
+    "predicted_answer": "The Church of the Guanche People was founded in San Cristóbal de La Laguna, a city located on Tenerife, which is the most populated island of the Canary Islands.",
+    "judge_correct": false,
+    "judge_rationale": "The predicted answer names 'the Canary Islands' as the larger area, but the gold answer specifies the broader region of 'Macaronesia', of which the Canary Islands are only a part.",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 3150,
+      "output_tokens": 110,
+      "cost_usd": 0.00122,
+      "total_wall_clock_seconds": 5.9387996250000015
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ac079e9554299294b218fff",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "What organization does Rosyth Dockyard and Queen Elizabeth-class aircraft carrier have in common?",
+    "gold_answer": "Navy",
+    "predicted_answer": "Babcock International is the organization that Rosyth Dockyard and the Queen Elizabeth-class aircraft carrier have in common. Rosyth Dockyard is owned by Babcock Marine (part of Babcock International), and Babcock International is also part of the Aircraft Carrier Alliance, which builds the Queen Elizabeth-class aircraft carriers.",
+    "judge_correct": false,
+    "judge_rationale": "The predicted answer names 'Babcock International' as the common organization, which is factually different from the gold answer 'Navy'.",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 3813,
+      "output_tokens": 137,
+      "cost_usd": 0.0014864000000000001,
+      "total_wall_clock_seconds": 5.668620624000006
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ab6ba045542995eadef007e",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "Dorian Gray is the main character of what philosophical novel whose editor feared the story was indecent, and deleted roughly five hundred words before publication?",
+    "gold_answer": "The Picture of Dorian Gray",
+    "predicted_answer": "The philosophical novel featuring Dorian Gray as the main character, whose editor feared the story was indecent and deleted roughly five hundred words before publication, is *The Picture of Dorian Gray* by Oscar Wilde.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer directly states the correct title of the novel, matching the gold answer exactly.",
+    "metrics": {
+      "n_llm_calls": 6,
+      "n_tool_calls": 5,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 4697,
+      "output_tokens": 150,
+      "cost_usd": 0.0017840999999999998,
+      "total_wall_clock_seconds": 15.53877124999999
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a7a15d35542996a35c170c4",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "In what city does a Christian minister who won the singles title with Jan Kodes in the 1970 French Open currently reside?",
+    "gold_answer": "Perth, Western Australia",
+    "predicted_answer": "Based on the information available, Jan Kodeš won the men's singles title at the 1970 French Open. Singles titles are won by individual players, not \"with\" another person. Furthermore, the records for the 1970 French Open do not indicate that Jan Kodeš won a doubles title that year. Therefore, I cannot identify a Christian minister who won the singles title with Jan Kodeš in the 1970 French Open.",
+    "judge_correct": false,
+    "judge_rationale": "The predicted answer states it cannot identify the person mentioned in the question and therefore cannot provide the requested city, which directly contradicts the gold answer providing a specific location.",
+    "metrics": {
+      "n_llm_calls": 4,
+      "n_tool_calls": 3,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 2888,
+      "output_tokens": 156,
+      "cost_usd": 0.0012564,
+      "total_wall_clock_seconds": 9.861214750000002
+    },
+    "error": null
+  },
+  {
+    "task_id": "5abbcfaf5542993f40c73ba9",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "Nicole Gordon won a silver medal with Sara Petersen int he women's doubles at a competition held in what city?",
+    "gold_answer": "Manchester",
+    "predicted_answer": "Nicole Gordon won a silver medal with Sara Petersen in the women's doubles at a competition held in Manchester, England.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer correctly identifies 'Manchester' as the city and provides additional accurate context ('England').",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 2489,
+      "output_tokens": 109,
+      "cost_usd": 0.0010192,
+      "total_wall_clock_seconds": 4.989568708000007
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ade8b2655429975fa854eff",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "What is the nickname of this American retired airline captain celebrated for his water landing with Jeffrey Skiles, after a bird strike and being unable to reach an airport?",
+    "gold_answer": "Sully",
+    "predicted_answer": "The nickname of the American retired airline captain, Chesley Sullenberger, is Sully.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer correctly states the nickname as 'Sully', which matches the gold answer.",
+    "metrics": {
+      "n_llm_calls": 3,
+      "n_tool_calls": 2,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 1569,
+      "output_tokens": 58,
+      "cost_usd": 0.0006157000000000001,
+      "total_wall_clock_seconds": 3.348412707999998
+    },
+    "error": null
+  },
+  {
+    "task_id": "5adea9ea55429939a52fe934",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "What was the name of the fanzine that interviewed the Sex Pistols bassist when he was in the band \"The Flowers of Romance?\"",
+    "gold_answer": "SKUM",
+    "predicted_answer": "The fanzine that interviewed the Sex Pistols bassist when he was in the band \"The Flowers of Romance\" was called SKUM.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer accurately states the name of the fanzine, which is 'SKUM', matching the gold answer exactly.",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 2421,
+      "output_tokens": 107,
+      "cost_usd": 0.0009938,
+      "total_wall_clock_seconds": 5.749746123999998
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ade636255429939a52fe896",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "Kresy, which roughly was a part of the land beyond the so-called Curson Line, was drawn for what reason?",
+    "gold_answer": "demarcation line between the newly emerging states, the Second Polish Republic, and the Soviet Union",
+    "predicted_answer": "The Curzon Line was drawn as a proposed demarcation line between the newly independent Second Polish Republic and the Soviet Union after World War I. Its primary reason was to serve as a diplomatic basis for a future border agreement, broadly corresponding to the ethnographic divisions between predominantly Polish-speaking territories and eastern regions largely populated by Ukrainians, Belarusians, and Lithuanians.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer accurately states the reason for the Curzon Line as a 'demarcation line between the newly independent Second Polish Republic and the Soviet Union,' which semantically matches the gold answer.",
+    "metrics": {
+      "n_llm_calls": 4,
+      "n_tool_calls": 3,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 1901,
+      "output_tokens": 123,
+      "cost_usd": 0.0008778,
+      "total_wall_clock_seconds": 4.352133542000004
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a7f53ff5542992097ad2f17",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "In addition to the best known comic servant from Commedia dell'arte, who else is featured in La Surprise de l'amour?",
+    "gold_answer": "Columbine",
+    "predicted_answer": "In addition to Arlequin, the characters featured in La Surprise de l'amour are the Countess, Lélio, the Baron, Columbine, Jacqueline, and Pierre.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer explicitly includes the gold answer 'Columbine' and adds other characters who are also correctly featured in the play, which is acceptable under the rule that a prediction containing the gold answer is correct.",
+    "metrics": {
+      "n_llm_calls": 3,
+      "n_tool_calls": 2,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 1318,
+      "output_tokens": 75,
+      "cost_usd": 0.0005828999999999999,
+      "total_wall_clock_seconds": 3.699452667999978
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a7730015542994aec3b7210",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "Which TV series, written by the creators of Robocalypse, is set in Bikini Bottom?",
+    "gold_answer": "SpongeBob SquarePants",
+    "predicted_answer": "SpongeBob SquarePants",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer exactly matches the gold answer.",
+    "metrics": {
+      "n_llm_calls": 4,
+      "n_tool_calls": 3,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 1710,
+      "output_tokens": 54,
+      "cost_usd": 0.0006479999999999999,
+      "total_wall_clock_seconds": 4.412769124999983
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ac325495542995ef918c12e",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "Which region of Ghana was the city where Akrofuom is located? ",
+    "gold_answer": "Ashanti Region of Ghana",
+    "predicted_answer": "Akrofuom is located in the Ashanti Region of Ghana.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer accurately and completely states that Akrofuom is located in the Ashanti Region of Ghana, which matches the gold answer.",
+    "metrics": {
+      "n_llm_calls": 3,
+      "n_tool_calls": 2,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 981,
+      "output_tokens": 50,
+      "cost_usd": 0.00041929999999999995,
+      "total_wall_clock_seconds": 2.625409082999994
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a7dbc175542995ed0d1666b",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "What russian Marxist revolutionary born in 1875 was part of the Vpered organization?",
+    "gold_answer": "Anatoly Vasilyevich Lunacharsky",
+    "predicted_answer": "Anatoly Vasilyevich Lunacharsky, a Russian Marxist revolutionary born on November 23, 1875, was part of the Vpered organization.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer exactly matches the gold answer, providing the correct name.",
+    "metrics": {
+      "n_llm_calls": 9,
+      "n_tool_calls": 8,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 15105,
+      "output_tokens": 183,
+      "cost_usd": 0.0049889999999999995,
+      "total_wall_clock_seconds": 14.631819000000021
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ac514d05542994611c8b372",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "What is the name of the person that named Moltke Nunatak after the Chief of the German General staff that served from 1906 to 1914?",
+    "gold_answer": "Second German Antarctic Expedition of 1911–12 under Wilhelm Filchner.",
+    "predicted_answer": "Wilhelm Filchner named Moltke Nunatak.",
+    "judge_correct": false,
+    "judge_rationale": "The predicted answer provides only the name of the expedition leader, which is a partial answer compared to the gold answer that specifies the full expedition responsible for the naming.",
+    "metrics": {
+      "n_llm_calls": 3,
+      "n_tool_calls": 2,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 1013,
+      "output_tokens": 49,
+      "cost_usd": 0.00042640000000000006,
+      "total_wall_clock_seconds": 4.800077041000009
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a8ec02e5542995a26add501",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "Which American sketch comedy television series starring John C. Reilly was produced by Abso Lutely Productions?",
+    "gold_answer": "Check It Out!",
+    "predicted_answer": "The American sketch comedy television series starring John C. Reilly and produced by Abso Lutely Productions is *Check It Out! with Dr. Steve Brule*.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer correctly identifies the series as 'Check It Out!'. The additional information 'with Dr. Steve Brule' is part of the full title and does not contradict or invalidate the core answer.",
+    "metrics": {
+      "n_llm_calls": 3,
+      "n_tool_calls": 2,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 1519,
+      "output_tokens": 81,
+      "cost_usd": 0.0006582,
+      "total_wall_clock_seconds": 4.261176249999991
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a7220f055429971e9dc92ac",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "What was the Volvo S70 essentially modeled after and was the first all wheel drive Volvo?",
+    "gold_answer": "Volvo 850",
+    "predicted_answer": "The Volvo S70 was essentially modeled after the Volvo 850 saloon. It was not the first all-wheel-drive Volvo, though all-wheel-drive models of the S70 were available.",
+    "judge_correct": false,
+    "judge_rationale": "The predicted answer correctly identifies the Volvo 850 as the model the S70 was based on, but incorrectly states that the S70 was not the first all-wheel-drive Volvo, when the question implies it was by asking 'and was the first all wheel drive Volvo?' However, the question itself might be flawed, as the Volvo 850, which the S70 was based on, also had AWD models introduced prior to the S70. Given the specific phrasing of the question, and the gold answer being 'Volvo 850', the prediction's contradiction of the second part of the question's premise makes it problematic.",
+    "metrics": {
+      "n_llm_calls": 3,
+      "n_tool_calls": 2,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 1454,
+      "output_tokens": 80,
+      "cost_usd": 0.0006362,
+      "total_wall_clock_seconds": 4.962974625000001
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a8db348554299068b959dc2",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "What is the subsidiary of the record company who released \"Love Incredible?\"",
+    "gold_answer": "Vivendi S.A.",
+    "predicted_answer": "Mad Love is a subsidiary of Interscope Records, which released \"Love Incredible.\"",
+    "judge_correct": false,
+    "judge_rationale": "JUDGE_PARSE_ERROR: '{\"correct\": false, \"rationale\": \"The predicted answer names \\'Mad Love\\' and \\'Interscope Records\\', neither of which is \\'Vivendi S.A.\\' as specified in the gold answer'",
+    "metrics": {
+      "n_llm_calls": 6,
+      "n_tool_calls": 5,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 5942,
+      "output_tokens": 106,
+      "cost_usd": 0.0020476,
+      "total_wall_clock_seconds": 11.27857070600001
+    },
+    "error": null
+  }
+]
