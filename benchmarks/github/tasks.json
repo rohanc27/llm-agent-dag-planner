@@ -1,0 +1,227 @@
+[
+  {
+    "id": "gh_01",
+    "category": "embarrassingly_parallel",
+    "question": "Among the repositories torvalds/linux, rust-lang/rust, golang/go, and python/cpython, which has the most stars?",
+    "answer": "torvalds/linux",
+    "answer_type": "name",
+    "expected_parallel_count": 4,
+    "notes": "Verified May 2026: linux 232965 >> go 133848 > rust 112736 > cpython 72661. Margin is huge, won't flip."
+  },
+  {
+    "id": "gh_02",
+    "category": "embarrassingly_parallel",
+    "question": "What is the primary language of each of these repositories: microsoft/vscode, facebook/react, golang/go, rust-lang/rust?",
+    "answer": "microsoft/vscode: TypeScript, facebook/react: JavaScript, golang/go: Go, rust-lang/rust: Rust",
+    "answer_type": "list",
+    "expected_parallel_count": 4,
+    "notes": "GitHub's primary-language detection is by line count, stable for these mature repos."
+  },
+  {
+    "id": "gh_03",
+    "category": "embarrassingly_parallel",
+    "question": "Among nodejs/node, denoland/deno, and oven-sh/bun, which has the most stars?",
+    "answer": "nodejs/node",
+    "answer_type": "name",
+    "expected_parallel_count": 3,
+    "notes": "Verified May 2026: node 117167 > deno 106656 > bun 89941."
+  },
+  {
+    "id": "gh_04",
+    "category": "embarrassingly_parallel",
+    "question": "Among microsoft/typescript, golang/go, and rust-lang/rust, which has the most stars?",
+    "answer": "golang/go",
+    "answer_type": "name",
+    "expected_parallel_count": 3,
+    "notes": "Verified May 2026: go 133848 > rust 112736 > typescript 108828."
+  },
+  {
+    "id": "gh_05",
+    "category": "embarrassingly_parallel",
+    "question": "Compare fork counts for kubernetes/kubernetes, hashicorp/terraform, and docker/cli. Which has the most forks?",
+    "answer": "kubernetes/kubernetes",
+    "answer_type": "name",
+    "expected_parallel_count": 3,
+    "notes": "Verified May 2026: kubernetes 43035 >> terraform 10348 >> docker/cli 2130."
+  },
+  {
+    "id": "gh_06",
+    "category": "embarrassingly_parallel",
+    "question": "What is the primary language of each of these web framework repos: django/django, rails/rails, expressjs/express, laravel/laravel?",
+    "answer": "django/django: Python, rails/rails: Ruby, expressjs/express: JavaScript, laravel/laravel: Blade",
+    "answer_type": "list",
+    "expected_parallel_count": 4,
+    "notes": "laravel reports as 'Blade' (the templating language) rather than PHP — GitHub goes by line count, and Laravel ships a lot of Blade templates. Catch for models that rely on priors."
+  },
+  {
+    "id": "gh_07",
+    "category": "embarrassingly_parallel",
+    "question": "Among vercel/next.js, remix-run/remix, and sveltejs/kit, which has the most stars?",
+    "answer": "vercel/next.js",
+    "answer_type": "name",
+    "expected_parallel_count": 3,
+    "notes": "Verified May 2026: next.js 139415 >> remix 32934 > kit 20495."
+  },
+  {
+    "id": "gh_08",
+    "category": "embarrassingly_parallel",
+    "question": "Compare open issue counts (issues only, not PRs) for facebook/react and vuejs/core. Which has more open issues?",
+    "answer": "facebook/react",
+    "answer_type": "comparison",
+    "expected_parallel_count": 2,
+    "notes": "Verified May 2026 via /search/issues: react 829 > vue/core 635. The PR-inclusive 'open_issues' field on /repos would mislead; the search API gives issues-only."
+  },
+  {
+    "id": "gh_09",
+    "category": "embarrassingly_parallel",
+    "question": "Among tailwindlabs/tailwindcss, mui/material-ui, and chakra-ui/chakra-ui, which has the FEWEST stars?",
+    "answer": "chakra-ui/chakra-ui",
+    "answer_type": "name",
+    "expected_parallel_count": 3,
+    "notes": "Verified May 2026: chakra-ui 40419 vs tailwindcss 94970 vs material-ui 98321. Chakra is clearly the fewest by a wide margin."
+  },
+  {
+    "id": "gh_10",
+    "category": "embarrassingly_parallel",
+    "question": "What is the primary language of each: tensorflow/tensorflow, pytorch/pytorch, keras-team/keras?",
+    "answer": "tensorflow/tensorflow: C++, pytorch/pytorch: Python, keras-team/keras: Python",
+    "answer_type": "list",
+    "expected_parallel_count": 3,
+    "notes": "GitHub reports tensorflow as C++ (line count), not Python. Designed to catch models that lean on priors instead of the tool — the 'obvious' answer (all three are Python) is wrong."
+  },
+  {
+    "id": "gh_11",
+    "category": "mixed",
+    "question": "Search for 'rust web framework' on GitHub. For the top 3 results by stars, return the latest release tag of each.",
+    "answer": "DioxusLabs/dioxus: v0.7.9, yewstack/yew: yew-v0.23.0, rwf2/Rocket: v0.5.1",
+    "answer_type": "list",
+    "expected_parallel_count": 3,
+    "notes": "Verified May 2026. The 3 release-tag fetches can fan out from the search result."
+  },
+  {
+    "id": "gh_12",
+    "category": "mixed",
+    "question": "Search for 'static site generator' on GitHub. For the top 3 results by stars, return the latest release tag of each.",
+    "answer": "jekyll/jekyll: v4.4.1, vuejs/vuepress: v1.9.10, decaporg/decap-cms: decap-cms@3.12.2",
+    "answer_type": "list",
+    "expected_parallel_count": 3,
+    "notes": "Verified May 2026."
+  },
+  {
+    "id": "gh_13",
+    "category": "mixed",
+    "question": "Search for 'monorepo' on GitHub. Among the top 3 results by stars, which has the most open issues (issues only, not PRs)?",
+    "answer": "mattermost/mattermost",
+    "answer_type": "name",
+    "expected_parallel_count": 3,
+    "notes": "Verified May 2026: top 3 by stars are twentyhq/twenty (85 issues), mattermost/mattermost (560), lerna/lerna (307). Mattermost wins."
+  },
+  {
+    "id": "gh_14",
+    "category": "mixed",
+    "question": "Search for 'graphql server' on GitHub. Among the top 3 results by stars, which has the most forks?",
+    "answer": "parse-community/parse-server",
+    "answer_type": "name",
+    "expected_parallel_count": 3,
+    "notes": "Verified May 2026. Top 3: TanStack/query (3815 forks), parse-community/parse-server (4820), mountain-loop/yaak (752). parse-server wins despite ranking 2nd by stars — illustrates that DAG planner correctly extracts the answer from raw outputs without confusion."
+  },
+  {
+    "id": "gh_15",
+    "category": "mixed",
+    "question": "Search for 'vector database' on GitHub. For the top 3 results by stars, return the top contributor's login (single most-prolific committer) for each.",
+    "answer": "redis/redis: antirez, milvus-io/milvus: congqixia, pingcap/tidb: hawkingrei",
+    "answer_type": "list",
+    "expected_parallel_count": 3,
+    "notes": "Verified May 2026."
+  },
+  {
+    "id": "gh_16",
+    "category": "mixed",
+    "question": "Search for 'reverse proxy' on GitHub. Among the top 3 results by stars, which has the most open issues (issues only, not PRs)?",
+    "answer": "chaitin/SafeLine",
+    "answer_type": "name",
+    "expected_parallel_count": 3,
+    "notes": "Verified May 2026: top 3 by stars are fatedier/frp (36 issues), chaitin/SafeLine (86), fosrl/pangolin (63). SafeLine wins. Note frp's huge star count (106k) and tiny issue count (36) — the question intentionally separates popularity from activity."
+  },
+  {
+    "id": "gh_17",
+    "category": "mixed",
+    "question": "Search for 'machine learning' on GitHub. Among the top 3 results by stars, which has the most open issues (issues only, not PRs)?",
+    "answer": "huggingface/transformers",
+    "answer_type": "name",
+    "expected_parallel_count": 3,
+    "notes": "Verified May 2026: tensorflow/tensorflow (1009), huggingface/transformers (1042), microsoft/ML-For-Beginners (0). Transformers wins by a narrow ~30-issue margin."
+  },
+  {
+    "id": "gh_18",
+    "category": "mixed",
+    "question": "Search for 'web framework' on GitHub. For the top 3 results by stars, list the primary language of each.",
+    "answer": "twbs/bootstrap: MDX, fastapi/fastapi: Python, microsoft/playwright: TypeScript",
+    "answer_type": "list",
+    "expected_parallel_count": 3,
+    "notes": "Verified May 2026. Note that bootstrap's primary language is now reported as 'MDX' (docs took over the line-count crown), not HTML/CSS. Another priors-vs-tool catch."
+  },
+  {
+    "id": "gh_19",
+    "category": "mixed",
+    "question": "Search GitHub with the query 'language:rust'. List the owner of each of the top 3 results by stars.",
+    "answer": "ultraworkers, rustdesk, rust-lang",
+    "answer_type": "list",
+    "expected_parallel_count": 1,
+    "notes": "Verified May 2026: top 3 are ultraworkers/claw-code (191k stars), rustdesk/rustdesk (114k), rust-lang/rust (112k). The owners can be read directly from the single search result — a smart strategy should not fan out."
+  },
+  {
+    "id": "gh_20",
+    "category": "mixed",
+    "question": "Search GitHub with the query 'language:rust'. Among the top 3 results by stars, which is the only one with more than 150,000 stars?",
+    "answer": "ultraworkers/claw-code",
+    "answer_type": "name",
+    "expected_parallel_count": 1,
+    "notes": "Verified May 2026: only claw-code (191212) exceeds 150k; rustdesk and rust-lang/rust both ~112-114k. Single-search-call sufficient."
+  },
+  {
+    "id": "gh_21",
+    "category": "sequential",
+    "question": "Find the most-starred repository for query 'machine learning' on GitHub. What is its primary language?",
+    "answer": "C++",
+    "answer_type": "name",
+    "expected_parallel_count": 1,
+    "notes": "Verified May 2026: top result is tensorflow/tensorflow, language C++ (line-count basis)."
+  },
+  {
+    "id": "gh_22",
+    "category": "sequential",
+    "question": "Find the most-starred repository for query 'static site generator' on GitHub. What is its latest release tag?",
+    "answer": "v4.4.1",
+    "answer_type": "name",
+    "expected_parallel_count": 1,
+    "notes": "Verified May 2026: top result is jekyll/jekyll, latest release v4.4.1 (published 2025-01-29). Genuinely sequential: must search before knowing which repo to query for releases."
+  },
+  {
+    "id": "gh_23",
+    "category": "sequential",
+    "question": "Find the most-starred repository for query 'vector database' on GitHub. Who is its top contributor (single login with the most contributions)?",
+    "answer": "antirez",
+    "answer_type": "name",
+    "expected_parallel_count": 1,
+    "notes": "Verified May 2026: top result is redis/redis, top contributor antirez (7187 contributions)."
+  },
+  {
+    "id": "gh_24",
+    "category": "sequential",
+    "question": "Find the most-starred repository for query 'monorepo' on GitHub. How many open issues (issues only, not PRs) does it have?",
+    "answer": "85",
+    "answer_type": "count",
+    "expected_parallel_count": 1,
+    "notes": "Verified May 2026: top result is twentyhq/twenty, open-issues-only count 85 via search API. This number will drift over time — accept ~±10 as correct."
+  },
+  {
+    "id": "gh_25",
+    "category": "sequential",
+    "question": "Find the most-starred repository for query 'reverse proxy' on GitHub. What is its primary language?",
+    "answer": "Go",
+    "answer_type": "name",
+    "expected_parallel_count": 1,
+    "notes": "Verified May 2026: top result is fatedier/frp, language Go."
+  }
+]
