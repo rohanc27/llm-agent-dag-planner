@@ -70,6 +70,7 @@ class LLMProvider(ABC):
         system: Optional[str] = None,
         force_single_tool_call: bool = False,
         max_tokens: int = 4096,
+        forced_function_name: Optional[str] = None,
     ) -> tuple[Any, CallMetrics]:
         """Issue one model call.
 
@@ -88,5 +89,10 @@ class LLMProvider(ABC):
             hint, so strategies must also discard extras post-hoc.
         max_tokens:
             Output token cap.
+        forced_function_name:
+            If set (and ``tools`` is non-empty), pin the model to call this
+            one function. Used by the DAG planner to force ``submit_plan``.
+            No effect when ``tools`` is empty or the provider lacks an
+            equivalent surface.
         """
         raise NotImplementedError

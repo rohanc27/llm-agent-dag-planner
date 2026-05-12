@@ -124,6 +124,9 @@ async def run_react(
             tool_result: Any = f"Error: unknown tool {first_call.name!r}."
             logger.warning("ReAct step %d: unknown tool %r", step, first_call.name)
         else:
+            # Count *attempted* executions — the external service may still
+            # return an error, but the network/tool call did happen.
+            metrics.n_tools_executed += 1
             try:
                 tool_result = await tool.execute(**first_call.args)
             except Exception as exc:  # noqa: BLE001 — surface error to the LLM

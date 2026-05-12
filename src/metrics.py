@@ -31,9 +31,15 @@ class AggregateMetrics:
 
     n_llm_calls: int = 0
     # Total function calls EMITTED by the model across all turns. For ReAct
-    # this may exceed the number actually executed — see
-    # :attr:`discarded_parallel_calls`.
+    # this may exceed the number actually executed (see
+    # :attr:`discarded_parallel_calls`); for ``dag_planner`` it counts only
+    # the planner's ``submit_plan`` emission and is NOT a measure of work
+    # done. Use :attr:`n_tools_executed` for cross-strategy comparison.
     n_tool_calls: int = 0
+    # Number of external tool invocations actually performed (Wikipedia /
+    # GitHub / etc.). This is the apples-to-apples "real work" metric for
+    # cross-strategy comparisons — ``n_tool_calls`` is LLM verbosity.
+    n_tools_executed: int = 0
     input_tokens: int = 0
     output_tokens: int = 0
     cost_usd: float = 0.0

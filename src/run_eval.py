@@ -38,6 +38,8 @@ from src.judge import judge_answer
 from src.llm.base import LLMProvider
 from src.llm.gemini import GeminiProvider
 from src.metrics import AggregateMetrics
+from src.strategies.dag_planner import run_dag_planner
+from src.strategies.native_parallel import run_native_parallel
 from src.strategies.react import run_react
 from src.tools.base import Tool
 from src.tools.wikipedia import WIKIPEDIA_TOOLS
@@ -49,6 +51,8 @@ DEFAULT_OUTPUT: Path = REPO_ROOT / "results" / "results.json"
 StrategyFn = Callable[..., Awaitable[tuple[str, AggregateMetrics]]]
 STRATEGIES: dict[str, StrategyFn] = {
     "react": run_react,
+    "native_parallel": run_native_parallel,
+    "dag_planner": run_dag_planner,
 }
 
 BENCHMARK_PATHS: dict[str, Path] = {
@@ -67,6 +71,7 @@ def _empty_metrics_dict() -> dict[str, Any]:
     return {
         "n_llm_calls": 0,
         "n_tool_calls": 0,
+        "n_tools_executed": 0,
         "discarded_parallel_calls": 0,
         "input_tokens": 0,
         "output_tokens": 0,
@@ -79,6 +84,7 @@ def _metrics_to_dict(m: AggregateMetrics) -> dict[str, Any]:
     return {
         "n_llm_calls": m.n_llm_calls,
         "n_tool_calls": m.n_tool_calls,
+        "n_tools_executed": m.n_tools_executed,
         "discarded_parallel_calls": m.discarded_parallel_calls,
         "input_tokens": m.input_tokens,
         "output_tokens": m.output_tokens,
@@ -184,6 +190,7 @@ def _print_summary(
     costs = [r["metrics"]["cost_usd"] for r in successful]
     llm_calls = [r["metrics"]["n_llm_calls"] for r in successful]
     tool_calls = [r["metrics"]["n_tool_calls"] for r in successful]
+    tools_exec = [r["metrics"].get("n_tools_executed", 0) for r in successful]
     discards = sum(r["metrics"]["discarded_parallel_calls"] for r in successful)
 
     table = Table(title="Run summary", show_header=False, title_style="bold cyan")
@@ -208,7 +215,8 @@ def _print_summary(
     table.add_row("Mean cost per task", f"${_mean(costs):.4f}")
     table.add_row("Total cost", f"${sum(costs):.4f}")
     table.add_row("Mean LLM calls per task", f"{_mean(llm_calls):.2f}")
-    table.add_row("Mean tool calls per task", f"{_mean(tool_calls):.2f}")
+    table.add_row("Mean LLM tool calls per task", f"{_mean(tool_calls):.2f}")
+    table.add_row("Mean tools executed per task", f"{_mean(tools_exec):.2f}")
     table.add_row("Discarded parallel calls (total)", str(discards))
     table.add_row(
         "Errors",

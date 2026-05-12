@@ -271,6 +271,7 @@ class GeminiProvider(LLMProvider):
         system: Optional[str] = None,
         force_single_tool_call: bool = False,
         max_tokens: int = 4096,
+        forced_function_name: Optional[str] = None,
     ) -> tuple[Any, CallMetrics]:
         # force_single_tool_call has no API equivalent on Gemini — fall back
         # to a system-prompt hint. Strategies must still drop extras.
@@ -285,6 +286,16 @@ class GeminiProvider(LLMProvider):
             config_kwargs["system_instruction"] = effective_system
         if tools:
             config_kwargs["tools"] = _to_gemini_tools(tools)
+        # ``forced_function_name`` pins the model to a single function via
+        # Gemini's ``tool_config``. Used by the DAG planner to force a
+        # ``submit_plan`` call. Has no effect when ``tools`` is empty.
+        if forced_function_name is not None and tools:
+            config_kwargs["tool_config"] = types.ToolConfig(
+                function_calling_config=types.FunctionCallingConfig(
+                    mode="ANY",
+                    allowed_function_names=[forced_function_name],
+                )
+            )
         config = types.GenerateContentConfig(**config_kwargs)
 
         contents = _to_gemini_contents(messages)

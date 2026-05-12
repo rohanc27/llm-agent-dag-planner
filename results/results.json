@@ -15,7 +15,8 @@
       "input_tokens": 3752,
       "output_tokens": 97,
       "cost_usd": 0.0013681000000000001,
-      "total_wall_clock_seconds": 5.620731291
+      "total_wall_clock_seconds": 5.620731291,
+      "n_tools_executed": 4
     },
     "error": null
   },
@@ -35,7 +36,8 @@
       "input_tokens": 4842,
       "output_tokens": 115,
       "cost_usd": 0.0017400999999999999,
-      "total_wall_clock_seconds": 15.137764958999998
+      "total_wall_clock_seconds": 15.137764958999998,
+      "n_tools_executed": 5
     },
     "error": null
   },
@@ -55,7 +57,8 @@
       "input_tokens": 2248,
       "output_tokens": 161,
       "cost_usd": 0.0010769,
-      "total_wall_clock_seconds": 6.271741208
+      "total_wall_clock_seconds": 6.271741208,
+      "n_tools_executed": 3
     },
     "error": null
   },
@@ -75,7 +78,8 @@
       "input_tokens": 3752,
       "output_tokens": 97,
       "cost_usd": 0.0013681000000000001,
-      "total_wall_clock_seconds": 13.520814583
+      "total_wall_clock_seconds": 13.520814583,
+      "n_tools_executed": 4
     },
     "error": null
   },
@@ -95,7 +99,8 @@
       "input_tokens": 4309,
       "output_tokens": 106,
       "cost_usd": 0.0015577,
-      "total_wall_clock_seconds": 10.708982622999999
+      "total_wall_clock_seconds": 10.708982622999999,
+      "n_tools_executed": 4
     },
     "error": null
   },
@@ -115,7 +120,8 @@
       "input_tokens": 2248,
       "output_tokens": 125,
       "cost_usd": 0.0009869,
-      "total_wall_clock_seconds": 6.0052871649999995
+      "total_wall_clock_seconds": 6.0052871649999995,
+      "n_tools_executed": 3
     },
     "error": null
   },
@@ -135,7 +141,8 @@
       "input_tokens": 4498,
       "output_tokens": 110,
       "cost_usd": 0.0016244,
-      "total_wall_clock_seconds": 7.249188499000002
+      "total_wall_clock_seconds": 7.249188499000002,
+      "n_tools_executed": 4
     },
     "error": null
   },
@@ -155,7 +162,8 @@
       "input_tokens": 2951,
       "output_tokens": 124,
       "cost_usd": 0.0011952999999999998,
-      "total_wall_clock_seconds": 6.216170206999999
+      "total_wall_clock_seconds": 6.216170206999999,
+      "n_tools_executed": 4
     },
     "error": null
   },
@@ -175,7 +183,8 @@
       "input_tokens": 1460,
       "output_tokens": 69,
       "cost_usd": 0.0006104999999999999,
-      "total_wall_clock_seconds": 3.823981876000005
+      "total_wall_clock_seconds": 3.823981876000005,
+      "n_tools_executed": 2
     },
     "error": null
   },
@@ -195,7 +204,8 @@
       "input_tokens": 4330,
       "output_tokens": 112,
       "cost_usd": 0.0015789999999999999,
-      "total_wall_clock_seconds": 5.363430168000004
+      "total_wall_clock_seconds": 5.363430168000004,
+      "n_tools_executed": 4
     },
     "error": null
   },
@@ -215,7 +225,8 @@
       "input_tokens": 4736,
       "output_tokens": 117,
       "cost_usd": 0.0017133,
-      "total_wall_clock_seconds": 6.015098082999998
+      "total_wall_clock_seconds": 6.015098082999998,
+      "n_tools_executed": 4
     },
     "error": null
   },
@@ -235,7 +246,8 @@
       "input_tokens": 4656,
       "output_tokens": 122,
       "cost_usd": 0.0017017999999999998,
-      "total_wall_clock_seconds": 12.027769041000003
+      "total_wall_clock_seconds": 12.027769041000003,
+      "n_tools_executed": 5
     },
     "error": null
   },
@@ -255,7 +267,8 @@
       "input_tokens": 1530,
       "output_tokens": 67,
       "cost_usd": 0.0006265,
-      "total_wall_clock_seconds": 4.314731290999994
+      "total_wall_clock_seconds": 4.314731290999994,
+      "n_tools_executed": 2
     },
     "error": null
   },
@@ -275,7 +288,8 @@
       "input_tokens": 804,
       "output_tokens": 83,
       "cost_usd": 0.0004487,
-      "total_wall_clock_seconds": 3.931823125000001
+      "total_wall_clock_seconds": 3.931823125000001,
+      "n_tools_executed": 2
     },
     "error": null
   },
@@ -295,7 +309,8 @@
       "input_tokens": 5271,
       "output_tokens": 145,
       "cost_usd": 0.0019437999999999999,
-      "total_wall_clock_seconds": 13.771849376000006
+      "total_wall_clock_seconds": 13.771849376000006,
+      "n_tools_executed": 5
     },
     "error": null
   },
@@ -315,7 +330,8 @@
       "input_tokens": 7747,
       "output_tokens": 116,
       "cost_usd": 0.0026141000000000003,
-      "total_wall_clock_seconds": 12.646355583999998
+      "total_wall_clock_seconds": 12.646355583999998,
+      "n_tools_executed": 5
     },
     "error": null
   },
@@ -335,7 +351,8 @@
       "input_tokens": 4841,
       "output_tokens": 127,
       "cost_usd": 0.0017698,
-      "total_wall_clock_seconds": 6.870754459000004
+      "total_wall_clock_seconds": 6.870754459000004,
+      "n_tools_executed": 5
     },
     "error": null
   },
@@ -355,7 +372,8 @@
       "input_tokens": 3150,
       "output_tokens": 110,
       "cost_usd": 0.00122,
-      "total_wall_clock_seconds": 5.9387996250000015
+      "total_wall_clock_seconds": 5.9387996250000015,
+      "n_tools_executed": 4
     },
     "error": null
   },
@@ -375,7 +393,8 @@
       "input_tokens": 3813,
       "output_tokens": 137,
       "cost_usd": 0.0014864000000000001,
-      "total_wall_clock_seconds": 5.668620624000006
+      "total_wall_clock_seconds": 5.668620624000006,
+      "n_tools_executed": 4
     },
     "error": null
   },
@@ -395,7 +414,8 @@
       "input_tokens": 4697,
       "output_tokens": 150,
       "cost_usd": 0.0017840999999999998,
-      "total_wall_clock_seconds": 15.53877124999999
+      "total_wall_clock_seconds": 15.53877124999999,
+      "n_tools_executed": 5
     },
     "error": null
   },
@@ -415,7 +435,8 @@
       "input_tokens": 2888,
       "output_tokens": 156,
       "cost_usd": 0.0012564,
-      "total_wall_clock_seconds": 9.861214750000002
+      "total_wall_clock_seconds": 9.861214750000002,
+      "n_tools_executed": 3
     },
     "error": null
   },
@@ -435,7 +456,8 @@
       "input_tokens": 2489,
       "output_tokens": 109,
       "cost_usd": 0.0010192,
-      "total_wall_clock_seconds": 4.989568708000007
+      "total_wall_clock_seconds": 4.989568708000007,
+      "n_tools_executed": 4
     },
     "error": null
   },
@@ -455,7 +477,8 @@
       "input_tokens": 1569,
       "output_tokens": 58,
       "cost_usd": 0.0006157000000000001,
-      "total_wall_clock_seconds": 3.348412707999998
+      "total_wall_clock_seconds": 3.348412707999998,
+      "n_tools_executed": 2
     },
     "error": null
   },
@@ -475,7 +498,8 @@
       "input_tokens": 2421,
       "output_tokens": 107,
       "cost_usd": 0.0009938,
-      "total_wall_clock_seconds": 5.749746123999998
+      "total_wall_clock_seconds": 5.749746123999998,
+      "n_tools_executed": 4
     },
     "error": null
   },
@@ -495,7 +519,8 @@
       "input_tokens": 1901,
       "output_tokens": 123,
       "cost_usd": 0.0008778,
-      "total_wall_clock_seconds": 4.352133542000004
+      "total_wall_clock_seconds": 4.352133542000004,
+      "n_tools_executed": 3
     },
     "error": null
   },
@@ -515,7 +540,8 @@
       "input_tokens": 1318,
       "output_tokens": 75,
       "cost_usd": 0.0005828999999999999,
-      "total_wall_clock_seconds": 3.699452667999978
+      "total_wall_clock_seconds": 3.699452667999978,
+      "n_tools_executed": 2
     },
     "error": null
   },
@@ -535,7 +561,8 @@
       "input_tokens": 1710,
       "output_tokens": 54,
       "cost_usd": 0.0006479999999999999,
-      "total_wall_clock_seconds": 4.412769124999983
+      "total_wall_clock_seconds": 4.412769124999983,
+      "n_tools_executed": 3
     },
     "error": null
   },
@@ -555,7 +582,8 @@
       "input_tokens": 981,
       "output_tokens": 50,
       "cost_usd": 0.00041929999999999995,
-      "total_wall_clock_seconds": 2.625409082999994
+      "total_wall_clock_seconds": 2.625409082999994,
+      "n_tools_executed": 2
     },
     "error": null
   },
@@ -575,7 +603,8 @@
       "input_tokens": 15105,
       "output_tokens": 183,
       "cost_usd": 0.0049889999999999995,
-      "total_wall_clock_seconds": 14.631819000000021
+      "total_wall_clock_seconds": 14.631819000000021,
+      "n_tools_executed": 8
     },
     "error": null
   },
@@ -595,7 +624,8 @@
       "input_tokens": 1013,
       "output_tokens": 49,
       "cost_usd": 0.00042640000000000006,
-      "total_wall_clock_seconds": 4.800077041000009
+      "total_wall_clock_seconds": 4.800077041000009,
+      "n_tools_executed": 2
     },
     "error": null
   },
@@ -615,7 +645,8 @@
       "input_tokens": 1519,
       "output_tokens": 81,
       "cost_usd": 0.0006582,
-      "total_wall_clock_seconds": 4.261176249999991
+      "total_wall_clock_seconds": 4.261176249999991,
+      "n_tools_executed": 2
     },
     "error": null
   },
@@ -635,7 +666,8 @@
       "input_tokens": 1454,
       "output_tokens": 80,
       "cost_usd": 0.0006362,
-      "total_wall_clock_seconds": 4.962974625000001
+      "total_wall_clock_seconds": 4.962974625000001,
+      "n_tools_executed": 2
     },
     "error": null
   },
@@ -655,7 +687,659 @@
       "input_tokens": 5942,
       "output_tokens": 106,
       "cost_usd": 0.0020476,
-      "total_wall_clock_seconds": 11.27857070600001
+      "total_wall_clock_seconds": 11.27857070600001,
+      "n_tools_executed": 5
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a86458b5542991e771815ec",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "What is the population of the city where the Akademisches Kunstmuseum is?",
+    "gold_answer": "300,000",
+    "predicted_answer": "The Akademisches Kunstmuseum is located in Bonn, Germany, which has a population exceeding 300,000.",
+    "judge_correct": true,
+    "judge_rationale": "The prediction correctly states the population as 'exceeding 300,000', which is an acceptable approximation for the gold answer '300,000' under the grading rules.",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 3657,
+      "output_tokens": 97,
+      "cost_usd": 0.0013395999999999998,
+      "total_wall_clock_seconds": 10.519520667,
+      "n_tools_executed": 4
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a7a9b9a5542990198eaf160",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "When was the Chinese American electronic musician and singer who collaborated on the album I Remember born?",
+    "gold_answer": "1989",
+    "predicted_answer": "Steven Zhu, the Chinese American electronic musician and singer who collaborated on the album *I Remember*, was born on April 28, 1989.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer correctly states the birth year as 1989, which matches the gold answer, and provides additional accurate information.",
+    "metrics": {
+      "n_llm_calls": 6,
+      "n_tool_calls": 5,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 5410,
+      "output_tokens": 130,
+      "cost_usd": 0.001948,
+      "total_wall_clock_seconds": 9.246317208999999,
+      "n_tools_executed": 5
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ac2659b55429963665199a1",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "How many laps did Harry Prowell run during the 10,000 metres race at the 1967 Pan American Games?",
+    "gold_answer": "25 laps",
+    "predicted_answer": "Harry Prowell ran 25 laps during the 10,000 metres race at the 1967 Pan American Games. A standard outdoor track is 400 meters, so 10,000 meters divided by 400 meters per lap equals 25 laps.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer accurately states \"25 laps\", which matches the gold answer exactly, and provides additional correct context.",
+    "metrics": {
+      "n_llm_calls": 3,
+      "n_tool_calls": 2,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 897,
+      "output_tokens": 139,
+      "cost_usd": 0.0006165999999999999,
+      "total_wall_clock_seconds": 5.815604958,
+      "n_tools_executed": 2
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ac2758b55429963665199c3",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "The organization that Nicolae Titulescu served two terms as president was founded on what date?",
+    "gold_answer": "10 January 1920",
+    "predicted_answer": "The organization that Nicolae Titulescu served two terms as president, the League of Nations, was founded on January 10, 1920.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer accurately states the founding date as 'January 10, 1920', which is semantically equivalent to the gold answer '10 January 1920'.",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 4363,
+      "output_tokens": 107,
+      "cost_usd": 0.0015764,
+      "total_wall_clock_seconds": 18.610198416000003,
+      "n_tools_executed": 4
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a8a575a554299515336136e",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "Rynella is an unincorporated community named after the daughters of a conservationist who presided of the maker of a brand of hot sauce made from vinegar, salt and what kind of peppers? ",
+    "gold_answer": "tabasco peppers",
+    "predicted_answer": "Rynella is an unincorporated community named after the daughters of Edward Avery McIlhenny, a conservationist who presided over the McIlhenny Company, maker of Tabasco brand hot sauce. The hot sauce is made from vinegar, salt, and tabasco peppers.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer correctly identifies 'tabasco peppers' as the type of peppers used in the hot sauce, which directly answers the question.",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 2830,
+      "output_tokens": 123,
+      "cost_usd": 0.0011565,
+      "total_wall_clock_seconds": 6.380386082999999,
+      "n_tools_executed": 4
+    },
+    "error": null
+  },
+  {
+    "task_id": "5adf75e35542993344016c98",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "What American horror film directed by Sidney J. Furie was based off an alleged haunting which occurred in 1974 at Culver City, California?",
+    "gold_answer": "The Entity",
+    "predicted_answer": "The American horror film directed by Sidney J. Furie and based on an alleged haunting that occurred in 1974 in Los Angeles (which includes Culver City) is \"The Entity.\"",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer correctly identifies 'The Entity' as the film, which is the gold answer.",
+    "metrics": {
+      "n_llm_calls": 3,
+      "n_tool_calls": 2,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 1395,
+      "output_tokens": 77,
+      "cost_usd": 0.000611,
+      "total_wall_clock_seconds": 4.420504458,
+      "n_tools_executed": 2
+    },
+    "error": null
+  },
+  {
+    "task_id": "5abaee845542996606241696",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "On February 25, 2017 tony Harrison lost the the International Boxing Federation light middleweight world title to a boxer from what state?",
+    "gold_answer": "Maryland",
+    "predicted_answer": "Tony Harrison lost the International Boxing Federation light middleweight world title to Jarrett Hurd, who is from Maryland.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer accurately identifies 'Maryland' as the state, which directly answers the question.",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 4215,
+      "output_tokens": 100,
+      "cost_usd": 0.0015144999999999998,
+      "total_wall_clock_seconds": 12.715092415999997,
+      "n_tools_executed": 4
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ac3bab155429939154138fb",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "The House of Hanover held the British throne until after Victoria's death, when it was past to the dynasty that ruled which duchy?",
+    "gold_answer": "Ernestine",
+    "predicted_answer": "After Victoria's death, the British throne passed to the House of Saxe-Coburg and Gotha, which ruled the Duchy of Saxe-Coburg and Gotha.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer correctly identifies the House of Saxe-Coburg and Gotha as the dynasty and the Duchy of Saxe-Coburg and Gotha as the duchy they ruled, which is a factually accurate and precise answer to the question 'which duchy?'.",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 4633,
+      "output_tokens": 116,
+      "cost_usd": 0.0016798999999999998,
+      "total_wall_clock_seconds": 7.198120415999998,
+      "n_tools_executed": 4
+    },
+    "error": null
+  },
+  {
+    "task_id": "5abdff775542993f32c2a082",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "At what theater is the composer and lyricist for the musical Big Fish a residential artist?",
+    "gold_answer": "Ars Nova Theater",
+    "predicted_answer": "Andrew Lippa, the composer and lyricist for the musical Big Fish, is a resident artist at the Ars Nova Theater in New York City.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer accurately identifies 'Ars Nova Theater' which is the correct theater, and the additional information provided does not contradict or invalidate the core answer.",
+    "metrics": {
+      "n_llm_calls": 7,
+      "n_tool_calls": 6,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 5625,
+      "output_tokens": 137,
+      "cost_usd": 0.00203,
+      "total_wall_clock_seconds": 12.491831708,
+      "n_tools_executed": 6
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a728dc65542992359bc30ef",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "What fellow Turkish footballer did Darko Kovačević form an offensive partnership with during his tenure at Real Sociedad?",
+    "gold_answer": "Nihat Kahveci",
+    "predicted_answer": "Nihat Kahveci.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer is identical to the gold answer.",
+    "metrics": {
+      "n_llm_calls": 3,
+      "n_tool_calls": 2,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 1461,
+      "output_tokens": 46,
+      "cost_usd": 0.0005533,
+      "total_wall_clock_seconds": 3.7918813339999993,
+      "n_tools_executed": 2
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ae694a15542991bbc976141",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "Why is Minister Pool important to Black Country and the West Midlands in England?",
+    "gold_answer": "defence of the Cathedral",
+    "predicted_answer": "I could not find any information about \"Minister Pool\" in relation to the Black Country and the West Midlands in England using Wikipedia.",
+    "judge_correct": false,
+    "judge_rationale": "The predicted answer indicates an inability to find information, which does not answer the question about why Minister Pool is important.",
+    "metrics": {
+      "n_llm_calls": 2,
+      "n_tool_calls": 1,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 423,
+      "output_tokens": 46,
+      "cost_usd": 0.00024189999999999997,
+      "total_wall_clock_seconds": 4.207074999999996,
+      "n_tools_executed": 1
+    },
+    "error": null
+  },
+  {
+    "task_id": "5add016e5542992c1e3a250b",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "What made the man who abolished the Consell in 1718 resume the throne?",
+    "gold_answer": "upon his son's death",
+    "predicted_answer": "Philip V of Spain abolished the Consell in 1718. He resumed the throne in 1724 after his son, Louis I, to whom he had abdicated earlier that year, died.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer correctly states that the man resumed the throne after his son's death, which is semantically equivalent to the gold answer.",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 4025,
+      "output_tokens": 124,
+      "cost_usd": 0.0015174999999999998,
+      "total_wall_clock_seconds": 7.373407874999998,
+      "n_tools_executed": 4
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ac3090d5542990b17b154fc",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "Operalia, The World Opera Competition helped launch the career of an operatic soprano of what nationality?",
+    "gold_answer": "Bulgarian",
+    "predicted_answer": "Operalia, The World Opera Competition helped launch the career of American operatic soprano Rachel Willis-Sørensen.",
+    "judge_correct": false,
+    "judge_rationale": "The gold answer states the soprano is Bulgarian, while the predicted answer incorrectly states she is American.",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 4998,
+      "output_tokens": 105,
+      "cost_usd": 0.0017618999999999998,
+      "total_wall_clock_seconds": 14.978230874999994,
+      "n_tools_executed": 4
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a7133565542994082a3e65c",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "What Kentucky county has a population of 60,316 and features the Lake Louisvilla neighborhood?",
+    "gold_answer": "Oldham County",
+    "predicted_answer": "I am unable to identify a Kentucky county with an exact population of 60,316 that also features the Lake Louisvilla neighborhood. Lake Louisvilla is partially located in Oldham County, Kentucky, which had a population of 67,607 in 2020. My search for a Kentucky county with precisely 60,316 residents did not yield any results.",
+    "judge_correct": false,
+    "judge_rationale": "The prediction fails to provide the correct county as the answer, stating it is unable to identify one that perfectly matches the criteria, even though it correctly identifies the location of Lake Louisvilla in Oldham County while noting a population discrepancy.",
+    "metrics": {
+      "n_llm_calls": 6,
+      "n_tool_calls": 5,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 3893,
+      "output_tokens": 182,
+      "cost_usd": 0.0016228999999999998,
+      "total_wall_clock_seconds": 13.578331165999998,
+      "n_tools_executed": 5
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ae7edee554299540e5a56ad",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "The Church of the Guanche People was founded in the city that is on the most populated island of what larger area?",
+    "gold_answer": "Macaronesia",
+    "predicted_answer": "The Church of the Guanche People was founded in the city of San Cristóbal de La Laguna, on the island of Tenerife, which is the most populated island of the Canary Islands.",
+    "judge_correct": false,
+    "judge_rationale": "The predicted answer identifies the Canary Islands, which is a sub-region, rather than the broader Macaronesia area specified in the gold answer, failing to provide the requested 'larger area'.",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 3045,
+      "output_tokens": 114,
+      "cost_usd": 0.0011985,
+      "total_wall_clock_seconds": 16.708967709,
+      "n_tools_executed": 4
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ac079e9554299294b218fff",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "What organization does Rosyth Dockyard and Queen Elizabeth-class aircraft carrier have in common?",
+    "gold_answer": "Navy",
+    "predicted_answer": "Babcock International is the organization that Rosyth Dockyard and the Queen Elizabeth-class aircraft carrier have in common. Rosyth Dockyard is owned by Babcock Marine (a subsidiary of Babcock International) and serves as the integration site for the Queen Elizabeth-class aircraft carriers. Babcock International is also a key partner in the Aircraft Carrier Alliance, which was responsible for the construction of the Queen Elizabeth-class aircraft carriers.",
+    "judge_correct": false,
+    "judge_rationale": "The predicted answer identifies 'Babcock International' as the common organization, which is a contractor involved in building and maintaining, while the gold answer 'Navy' refers to the end-user and ultimate organizational affiliation for both the dockyard's work on the carriers and the carriers themselves, making them factually different.",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 3698,
+      "output_tokens": 159,
+      "cost_usd": 0.0015069000000000003,
+      "total_wall_clock_seconds": 8.339668125000003,
+      "n_tools_executed": 4
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ab6ba045542995eadef007e",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "Dorian Gray is the main character of what philosophical novel whose editor feared the story was indecent, and deleted roughly five hundred words before publication?",
+    "gold_answer": "The Picture of Dorian Gray",
+    "predicted_answer": "The philosophical novel featuring Dorian Gray as the main character, whose editor feared the story was indecent and deleted roughly five hundred words before publication, is *The Picture of Dorian Gray*.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer accurately identifies the novel as 'The Picture of Dorian Gray', which is the gold standard.",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 3443,
+      "output_tokens": 117,
+      "cost_usd": 0.0013254,
+      "total_wall_clock_seconds": 15.985122582999999,
+      "n_tools_executed": 4
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a7a15d35542996a35c170c4",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "In what city does a Christian minister who won the singles title with Jan Kodes in the 1970 French Open currently reside?",
+    "gold_answer": "Perth, Western Australia",
+    "predicted_answer": "The premise of the question is factually incorrect. A singles title is won by an individual, not \"with\" another person. Jan Kodeš won the men's singles title at the 1970 French Open. He did not win a doubles title with a partner in that tournament. Therefore, there is no such person who fits the description provided.",
+    "judge_correct": false,
+    "judge_rationale": "The predicted answer challenges the premise of the question instead of providing the requested information, which is the city of residence.",
+    "metrics": {
+      "n_llm_calls": 8,
+      "n_tool_calls": 7,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 6776,
+      "output_tokens": 230,
+      "cost_usd": 0.0026078000000000004,
+      "total_wall_clock_seconds": 15.358767166999996,
+      "n_tools_executed": 7
+    },
+    "error": null
+  },
+  {
+    "task_id": "5abbcfaf5542993f40c73ba9",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "Nicole Gordon won a silver medal with Sara Petersen int he women's doubles at a competition held in what city?",
+    "gold_answer": "Manchester",
+    "predicted_answer": "Manchester, England.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer \"Manchester, England\" accurately identifies the city and provides additional correct context, which is semantically equivalent to the gold answer \"Manchester.\"",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 2390,
+      "output_tokens": 87,
+      "cost_usd": 0.0009345,
+      "total_wall_clock_seconds": 6.533898125000007,
+      "n_tools_executed": 4
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ade8b2655429975fa854eff",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "What is the nickname of this American retired airline captain celebrated for his water landing with Jeffrey Skiles, after a bird strike and being unable to reach an airport?",
+    "gold_answer": "Sully",
+    "predicted_answer": "The nickname of the American retired airline captain is Sully.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer accurately states the nickname as 'Sully', which is semantically equivalent to the gold answer.",
+    "metrics": {
+      "n_llm_calls": 3,
+      "n_tool_calls": 2,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 1492,
+      "output_tokens": 54,
+      "cost_usd": 0.0005826,
+      "total_wall_clock_seconds": 3.7053706250000005,
+      "n_tools_executed": 2
+    },
+    "error": null
+  },
+  {
+    "task_id": "5adea9ea55429939a52fe934",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "What was the name of the fanzine that interviewed the Sex Pistols bassist when he was in the band \"The Flowers of Romance?\"",
+    "gold_answer": "SKUM",
+    "predicted_answer": "SKUM fanzine interviewed the Sex Pistols bassist Sid Vicious when he was in the band \"The Flowers of Romance.\"",
+    "judge_correct": true,
+    "judge_rationale": "The prediction accurately states 'SKUM', which is the correct name of the fanzine, and provides additional context that does not detract from its accuracy.",
+    "metrics": {
+      "n_llm_calls": 3,
+      "n_tool_calls": 2,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 1426,
+      "output_tokens": 66,
+      "cost_usd": 0.0005928,
+      "total_wall_clock_seconds": 3.8062768749999947,
+      "n_tools_executed": 2
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ade636255429939a52fe896",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "Kresy, which roughly was a part of the land beyond the so-called Curson Line, was drawn for what reason?",
+    "gold_answer": "demarcation line between the newly emerging states, the Second Polish Republic, and the Soviet Union",
+    "predicted_answer": "The Curzon Line was drawn as a proposed demarcation line between the Second Polish Republic and the Soviet Union after World War I. Its primary purpose was to establish a border based on ethnographic divisions, separating predominantly Polish-speaking territories from regions mainly populated by Ukrainians, Belarusians, and Lithuanians.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer accurately states the Curzon Line was a demarcation line between the Second Polish Republic and the Soviet Union, which matches the core information in the gold answer, and provides additional correct context about its purpose based on ethnographic divisions.",
+    "metrics": {
+      "n_llm_calls": 3,
+      "n_tool_calls": 2,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 1405,
+      "output_tokens": 93,
+      "cost_usd": 0.0006540000000000001,
+      "total_wall_clock_seconds": 4.048445540999992,
+      "n_tools_executed": 2
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a7f53ff5542992097ad2f17",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "In addition to the best known comic servant from Commedia dell'arte, who else is featured in La Surprise de l'amour?",
+    "gold_answer": "Columbine",
+    "predicted_answer": "In addition to Arlequin (Harlequin), the other characters featured in Marivaux's *La Surprise de l'amour* are the Countess, Lélio, the Baron, Columbine, Jacqueline, and Pierre.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer correctly identifies 'Columbine' as specified in the gold answer, even though it provides additional correct information.",
+    "metrics": {
+      "n_llm_calls": 3,
+      "n_tool_calls": 2,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 1249,
+      "output_tokens": 86,
+      "cost_usd": 0.0005897,
+      "total_wall_clock_seconds": 4.5298786670000055,
+      "n_tools_executed": 2
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a7730015542994aec3b7210",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "Which TV series, written by the creators of Robocalypse, is set in Bikini Bottom?",
+    "gold_answer": "SpongeBob SquarePants",
+    "predicted_answer": "SpongeBob SquarePants, co-written by Jay Lender, who also co-wrote Robocalypse, is set in Bikini Bottom.",
+    "judge_correct": true,
+    "judge_rationale": "The prediction accurately identifies 'SpongeBob SquarePants' which is the correct TV series, with additional supporting information that is also correct and does not negate the core answer.",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 3928,
+      "output_tokens": 95,
+      "cost_usd": 0.0014159,
+      "total_wall_clock_seconds": 9.121216958000005,
+      "n_tools_executed": 4
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ac325495542995ef918c12e",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "Which region of Ghana was the city where Akrofuom is located? ",
+    "gold_answer": "Ashanti Region of Ghana",
+    "predicted_answer": "Akrofuom is located in the Ashanti Region of Ghana.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer accurately states that Akrofuom is located in the Ashanti Region of Ghana, which matches the gold answer.",
+    "metrics": {
+      "n_llm_calls": 3,
+      "n_tool_calls": 2,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 912,
+      "output_tokens": 50,
+      "cost_usd": 0.00039860000000000004,
+      "total_wall_clock_seconds": 3.111471417000004,
+      "n_tools_executed": 2
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a7dbc175542995ed0d1666b",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "What russian Marxist revolutionary born in 1875 was part of the Vpered organization?",
+    "gold_answer": "Anatoly Vasilyevich Lunacharsky",
+    "predicted_answer": "Anatoly Lunacharsky, born in 1875, was a Russian Marxist revolutionary who was part of the Vpered organization.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer 'Anatoly Lunacharsky' is a correct and semantically equivalent name variant for the gold answer 'Anatoly Vasilyevich Lunacharsky', and the additional context provided aligns with the question.",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 4336,
+      "output_tokens": 109,
+      "cost_usd": 0.0015733000000000001,
+      "total_wall_clock_seconds": 7.070442459000006,
+      "n_tools_executed": 4
+    },
+    "error": null
+  },
+  {
+    "task_id": "5ac514d05542994611c8b372",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "What is the name of the person that named Moltke Nunatak after the Chief of the German General staff that served from 1906 to 1914?",
+    "gold_answer": "Second German Antarctic Expedition of 1911–12 under Wilhelm Filchner.",
+    "predicted_answer": "Wilhelm Filchner, leader of the Second German Antarctic Expedition of 1911-12, named Moltke Nunatak after General Helmuth von Moltke.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer correctly identifies Wilhelm Filchner as the person who named Moltke Nunatak, and also includes the expedition he led, which matches the gold answer.",
+    "metrics": {
+      "n_llm_calls": 8,
+      "n_tool_calls": 7,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 14111,
+      "output_tokens": 195,
+      "cost_usd": 0.0047208,
+      "total_wall_clock_seconds": 17.224520916000003,
+      "n_tools_executed": 7
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a8ec02e5542995a26add501",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "Which American sketch comedy television series starring John C. Reilly was produced by Abso Lutely Productions?",
+    "gold_answer": "Check It Out!",
+    "predicted_answer": "The American sketch comedy television series starring John C. Reilly that was produced by Abso Lutely Productions is \"Check It Out! with Dr. Steve Brule\".",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer provides the full title of the series, which semantically includes the gold answer.",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 3827,
+      "output_tokens": 127,
+      "cost_usd": 0.0014656,
+      "total_wall_clock_seconds": 16.634658834000007,
+      "n_tools_executed": 4
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a7220f055429971e9dc92ac",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "What was the Volvo S70 essentially modeled after and was the first all wheel drive Volvo?",
+    "gold_answer": "Volvo 850",
+    "predicted_answer": "The Volvo S70 was essentially modeled after a facelifted Volvo 850 saloon. It was among the first Volvo models to offer all-wheel drive, with its estate counterpart, the Volvo V70, also being available with all-wheel drive from its debut in late 1996.",
+    "judge_correct": false,
+    "judge_rationale": "JUDGE_PARSE_ERROR: '{\"correct\": false, \"rationale\": \"The prediction correctly identifies the Volvo 850 as the model it was based on, but contradicts the premise of the question by stating it was \\''",
+    "metrics": {
+      "n_llm_calls": 8,
+      "n_tool_calls": 7,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 10806,
+      "output_tokens": 198,
+      "cost_usd": 0.0037368,
+      "total_wall_clock_seconds": 18.752246375,
+      "n_tools_executed": 7
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a8db348554299068b959dc2",
+    "strategy": "native_parallel",
+    "benchmark": "hotpotqa",
+    "question": "What is the subsidiary of the record company who released \"Love Incredible?\"",
+    "gold_answer": "Vivendi S.A.",
+    "predicted_answer": "Mad Love Records is a subsidiary of Interscope Records.",
+    "judge_correct": false,
+    "judge_rationale": "The predicted answer names Mad Love Records and Interscope Records, which are different entities from the gold answer Vivendi S.A.",
+    "metrics": {
+      "n_llm_calls": 9,
+      "n_tool_calls": 8,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 12345,
+      "output_tokens": 152,
+      "cost_usd": 0.0040835,
+      "total_wall_clock_seconds": 19.83564795800001,
+      "n_tools_executed": 8
+    },
+    "error": null
+  },
+  {
+    "task_id": "5a86458b5542991e771815ec",
+    "strategy": "react",
+    "benchmark": "hotpotqa",
+    "question": "What is the population of the city where the Akademisches Kunstmuseum is?",
+    "gold_answer": "300,000",
+    "predicted_answer": "The Akademisches Kunstmuseum is in Bonn, Germany, which has a population exceeding 300,000.",
+    "judge_correct": true,
+    "judge_rationale": "The predicted answer provides the correct numerical value along with an acceptable approximation term \"exceeding\", which falls within the tolerance for quantity figures as per grading rule 7.",
+    "metrics": {
+      "n_llm_calls": 5,
+      "n_tool_calls": 4,
+      "n_tools_executed": 4,
+      "discarded_parallel_calls": 0,
+      "input_tokens": 3756,
+      "output_tokens": 96,
+      "cost_usd": 0.0013667999999999998,
+      "total_wall_clock_seconds": 5.423513917999999
     },
     "error": null
   }
