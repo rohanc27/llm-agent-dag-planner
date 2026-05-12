@@ -114,13 +114,19 @@ async def _run_one_task(
     benchmark: str,
     sem: asyncio.Semaphore,
     console: Console,
+    seed: int,
 ) -> dict[str, Any]:
-    """Execute strategy + judge on one task, returning the result record."""
+    """Execute strategy + judge on one task, returning the result record.
+
+    ``seed`` is recorded on every row so multi-seed evals can be grouped
+    by (strategy, benchmark, seed) when computing confidence intervals.
+    """
     async with sem:
         record: dict[str, Any] = {
             "task_id": task["id"],
             "strategy": strategy_name,
             "benchmark": benchmark,
+            "seed": seed,
             "question": task["question"],
             "gold_answer": task["answer"],
             "predicted_answer": "",
@@ -269,40 +275,75 @@ def _save_results(path: Path, new_records: list[dict[str, Any]]) -> int:
 # -----------------------------------------------------------------------------
 # Orchestration
 # -----------------------------------------------------------------------------
+def _load_tasks(benchmark: str, n: int, seed: int) -> list[dict[str, Any]]:
+    """Load (and for HotpotQA, re-sample) the task set for a benchmark.
+
+    HotpotQA bridge / comparison: re-sample ``n`` tasks from the raw dev set
+    with the given seed. Different seeds yield different distributional
+    coverage of the dev set.
+
+    GitHub: hand-curated, NOT re-sampled. The seed is recorded in each row
+    only as a grouping label for capturing strategy-side stochasticity.
+    """
+    if benchmark in ("hotpotqa", "hotpotqa_comparison"):
+        from benchmarks.hotpotqa.load import (  # local to avoid import cost on github runs
+            RAW_PATH,
+            filter_and_sample,
+        )
+
+        if not RAW_PATH.exists():
+            raise FileNotFoundError(
+                f"raw HotpotQA file missing at {RAW_PATH}. "
+                f"Run `python -m benchmarks.hotpotqa.load --type bridge` first."
+            )
+        task_type = "comparison" if benchmark == "hotpotqa_comparison" else "bridge"
+        return filter_and_sample(RAW_PATH, n=n, seed=seed, task_type=task_type)
+
+    # GitHub or any other file-backed benchmark.
+    tasks_path = BENCHMARK_PATHS[benchmark]
+    if not tasks_path.exists():
+        raise FileNotFoundError(
+            f"tasks file missing at {tasks_path}. "
+            f"Run `python -m benchmarks.{benchmark}.load` first."
+        )
+    with open(tasks_path, "r", encoding="utf-8") as f:
+        all_tasks = json.load(f)
+    return all_tasks if n <= 0 else all_tasks[:n]
+
+
 async def run_eval(
     strategy: str,
     benchmark: str,
     n: int,
     output: Path,
     concurrency: int,
+    seed: int,
 ) -> int:
     load_dotenv(REPO_ROOT / ".env")
     if not os.environ.get("GEMINI_API_KEY"):
         print("ERROR: GEMINI_API_KEY is not set.", file=sys.stderr)
         return 1
 
-    tasks_path = BENCHMARK_PATHS[benchmark]
-    if not tasks_path.exists():
-        print(
-            f"ERROR: tasks file missing at {tasks_path}.\n"
-            f"       Run `python -m benchmarks.{benchmark}.load` first.",
-            file=sys.stderr,
-        )
+    try:
+        tasks_to_run = _load_tasks(benchmark, n, seed)
+    except FileNotFoundError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
         return 3
-
-    with open(tasks_path, "r", encoding="utf-8") as f:
-        all_tasks = json.load(f)
-    tasks_to_run = all_tasks if n <= 0 else all_tasks[:n]
 
     strategy_fn = STRATEGIES[strategy]
     tools = TOOLS_FOR_BENCHMARK[benchmark]
     llm = GeminiProvider()
 
     console = Console()
+    reuse_note = (
+        " (re-sampled)"
+        if benchmark in ("hotpotqa", "hotpotqa_comparison")
+        else " (hand-curated; seed only tags strategy variance)"
+    )
     console.print(
         f"Running [bold]{strategy}[/bold] on [bold]{benchmark}[/bold] — "
-        f"{len(tasks_to_run)} task(s), concurrency={concurrency}, "
-        f"model={llm.model}\n"
+        f"{len(tasks_to_run)} task(s), seed={seed}{reuse_note}, "
+        f"concurrency={concurrency}, model={llm.model}\n"
     )
 
     sem = asyncio.Semaphore(concurrency)
@@ -316,6 +357,7 @@ async def run_eval(
             benchmark=benchmark,
             sem=sem,
             console=console,
+            seed=seed,
         )
         for t in tasks_to_run
     ]
@@ -365,6 +407,16 @@ def main(argv: Optional[list[str]] = None) -> int:
         default=3,
         help="Max tasks running in parallel. Respects Gemini's 15 RPM cap.",
     )
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=42,
+        help=(
+            "Random seed. HotpotQA bridge/comparison re-sample 30 tasks per "
+            "seed; GitHub ignores it for task selection (hand-curated set) "
+            "but tags the seed on each row to group strategy-variance runs."
+        ),
+    )
     args = parser.parse_args(argv)
     return asyncio.run(
         run_eval(
@@ -373,6 +425,7 @@ def main(argv: Optional[list[str]] = None) -> int:
             n=args.n,
             output=args.output,
             concurrency=args.concurrency,
+            seed=args.seed,
         )
     )
 
