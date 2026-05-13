@@ -364,6 +364,51 @@ async def test_diversification_instruction_appears_in_replan_prompt() -> None:
     assert "different" in lower  # "different approach / entity / angle"
 
 
+@pytest.mark.asyncio
+async def test_any_or_empty_trigger_fires_for_both_failure_modes() -> None:
+    """``trigger='any_or_empty'`` is the union of ``any_failure`` and
+    ``empty_synth``. Verify both arms fire in one run:
+      1. Initial plan's task fails → per-level trigger fires → replan #1.
+      2. The replanned task succeeds but synth produces a refusal →
+         post-synth trigger fires → replan #2.
+      3. The final replan succeeds and synth gives a real answer.
+    """
+    # Plan A: failing task → per-level trigger.
+    plan_a = _plan(
+        [{"id": 0, "tool": "noop", "args": '{"x":"FAIL"}', "depends_on": []}]
+    )
+    # Plan B (replan #1): succeeds, but synth refuses → post-synth trigger.
+    plan_b = _plan(
+        [{"id": 0, "tool": "noop", "args": '{"x":"ok"}', "depends_on": []}]
+    )
+    refusal = _response([_text("I cannot answer with this information.")])
+    # Plan C (replan #2): succeeds; synth real answer.
+    plan_c = _plan(
+        [{"id": 0, "tool": "noop", "args": '{"x":"recovered"}', "depends_on": []}]
+    )
+    real_answer = _response([_text("Paris is the capital.")])
+
+    llm = _ScriptedLLM([plan_a, plan_b, refusal, plan_c, real_answer])
+
+    answer, metrics = await run_dag_planner_replan(
+        "q?",
+        [_noop_tool()],
+        llm,
+        max_replans=3,
+        trigger="any_or_empty",
+    )
+
+    assert "paris" in answer.lower()
+    # Per-level fired once + post-synth fired once = 2 replans.
+    assert metrics.n_replans == 2
+    # 5 LLM calls: plan_a, plan_b (replan from failure), synth(refusal),
+    #              plan_c (replan from refusal), synth(real).
+    assert metrics.n_llm_calls == 5
+    # 3 tool invocations: plan_a's task ran (and raised), plan_b's task,
+    # plan_c's task.
+    assert metrics.n_tools_executed == 3
+
+
 def test_cot_synth_extracts_final_answer() -> None:
     """``_extract_final_answer`` should pull the text after ``FINAL ANSWER:``
     and fall back to the whole text when the marker is absent."""

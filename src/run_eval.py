@@ -93,6 +93,53 @@ STRATEGIES: dict[str, StrategyFn] = {
         diversify_replan=True,
         cot_synth=True,
     ),
+    # Phase A polish — the most-aggressive variant. ``any_or_empty`` trigger
+    # catches both in-DAG syntactic failures AND post-synth refusals;
+    # max_replans bumped to 8; top-K bumped to 5.
+    "dag_replan_max": partial(
+        run_dag_planner_replan,
+        max_replans=8,
+        trigger="any_or_empty",
+        search_topk=5,
+        diversify_replan=True,
+        cot_synth=True,
+    ),
+    # Phase A polish — leave-one-out ablations of ``dag_replan_aggressive``.
+    # Each starts from aggressive (cap=5, empty_synth, top-3, diversify=T,
+    # cot=T) and disables exactly one component to measure its
+    # contribution.
+    "dag_replan_aggressive_no_diversify": partial(
+        run_dag_planner_replan,
+        max_replans=5,
+        trigger="empty_synth",
+        search_topk=3,
+        diversify_replan=False,
+        cot_synth=True,
+    ),
+    "dag_replan_aggressive_no_cot": partial(
+        run_dag_planner_replan,
+        max_replans=5,
+        trigger="empty_synth",
+        search_topk=3,
+        diversify_replan=True,
+        cot_synth=False,
+    ),
+    "dag_replan_aggressive_no_topk": partial(
+        run_dag_planner_replan,
+        max_replans=5,
+        trigger="empty_synth",
+        search_topk=1,
+        diversify_replan=True,
+        cot_synth=True,
+    ),
+    "dag_replan_aggressive_no_emptysynth": partial(
+        run_dag_planner_replan,
+        max_replans=5,
+        trigger="any_failure",
+        search_topk=3,
+        diversify_replan=True,
+        cot_synth=True,
+    ),
 }
 
 BENCHMARK_PATHS: dict[str, Path] = {

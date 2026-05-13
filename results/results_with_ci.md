@@ -2,35 +2,42 @@
 
 Each cell aggregates per-seed scalars (one accuracy / mean-LLM-calls etc. per seed) across seeds. Stddev is the sample stddev of those per-seed values — not the within-seed variance. `±—` means only one seed is present.
 
-## Accuracy summary (5 strategies × 3 benchmarks)
+## Accuracy summary (15 strategies × 3 benchmarks)
+
+Each cell shows `mean ± stddev-across-seeds [95% bootstrap CI]`. Bootstrap CI is computed by resampling the pooled per-task correctness vector across all seeds (with replacement, 1000 resamples).
 
 | Strategy | HotpotQA bridge | HotpotQA comparison | GitHub |
 | --- | --- | --- | --- |
-| ReAct | 57.8% ± 7.7pp | 86.7% ± 5.8pp | 98.7% ± 2.3pp |
-| Native parallel | 61.1% ± 11.7pp | 84.4% ± 8.4pp | 100.0% ± 0.0pp |
-| DAG planner | 28.9% ± 13.5pp | 81.1% ± 1.9pp | 96.0% ± 4.0pp |
-| DAG replan ×2 (any_failure) | 37.8% ± 12.6pp | 80.0% ± 3.3pp | 98.7% ± 2.3pp |
-| DAG replan ×5 (any_failure) | 37.8% ± 12.6pp | 75.6% ± 6.9pp | 90.7% ± 6.1pp |
-| DAG replan ×2 (empty_synth) | 45.6% ± 5.1pp | 82.2% ± 1.9pp | 97.3% ± 2.3pp |
-| DAG replan ×5 (empty_synth) | 46.7% ± 6.7pp | 77.8% ± 3.8pp | 96.0% ± 0.0pp |
-| DAG replan ×2 (empty_synth, top-3) | 43.3% ± 14.5pp | 88.9% ± 1.9pp | 97.3% ± 4.6pp |
-| DAG replan ×5 (empty_synth, top-3) | 48.9% ± 1.9pp | 83.3% ± 0.0pp | 90.7% ± 6.1pp |
-| DAG replan aggressive (cap=5, diversif+CoT) | 44.4% ± 21.4pp | 85.6% ± 3.8pp | 94.7% ± 2.3pp |
+| ReAct | 57.8% ± 7.7pp [95% CI: 47.8%–67.8%] | 86.7% ± 5.8pp [95% CI: 80.0%–93.3%] | 98.7% ± 2.3pp [95% CI: 96.0%–100.0%] |
+| Native parallel | 61.1% ± 11.7pp [95% CI: 51.1%–71.1%] | 84.4% ± 8.4pp [95% CI: 76.7%–91.1%] | 100.0% ± 0.0pp [95% CI: 100.0%–100.0%] |
+| DAG planner | 28.9% ± 13.5pp [95% CI: 20.0%–37.8%] | 81.1% ± 1.9pp [95% CI: 73.3%–88.9%] | 96.0% ± 4.0pp [95% CI: 90.7%–100.0%] |
+| DAG replan ×2 (any_failure) | 37.8% ± 12.6pp [95% CI: 27.8%–47.8%] | 80.0% ± 3.3pp [95% CI: 72.2%–87.8%] | 98.7% ± 2.3pp [95% CI: 96.0%–100.0%] |
+| DAG replan ×5 (any_failure) | 37.8% ± 12.6pp [95% CI: 27.8%–47.8%] | 75.6% ± 6.9pp [95% CI: 66.7%–83.3%] | 90.7% ± 6.1pp [95% CI: 82.7%–97.3%] |
+| DAG replan ×2 (empty_synth) | 45.6% ± 5.1pp [95% CI: 35.6%–55.6%] | 82.2% ± 1.9pp [95% CI: 74.4%–90.0%] | 97.3% ± 2.3pp [95% CI: 93.3%–100.0%] |
+| DAG replan ×5 (empty_synth) | 46.7% ± 6.7pp [95% CI: 36.7%–57.8%] | 77.8% ± 3.8pp [95% CI: 68.9%–86.7%] | 96.0% ± 0.0pp [95% CI: 90.7%–100.0%] |
+| DAG replan ×2 (empty_synth, top-3) | 43.3% ± 14.5pp [95% CI: 33.3%–54.4%] | 88.9% ± 1.9pp [95% CI: 82.2%–94.4%] | 97.3% ± 4.6pp [95% CI: 93.3%–100.0%] |
+| DAG replan ×5 (empty_synth, top-3) | 48.9% ± 1.9pp [95% CI: 38.9%–60.0%] | 83.3% ± 0.0pp [95% CI: 75.6%–91.1%] | 90.7% ± 6.1pp [95% CI: 84.0%–97.3%] |
+| DAG replan aggressive (cap=5, diversif+CoT) | 44.4% ± 21.4pp [95% CI: 33.3%–55.6%] | 85.6% ± 3.8pp [95% CI: 77.8%–92.2%] | 94.7% ± 2.3pp [95% CI: 89.3%–98.7%] |
+| DAG replan max (cap=8, any_or_empty, top-5, diversif+CoT) | 33.3% ± — [95% CI: 0.0%–100.0%] | — | — |
+| aggressive − diversification | 53.3% ± — [95% CI: 36.7%–70.0%] | — | — |
+| aggressive − CoT | 60.0% ± — [95% CI: 43.3%–76.7%] | — | — |
+| aggressive − top-K (back to top-1) | 43.3% ± — [95% CI: 26.7%–60.0%] | — | — |
+| aggressive − empty_synth (back to any_failure) | 36.7% ± — [95% CI: 20.0%–53.3%] | — | — |
 
 ## HotpotQA (bridge — adaptive 2-hop)
 
 _Seeds: [7, 17, 42]; n per seed: 30._
 
-| Metric | ReAct | Native parallel | DAG planner | DAG replan ×2 (any_failure) | DAG replan ×5 (any_failure) | DAG replan ×2 (empty_synth) | DAG replan ×5 (empty_synth) | DAG replan ×2 (empty_synth, top-3) | DAG replan ×5 (empty_synth, top-3) | DAG replan aggressive (cap=5, diversif+CoT) |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Accuracy | 57.8% ± 7.7pp | 61.1% ± 11.7pp | 28.9% ± 13.5pp | 37.8% ± 12.6pp | 37.8% ± 12.6pp | 45.6% ± 5.1pp | 46.7% ± 6.7pp | 43.3% ± 14.5pp | 48.9% ± 1.9pp | 44.4% ± 21.4pp |
-| LLM calls / task | 4.79 ± 0.18 | 4.93 ± 0.04 | 1.91 ± 0.02 | 2.02 ± 0.10 | 2.01 ± 0.05 | 2.76 ± 0.25 | 3.22 ± 0.11 | 2.64 ± 0.12 | 2.82 ± 0.36 | 3.14 ± 0.79 |
-| Tools executed / task | 3.82 ± 0.20 | 3.97 ± 0.06 | 2.66 ± 0.26 | 2.89 ± 0.36 | 2.88 ± 0.39 | 3.76 ± 0.31 | 4.72 ± 0.16 | 6.23 ± 0.30 | 6.19 ± 0.66 | 7.23 ± 1.58 |
-| Replans / task | 0.00 ± 0.00 | 0.00 ± 0.00 | 0.00 ± 0.00 | 0.10 ± 0.09 | 0.07 ± 0.03 | 0.43 ± 0.12 | 0.67 ± 0.08 | 0.37 ± 0.03 | 0.44 ± 0.20 | 0.59 ± 0.40 |
-| Cost / task | $0.0015 ± $0.0002 | $0.0015 ± $0.0000 | $0.0010 ± $0.0000 | $0.0011 ± $0.0001 | $0.0010 ± $0.0001 | $0.0014 ± $0.0001 | $0.0018 ± $0.0001 | $0.0021 ± $0.0000 | $0.0021 ± $0.0003 | $0.0027 ± $0.0007 |
-| Wall-clock p50 | 5.63s ± 0.39s | 8.10s ± 1.01s | 6.46s ± 0.78s | 5.71s ± 0.25s | 6.67s ± 0.88s | 6.39s ± 1.86s | 8.72s ± 0.77s | 8.63s ± 0.41s | 8.84s ± 1.37s | 11.10s ± 2.30s |
-| Wall-clock mean | 7.69s ± 0.96s | 9.73s ± 0.55s | 7.86s ± 0.40s | 8.29s ± 1.63s | 9.05s ± 0.83s | 11.17s ± 1.73s | 15.49s ± 2.00s | 12.12s ± 1.75s | 13.51s ± 1.75s | 15.90s ± 4.25s |
-| Errors (total) | 1.0 ± 1.7 | 0.3 ± 0.6 | 1.0 ± 1.0 | 0.3 ± 0.6 | 0.0 ± 0.0 | 0.3 ± 0.6 | 0.3 ± 0.6 | 0.0 ± 0.0 | 0.0 ± 0.0 | 2.0 ± 1.0 |
+| Metric | ReAct | Native parallel | DAG planner | DAG replan ×2 (any_failure) | DAG replan ×5 (any_failure) | DAG replan ×2 (empty_synth) | DAG replan ×5 (empty_synth) | DAG replan ×2 (empty_synth, top-3) | DAG replan ×5 (empty_synth, top-3) | DAG replan aggressive (cap=5, diversif+CoT) | DAG replan max (cap=8, any_or_empty, top-5, diversif+CoT) | aggressive − diversification | aggressive − CoT | aggressive − top-K (back to top-1) | aggressive − empty_synth (back to any_failure) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Accuracy | 57.8% ± 7.7pp [95% CI: 47.8%–67.8%] | 61.1% ± 11.7pp [95% CI: 51.1%–71.1%] | 28.9% ± 13.5pp [95% CI: 20.0%–37.8%] | 37.8% ± 12.6pp [95% CI: 27.8%–47.8%] | 37.8% ± 12.6pp [95% CI: 27.8%–47.8%] | 45.6% ± 5.1pp [95% CI: 35.6%–55.6%] | 46.7% ± 6.7pp [95% CI: 36.7%–57.8%] | 43.3% ± 14.5pp [95% CI: 33.3%–54.4%] | 48.9% ± 1.9pp [95% CI: 38.9%–60.0%] | 44.4% ± 21.4pp [95% CI: 33.3%–55.6%] | 33.3% ± — [95% CI: 0.0%–100.0%] | 53.3% ± — [95% CI: 36.7%–70.0%] | 60.0% ± — [95% CI: 43.3%–76.7%] | 43.3% ± — [95% CI: 26.7%–60.0%] | 36.7% ± — [95% CI: 20.0%–53.3%] |
+| LLM calls / task | 4.79 ± 0.18 | 4.93 ± 0.04 | 1.91 ± 0.02 | 2.02 ± 0.10 | 2.01 ± 0.05 | 2.76 ± 0.25 | 3.22 ± 0.11 | 2.64 ± 0.12 | 2.82 ± 0.36 | 3.14 ± 0.79 | 3.50 ± — | 3.00 ± — | 2.70 ± — | 3.59 ± — | 2.13 ± — |
+| Tools executed / task | 3.82 ± 0.20 | 3.97 ± 0.06 | 2.66 ± 0.26 | 2.89 ± 0.36 | 2.88 ± 0.39 | 3.76 ± 0.31 | 4.72 ± 0.16 | 6.23 ± 0.30 | 6.19 ± 0.66 | 7.23 ± 1.58 | 7.00 ± — | 7.14 ± — | 6.27 ± — | 4.62 ± — | 5.33 ± — |
+| Replans / task | 0.00 ± 0.00 | 0.00 ± 0.00 | 0.00 ± 0.00 | 0.10 ± 0.09 | 0.07 ± 0.03 | 0.43 ± 0.12 | 0.67 ± 0.08 | 0.37 ± 0.03 | 0.44 ± 0.20 | 0.59 ± 0.40 | 1.00 ± — | 0.52 ± — | 0.37 ± — | 0.83 ± — | 0.23 ± — |
+| Cost / task | $0.0015 ± $0.0002 | $0.0015 ± $0.0000 | $0.0010 ± $0.0000 | $0.0011 ± $0.0001 | $0.0010 ± $0.0001 | $0.0014 ± $0.0001 | $0.0018 ± $0.0001 | $0.0021 ± $0.0000 | $0.0021 ± $0.0003 | $0.0027 ± $0.0007 | $0.0030 ± — | $0.0026 ± — | $0.0020 ± — | $0.0022 ± — | $0.0019 ± — |
+| Wall-clock p50 | 5.63s ± 0.39s | 8.10s ± 1.01s | 6.46s ± 0.78s | 5.71s ± 0.25s | 6.67s ± 0.88s | 6.39s ± 1.86s | 8.72s ± 0.77s | 8.63s ± 0.41s | 8.84s ± 1.37s | 11.10s ± 2.30s | 45.17s ± — | 11.06s ± — | 10.24s ± — | 7.60s ± — | 8.32s ± — |
+| Wall-clock mean | 7.69s ± 0.96s | 9.73s ± 0.55s | 7.86s ± 0.40s | 8.29s ± 1.63s | 9.05s ± 0.83s | 11.17s ± 1.73s | 15.49s ± 2.00s | 12.12s ± 1.75s | 13.51s ± 1.75s | 15.90s ± 4.25s | 32.35s ± — | 16.10s ± — | 15.73s ± — | 15.80s ± — | 11.89s ± — |
+| Errors (total) | 1.0 ± 1.7 | 0.3 ± 0.6 | 1.0 ± 1.0 | 0.3 ± 0.6 | 0.0 ± 0.0 | 0.3 ± 0.6 | 0.3 ± 0.6 | 0.0 ± 0.0 | 0.0 ± 0.0 | 2.0 ± 1.0 | 1.0 ± — | 1.0 ± — | 0.0 ± — | 1.0 ± — | 0.0 ± — |
 
 ## HotpotQA (comparison — inherently parallel)
 
@@ -38,7 +45,7 @@ _Seeds: [7, 17, 42]; n per seed: 30._
 
 | Metric | ReAct | Native parallel | DAG planner | DAG replan ×2 (any_failure) | DAG replan ×5 (any_failure) | DAG replan ×2 (empty_synth) | DAG replan ×5 (empty_synth) | DAG replan ×2 (empty_synth, top-3) | DAG replan ×5 (empty_synth, top-3) | DAG replan aggressive (cap=5, diversif+CoT) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Accuracy | 86.7% ± 5.8pp | 84.4% ± 8.4pp | 81.1% ± 1.9pp | 80.0% ± 3.3pp | 75.6% ± 6.9pp | 82.2% ± 1.9pp | 77.8% ± 3.8pp | 88.9% ± 1.9pp | 83.3% ± 0.0pp | 85.6% ± 3.8pp |
+| Accuracy | 86.7% ± 5.8pp [95% CI: 80.0%–93.3%] | 84.4% ± 8.4pp [95% CI: 76.7%–91.1%] | 81.1% ± 1.9pp [95% CI: 73.3%–88.9%] | 80.0% ± 3.3pp [95% CI: 72.2%–87.8%] | 75.6% ± 6.9pp [95% CI: 66.7%–83.3%] | 82.2% ± 1.9pp [95% CI: 74.4%–90.0%] | 77.8% ± 3.8pp [95% CI: 68.9%–86.7%] | 88.9% ± 1.9pp [95% CI: 82.2%–94.4%] | 83.3% ± 0.0pp [95% CI: 75.6%–91.1%] | 85.6% ± 3.8pp [95% CI: 77.8%–92.2%] |
 | LLM calls / task | 4.97 ± 0.09 | 4.38 ± 0.06 | 2.00 ± 0.00 | 2.01 ± 0.02 | 2.00 ± 0.00 | 2.25 ± 0.08 | 2.20 ± 0.23 | 2.27 ± 0.20 | 2.27 ± 0.13 | 2.18 ± 0.09 |
 | Tools executed / task | 3.98 ± 0.10 | 4.09 ± 0.13 | 3.82 ± 0.06 | 3.89 ± 0.08 | 3.86 ± 0.21 | 4.16 ± 0.04 | 4.12 ± 0.26 | 6.31 ± 0.84 | 5.77 ± 0.81 | 5.28 ± 0.69 |
 | Replans / task | 0.00 ± 0.00 | 0.00 ± 0.00 | 0.00 ± 0.00 | 0.01 ± 0.02 | 0.00 ± 0.00 | 0.12 ± 0.04 | 0.10 ± 0.11 | 0.13 ± 0.10 | 0.13 ± 0.07 | 0.09 ± 0.04 |
@@ -53,7 +60,7 @@ _Seeds: [7, 17, 42]; n per seed: 25._
 
 | Metric | ReAct | Native parallel | DAG planner | DAG replan ×2 (any_failure) | DAG replan ×5 (any_failure) | DAG replan ×2 (empty_synth) | DAG replan ×5 (empty_synth) | DAG replan ×2 (empty_synth, top-3) | DAG replan ×5 (empty_synth, top-3) | DAG replan aggressive (cap=5, diversif+CoT) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Accuracy | 98.7% ± 2.3pp | 100.0% ± 0.0pp | 96.0% ± 4.0pp | 98.7% ± 2.3pp | 90.7% ± 6.1pp | 97.3% ± 2.3pp | 96.0% ± 0.0pp | 97.3% ± 4.6pp | 90.7% ± 6.1pp | 94.7% ± 2.3pp |
+| Accuracy | 98.7% ± 2.3pp [95% CI: 96.0%–100.0%] | 100.0% ± 0.0pp [95% CI: 100.0%–100.0%] | 96.0% ± 4.0pp [95% CI: 90.7%–100.0%] | 98.7% ± 2.3pp [95% CI: 96.0%–100.0%] | 90.7% ± 6.1pp [95% CI: 82.7%–97.3%] | 97.3% ± 2.3pp [95% CI: 93.3%–100.0%] | 96.0% ± 0.0pp [95% CI: 90.7%–100.0%] | 97.3% ± 4.6pp [95% CI: 93.3%–100.0%] | 90.7% ± 6.1pp [95% CI: 84.0%–97.3%] | 94.7% ± 2.3pp [95% CI: 89.3%–98.7%] |
 | LLM calls / task | 3.84 ± 0.00 | 2.40 ± 0.00 | 2.00 ± 0.00 | 2.00 ± 0.00 | 2.00 ± 0.00 | 2.00 ± 0.00 | 2.00 ± 0.00 | 2.00 ± 0.00 | 2.00 ± 0.00 | 2.00 ± 0.00 |
 | Tools executed / task | 2.84 ± 0.00 | 2.84 ± 0.00 | 3.03 ± 0.02 | 2.97 ± 0.05 | 2.97 ± 0.07 | 3.01 ± 0.02 | 2.99 ± 0.06 | 3.04 ± 0.00 | 3.00 ± 0.04 | 3.00 ± 0.07 |
 | Replans / task | 0.00 ± 0.00 | 0.00 ± 0.00 | 0.00 ± 0.00 | 0.00 ± 0.00 | 0.00 ± 0.00 | 0.00 ± 0.00 | 0.00 ± 0.00 | 0.00 ± 0.00 | 0.00 ± 0.00 | 0.00 ± 0.00 |
@@ -73,6 +80,19 @@ Cumulative contribution of each modification. Each row reports accuracy ± stdde
 | + empty_synth trigger (cap=2) | 45.6% ± 5.1pp | +16.7pp | 2.76 ± 0.25 | 0.43 ± 0.12 |
 | + empty_synth + top-3 (cap=5) | 48.9% ± 1.9pp | +20.0pp | 2.82 ± 0.36 | 0.44 ± 0.20 |
 | + diversification + replan-context + CoT (cap=5) | 44.4% ± 21.4pp | +15.6pp | 3.14 ± 0.79 | 0.59 ± 0.40 |
+| ++ any_or_empty + cap=8 + top-5 (most aggressive) | 33.3% ± — | +4.4pp | 3.50 ± — | 1.00 ± — |
+
+### Leave-one-out ablation (HotpotQA bridge)
+
+Each row removes one component from the aggressive variant. Δ vs aggressive shows the impact of REMOVING that component — if Δ is negative (i.e. accuracy drops), the component was helping; if Δ is positive, the component was hurting.
+
+| Variant | Accuracy | Δ vs aggressive | LLM calls / task | Replans / task |
+| --- | --- | --- | --- | --- |
+| aggressive (all 5 modifications) | 44.4% ± 21.4pp | — | 3.14 ± 0.79 | 0.59 ± 0.40 |
+| − diversification | 53.3% ± — | +8.9pp | 3.00 ± — | 0.52 ± — |
+| − CoT synth | 60.0% ± — | +15.6pp | 2.70 ± — | 0.37 ± — |
+| − top-K fan-out (back to top-1) | 43.3% ± — | -1.1pp | 3.59 ± — | 0.83 ± — |
+| − empty_synth trigger (back to any_failure) | 36.7% ± — | -7.8pp | 2.13 ± — | 0.23 ± — |
 
 ## Statistically meaningful differences
 

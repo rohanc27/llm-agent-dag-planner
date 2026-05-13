@@ -23,11 +23,18 @@ Run:
 """
 
 import json
+import random
 import statistics
 import sys
 from collections import defaultdict
 from pathlib import Path
 from typing import Any, Optional
+
+# Bootstrap configuration. Deterministic seed so re-running the aggregator
+# produces stable CI bounds; 1000 resamples per cell is enough for 2 d.p.
+# percentile estimates and keeps the script <2 s on the full results set.
+_BOOTSTRAP_N: int = 1000
+_BOOTSTRAP_SEED: int = 0xB007
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 RESULTS_PATH = REPO_ROOT / "results" / "results.json"
@@ -44,6 +51,11 @@ STRATEGY_ORDER = [
     "dag_replan_cap2_empty_top3",
     "dag_replan_cap5_empty_top3",
     "dag_replan_aggressive",
+    "dag_replan_max",
+    "dag_replan_aggressive_no_diversify",
+    "dag_replan_aggressive_no_cot",
+    "dag_replan_aggressive_no_topk",
+    "dag_replan_aggressive_no_emptysynth",
 ]
 STRATEGY_DISPLAY = {
     "react": "ReAct",
@@ -56,6 +68,11 @@ STRATEGY_DISPLAY = {
     "dag_replan_cap2_empty_top3": "DAG replan ×2 (empty_synth, top-3)",
     "dag_replan_cap5_empty_top3": "DAG replan ×5 (empty_synth, top-3)",
     "dag_replan_aggressive": "DAG replan aggressive (cap=5, diversif+CoT)",
+    "dag_replan_max": "DAG replan max (cap=8, any_or_empty, top-5, diversif+CoT)",
+    "dag_replan_aggressive_no_diversify": "aggressive − diversification",
+    "dag_replan_aggressive_no_cot": "aggressive − CoT",
+    "dag_replan_aggressive_no_topk": "aggressive − top-K (back to top-1)",
+    "dag_replan_aggressive_no_emptysynth": "aggressive − empty_synth (back to any_failure)",
 }
 
 
@@ -96,7 +113,34 @@ def _per_seed_metrics(records: list[dict[str, Any]]) -> dict[str, float]:
         "p50_latency_s": _p50_latency(),
         "wall_clock_mean_s": _mean("total_wall_clock_seconds"),
         "errors": float(n - len(successful)),
+        # Keep the raw 0/1 correctness vector for bootstrap CI computation.
+        "_correctness_vector": [
+            1 if r.get("judge_correct") else 0 for r in records
+        ],
     }
+
+
+def _bootstrap_ci_pct(
+    correctness: list[int], n_resamples: int = _BOOTSTRAP_N
+) -> tuple[float, float]:
+    """Return (2.5th, 97.5th) percentile of bootstrap-resampled accuracy.
+
+    Resamples ``correctness`` with replacement to the same size,
+    computes the proportion correct on each resample, and reads the
+    2.5%/97.5% quantiles. Returns ``(0.0, 0.0)`` for empty inputs.
+    """
+    if not correctness:
+        return 0.0, 0.0
+    rng = random.Random(_BOOTSTRAP_SEED)
+    n = len(correctness)
+    samples: list[float] = []
+    for _ in range(n_resamples):
+        s = sum(rng.choice(correctness) for _ in range(n))
+        samples.append(s / n * 100.0)
+    samples.sort()
+    lo_idx = max(0, int(0.025 * n_resamples) - 1)
+    hi_idx = min(n_resamples - 1, int(0.975 * n_resamples))
+    return samples[lo_idx], samples[hi_idx]
 
 
 def _mean_std(values: list[float]) -> tuple[float, Optional[float]]:
@@ -161,6 +205,14 @@ def _aggregate(
                 "std": std,
                 "per_seed": {s: per_seed[s].get(metric) for s in seeds},
             }
+        # Bootstrap CI for accuracy — pool task-level outcomes across seeds.
+        pooled: list[int] = []
+        for s in seeds:
+            pooled.extend(per_seed[s].get("_correctness_vector", []))
+        ci_lo, ci_hi = _bootstrap_ci_pct(pooled)
+        cell_summary["accuracy_pct"]["ci_lo"] = ci_lo
+        cell_summary["accuracy_pct"]["ci_hi"] = ci_hi
+        cell_summary["accuracy_pct"]["n_pooled"] = len(pooled)
         result[cell] = cell_summary
     return result
 
@@ -172,6 +224,18 @@ def _fmt_pct(mean: float, std: Optional[float]) -> str:
     if std is None:
         return f"{mean:.1f}% ± —"
     return f"{mean:.1f}% ± {std:.1f}pp"
+
+
+def _fmt_pct_with_ci(metric_dict: dict[str, Any]) -> str:
+    """Accuracy display including stddev-across-seeds AND 95% bootstrap CI."""
+    mean = metric_dict["mean"]
+    std = metric_dict.get("std")
+    ci_lo = metric_dict.get("ci_lo")
+    ci_hi = metric_dict.get("ci_hi")
+    stddev_str = f"± {std:.1f}pp" if std is not None else "± —"
+    if ci_lo is None or ci_hi is None:
+        return f"{mean:.1f}% {stddev_str}"
+    return f"{mean:.1f}% {stddev_str} [95% CI: {ci_lo:.1f}%–{ci_hi:.1f}%]"
 
 
 def _fmt_num(mean: float, std: Optional[float], digits: int = 2) -> str:
@@ -224,7 +288,14 @@ def render_markdown(agg: dict[tuple[str, str], dict[str, dict[str, Any]]]) -> st
     strategies_present = [s for s in STRATEGY_ORDER if any((bm, s) in agg for bm in benchmarks_present)]
 
     # ---- Accuracy summary matrix (rows = strategies, cols = benchmarks) ----
-    lines.append("## Accuracy summary (5 strategies × 3 benchmarks)")
+    lines.append(f"## Accuracy summary ({len(strategies_present)} strategies × {len(benchmarks_present)} benchmarks)")
+    lines.append("")
+    lines.append(
+        "Each cell shows `mean ± stddev-across-seeds [95% bootstrap CI]`. "
+        "Bootstrap CI is computed by resampling the pooled per-task "
+        "correctness vector across all seeds (with replacement, "
+        f"{_BOOTSTRAP_N} resamples)."
+    )
     lines.append("")
     bm_headers = [BENCHMARK_SHORT.get(bm, bm) for bm in benchmarks_present]
     lines.append("| Strategy | " + " | ".join(bm_headers) + " |")
@@ -233,8 +304,7 @@ def render_markdown(agg: dict[tuple[str, str], dict[str, dict[str, Any]]]) -> st
         cells = []
         for bm in benchmarks_present:
             if (bm, st) in agg:
-                m = agg[(bm, st)]["accuracy_pct"]
-                cells.append(_fmt_pct(m["mean"], m["std"]))
+                cells.append(_fmt_pct_with_ci(agg[(bm, st)]["accuracy_pct"]))
             else:
                 cells.append("—")
         lines.append(f"| {STRATEGY_DISPLAY[st]} | " + " | ".join(cells) + " |")
@@ -281,7 +351,15 @@ def render_markdown(agg: dict[tuple[str, str], dict[str, dict[str, Any]]]) -> st
                 cells.append(fmt_fn(m["mean"], m["std"]))
             lines.append(f"| {label} | " + " | ".join(cells) + " |")
 
-        row("Accuracy", _fmt_pct, "accuracy_pct")
+        def accuracy_row() -> None:
+            cells = []
+            for s in STRATEGY_ORDER:
+                if (bm, s) not in agg:
+                    continue
+                cells.append(_fmt_pct_with_ci(agg[(bm, s)]["accuracy_pct"]))
+            lines.append("| Accuracy | " + " | ".join(cells) + " |")
+
+        accuracy_row()
         row("LLM calls / task", _fmt_num, "llm_calls")
         row("Tools executed / task", _fmt_num, "tools_executed")
         row("Replans / task", _fmt_num, "replans")
@@ -305,6 +383,17 @@ ABLATION_ORDER: list[tuple[str, str]] = [
     ("dag_replan_cap2_empty", "+ empty_synth trigger (cap=2)"),
     ("dag_replan_cap5_empty_top3", "+ empty_synth + top-3 (cap=5)"),
     ("dag_replan_aggressive", "+ diversification + replan-context + CoT (cap=5)"),
+    ("dag_replan_max", "++ any_or_empty + cap=8 + top-5 (most aggressive)"),
+]
+
+# Leave-one-out ablations of `dag_replan_aggressive`. Each row removes ONE
+# component from the aggressive variant.
+LEAVE_ONE_OUT_ORDER: list[tuple[str, str]] = [
+    ("dag_replan_aggressive", "aggressive (all 5 modifications)"),
+    ("dag_replan_aggressive_no_diversify", "− diversification"),
+    ("dag_replan_aggressive_no_cot", "− CoT synth"),
+    ("dag_replan_aggressive_no_topk", "− top-K fan-out (back to top-1)"),
+    ("dag_replan_aggressive_no_emptysynth", "− empty_synth trigger (back to any_failure)"),
 ]
 
 
@@ -343,6 +432,47 @@ def _replan_ablation_table(
             delta = "—"
         else:
             d = acc_m - base_mean
+            sign = "+" if d >= 0 else ""
+            delta = f"{sign}{d:.1f}pp"
+        llm_m = cell["llm_calls"]["mean"]
+        llm_s = cell["llm_calls"]["std"]
+        llm_cell = _fmt_num(llm_m, llm_s)
+        rep_m = cell["replans"]["mean"]
+        rep_s = cell["replans"]["std"]
+        rep_cell = _fmt_num(rep_m, rep_s)
+        lines.append(
+            f"| {label} | {acc_cell} | {delta} | {llm_cell} | {rep_cell} |"
+        )
+    lines.append("")
+
+    # ---- Leave-one-out table -----------------------------------------------
+    lines.append(
+        f"### Leave-one-out ablation ({BENCHMARK_SHORT.get(ABLATION_BENCHMARK, ABLATION_BENCHMARK)})"
+    )
+    lines.append("")
+    lines.append(
+        "Each row removes one component from the aggressive variant. "
+        "Δ vs aggressive shows the impact of REMOVING that component — "
+        "if Δ is negative (i.e. accuracy drops), the component was "
+        "helping; if Δ is positive, the component was hurting."
+    )
+    lines.append("")
+    aggr_cell = agg.get((ABLATION_BENCHMARK, "dag_replan_aggressive"))
+    aggr_mean = aggr_cell["accuracy_pct"]["mean"] if aggr_cell else None
+    lines.append("| Variant | Accuracy | Δ vs aggressive | LLM calls / task | Replans / task |")
+    lines.append("| --- | --- | --- | --- | --- |")
+    for strategy_id, label in LEAVE_ONE_OUT_ORDER:
+        cell = agg.get((ABLATION_BENCHMARK, strategy_id))
+        if cell is None:
+            lines.append(f"| {label} | _(no data)_ | — | — | — |")
+            continue
+        acc_m = cell["accuracy_pct"]["mean"]
+        acc_s = cell["accuracy_pct"]["std"]
+        acc_cell = _fmt_pct(acc_m, acc_s)
+        if aggr_mean is None or strategy_id == "dag_replan_aggressive":
+            delta = "—"
+        else:
+            d = acc_m - aggr_mean
             sign = "+" if d >= 0 else ""
             delta = f"{sign}{d:.1f}pp"
         llm_m = cell["llm_calls"]["mean"]

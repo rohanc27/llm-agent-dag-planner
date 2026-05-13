@@ -27,6 +27,10 @@ README and the ablation table can attribute each contribution cleanly:
     call, scan the final answer for refusal markers ("I cannot answer",
     "does not contain", "no information," …) and re-plan if found.
     This catches semantic failures that ``any_failure`` misses.
+  - ``any_or_empty``: union of ``any_failure`` and ``empty_synth`` —
+    fires on both syntactic in-DAG failures *and* post-synth refusals.
+    Each replan that consumed by a per-level fire decrements the same
+    budget as a post-synth fire.
 
   **Ablation 3: fan-out retrieval** (``search_topk`` parameter).
   When ``search_topk > 1``, the planner system prompt is augmented with
@@ -116,7 +120,7 @@ logger = logging.getLogger(__name__)
 # -----------------------------------------------------------------------------
 # Trigger logic
 # -----------------------------------------------------------------------------
-TriggerKind = Literal["any_failure", "all_failure", "empty_synth"]
+TriggerKind = Literal["any_failure", "all_failure", "empty_synth", "any_or_empty"]
 
 # Short, mostly case-insensitive refusal markers used for the ``empty_synth``
 # trigger. Conservative — we only fire when the synth is overtly disclaiming.
@@ -163,14 +167,19 @@ def _is_failed_output(out: Any) -> bool:
 def _level_trigger_fires(
     trigger: TriggerKind, level_tasks: list, outputs: dict
 ) -> bool:
-    """Per-level trigger check. ``empty_synth`` never fires here."""
+    """Per-level trigger check. ``empty_synth`` never fires here.
+
+    ``any_or_empty`` fires here on any in-DAG failure (same as
+    ``any_failure``); its post-synth refusal arm is checked separately
+    after :func:`_synthesize`.
+    """
     if trigger == "empty_synth":
         return False
     level_outputs = [outputs.get(t.id) for t in level_tasks]
     if not level_outputs:
         return False
     fails = [_is_failed_output(o) for o in level_outputs]
-    if trigger == "any_failure":
+    if trigger == "any_failure" or trigger == "any_or_empty":
         return any(fails)
     if trigger == "all_failure":
         return all(fails)
@@ -638,7 +647,7 @@ async def run_dag_planner_replan(
             # fired once, making cap2_empty and cap5_empty empirically
             # identical — that defeated the budget knob.
             while (
-                trigger == "empty_synth"
+                trigger in ("empty_synth", "any_or_empty")
                 and metrics.n_replans < max_replans
                 and _looks_like_refusal(final_answer)
             ):
