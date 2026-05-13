@@ -56,14 +56,42 @@ STRATEGIES: dict[str, StrategyFn] = {
     "react": run_react,
     "native_parallel": run_native_parallel,
     "dag_planner": run_dag_planner,
-    # Two replan configurations to characterize the cost-accuracy frontier.
-    # ``functools.partial`` pre-binds the replan budget and trigger so the
-    # eval harness can keep calling strategies with ``(question, tools, llm)``.
+    # Replan configurations. ``functools.partial`` pre-binds the replan
+    # budget / trigger / search_topk so the eval harness can keep calling
+    # strategies with ``(question, tools, llm)``.
+    #
+    # Phase A — initial configs with the syntactic-failure trigger.
     "dag_replan_cap2": partial(
         run_dag_planner_replan, max_replans=2, trigger="any_failure"
     ),
     "dag_replan_cap5": partial(
         run_dag_planner_replan, max_replans=5, trigger="any_failure"
+    ),
+    # Phase A extension — refusal-detection trigger (catches semantic
+    # failures the any_failure trigger misses) and fan-out retrieval
+    # (search_topk=3 = fetch top-3 search results in parallel).
+    "dag_replan_cap2_empty": partial(
+        run_dag_planner_replan, max_replans=2, trigger="empty_synth", search_topk=1
+    ),
+    "dag_replan_cap5_empty": partial(
+        run_dag_planner_replan, max_replans=5, trigger="empty_synth", search_topk=1
+    ),
+    "dag_replan_cap2_empty_top3": partial(
+        run_dag_planner_replan, max_replans=2, trigger="empty_synth", search_topk=3
+    ),
+    "dag_replan_cap5_empty_top3": partial(
+        run_dag_planner_replan, max_replans=5, trigger="empty_synth", search_topk=3
+    ),
+    # Phase A second extension — all three new ablations stacked on top of
+    # the best Phase A configuration: diversified replan prompt with rich
+    # prior-attempt context, and chain-of-thought synthesis.
+    "dag_replan_aggressive": partial(
+        run_dag_planner_replan,
+        max_replans=5,
+        trigger="empty_synth",
+        search_topk=3,
+        diversify_replan=True,
+        cot_synth=True,
     ),
 }
 
@@ -156,10 +184,18 @@ async def _run_one_task(
         if "category" in task:
             record["category"] = task["category"]
         try:
-            predicted, metrics = await strategy_fn(
-                question=task["question"],
-                tools=tools,
-                llm=llm,
+            # Wrap the strategy in a wall-clock timeout so a single stuck
+            # Gemini call (e.g. an unresponsive 503) can't hang the whole
+            # asyncio.gather and leave the cell unable to save results.
+            # The 5-minute bound is generous — typical strategy invocations
+            # are <30s, even DAG-replan cap=5 with full retries.
+            predicted, metrics = await asyncio.wait_for(
+                strategy_fn(
+                    question=task["question"],
+                    tools=tools,
+                    llm=llm,
+                ),
+                timeout=300.0,
             )
             record["predicted_answer"] = predicted
             record["metrics"] = _metrics_to_dict(metrics)

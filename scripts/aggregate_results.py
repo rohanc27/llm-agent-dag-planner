@@ -39,13 +39,23 @@ STRATEGY_ORDER = [
     "dag_planner",
     "dag_replan_cap2",
     "dag_replan_cap5",
+    "dag_replan_cap2_empty",
+    "dag_replan_cap5_empty",
+    "dag_replan_cap2_empty_top3",
+    "dag_replan_cap5_empty_top3",
+    "dag_replan_aggressive",
 ]
 STRATEGY_DISPLAY = {
     "react": "ReAct",
     "native_parallel": "Native parallel",
     "dag_planner": "DAG planner",
-    "dag_replan_cap2": "DAG replan ×2",
-    "dag_replan_cap5": "DAG replan ×5",
+    "dag_replan_cap2": "DAG replan ×2 (any_failure)",
+    "dag_replan_cap5": "DAG replan ×5 (any_failure)",
+    "dag_replan_cap2_empty": "DAG replan ×2 (empty_synth)",
+    "dag_replan_cap5_empty": "DAG replan ×5 (empty_synth)",
+    "dag_replan_cap2_empty_top3": "DAG replan ×2 (empty_synth, top-3)",
+    "dag_replan_cap5_empty_top3": "DAG replan ×5 (empty_synth, top-3)",
+    "dag_replan_aggressive": "DAG replan aggressive (cap=5, diversif+CoT)",
 }
 
 
@@ -285,6 +295,70 @@ def render_markdown(agg: dict[tuple[str, str], dict[str, dict[str, Any]]]) -> st
 
 
 # ---------------------------------------------------------------------------
+# DAG-with-replan ablation table
+# ---------------------------------------------------------------------------
+ABLATION_BENCHMARK: str = "hotpotqa"
+ABLATION_BASELINE: str = "dag_planner"
+ABLATION_ORDER: list[tuple[str, str]] = [
+    ("dag_planner", "Base DAG planner"),
+    ("dag_replan_cap2", "+ any_failure trigger (cap=2)"),
+    ("dag_replan_cap2_empty", "+ empty_synth trigger (cap=2)"),
+    ("dag_replan_cap5_empty_top3", "+ empty_synth + top-3 (cap=5)"),
+    ("dag_replan_aggressive", "+ diversification + replan-context + CoT (cap=5)"),
+]
+
+
+def _replan_ablation_table(
+    agg: dict[tuple[str, str], dict[str, dict[str, Any]]],
+) -> str:
+    """DAG-with-replan ablation table on the bridge benchmark (the cell
+    where replanning is supposed to help)."""
+    lines: list[str] = []
+    lines.append(
+        f"## DAG-with-replan ablation ({BENCHMARK_SHORT.get(ABLATION_BENCHMARK, ABLATION_BENCHMARK)})"
+    )
+    lines.append("")
+    lines.append(
+        "Cumulative contribution of each modification. Each row reports "
+        "accuracy ± stddev across seeds, with a delta vs the **base DAG "
+        "planner** row."
+    )
+    lines.append("")
+
+    base_cell = agg.get((ABLATION_BENCHMARK, ABLATION_BASELINE))
+    base_mean = base_cell["accuracy_pct"]["mean"] if base_cell else None
+
+    lines.append("| Variant | Accuracy | Δ vs base | LLM calls / task | Replans / task |")
+    lines.append("| --- | --- | --- | --- | --- |")
+
+    for strategy_id, label in ABLATION_ORDER:
+        cell = agg.get((ABLATION_BENCHMARK, strategy_id))
+        if cell is None:
+            lines.append(f"| {label} | _(no data)_ | — | — | — |")
+            continue
+        acc_m = cell["accuracy_pct"]["mean"]
+        acc_s = cell["accuracy_pct"]["std"]
+        acc_cell = _fmt_pct(acc_m, acc_s)
+        if base_mean is None or strategy_id == ABLATION_BASELINE:
+            delta = "—"
+        else:
+            d = acc_m - base_mean
+            sign = "+" if d >= 0 else ""
+            delta = f"{sign}{d:.1f}pp"
+        llm_m = cell["llm_calls"]["mean"]
+        llm_s = cell["llm_calls"]["std"]
+        llm_cell = _fmt_num(llm_m, llm_s)
+        rep_m = cell["replans"]["mean"]
+        rep_s = cell["replans"]["std"]
+        rep_cell = _fmt_num(rep_m, rep_s)
+        lines.append(
+            f"| {label} | {acc_cell} | {delta} | {llm_cell} | {rep_cell} |"
+        )
+    lines.append("")
+    return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
 # Meaningfulness section
 # ---------------------------------------------------------------------------
 def _meaningful_pairs(
@@ -379,7 +453,13 @@ def main() -> int:
         return 2
 
     agg = _aggregate(records)
-    md = render_markdown(agg) + "\n" + _meaningful_pairs(agg)
+    md = (
+        render_markdown(agg)
+        + "\n"
+        + _replan_ablation_table(agg)
+        + "\n"
+        + _meaningful_pairs(agg)
+    )
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
