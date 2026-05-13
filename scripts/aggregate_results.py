@@ -33,11 +33,19 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 RESULTS_PATH = REPO_ROOT / "results" / "results.json"
 OUTPUT_PATH = REPO_ROOT / "results" / "results_with_ci.md"
 
-STRATEGY_ORDER = ["react", "native_parallel", "dag_planner"]
+STRATEGY_ORDER = [
+    "react",
+    "native_parallel",
+    "dag_planner",
+    "dag_replan_cap2",
+    "dag_replan_cap5",
+]
 STRATEGY_DISPLAY = {
     "react": "ReAct",
     "native_parallel": "Native parallel",
     "dag_planner": "DAG planner",
+    "dag_replan_cap2": "DAG replan ×2",
+    "dag_replan_cap5": "DAG replan ×5",
 }
 
 
@@ -53,7 +61,9 @@ def _per_seed_metrics(records: list[dict[str, Any]]) -> dict[str, float]:
     successful = [r for r in records if r.get("error") is None]
 
     def _mean(field: str) -> float:
-        vals = [r["metrics"][field] for r in successful if "metrics" in r]
+        vals = [
+            r["metrics"].get(field, 0) for r in successful if "metrics" in r
+        ]
         return statistics.mean(vals) if vals else 0.0
 
     def _p50_latency() -> float:
@@ -71,6 +81,7 @@ def _per_seed_metrics(records: list[dict[str, Any]]) -> dict[str, float]:
         "accuracy_pct": (correct / n) * 100.0,
         "llm_calls": _mean("n_llm_calls"),
         "tools_executed": _mean("n_tools_executed"),
+        "replans": _mean("n_replans"),
         "cost_usd": _mean("cost_usd"),
         "p50_latency_s": _p50_latency(),
         "wall_clock_mean_s": _mean("total_wall_clock_seconds"),
@@ -127,6 +138,7 @@ def _aggregate(
             "accuracy_pct",
             "llm_calls",
             "tools_executed",
+            "replans",
             "cost_usd",
             "p50_latency_s",
             "wall_clock_mean_s",
@@ -175,6 +187,11 @@ BENCHMARK_TITLE = {
     "hotpotqa_comparison": "HotpotQA (comparison — inherently parallel)",
     "github": "GitHub (structurally predictable multi-entity)",
 }
+BENCHMARK_SHORT = {
+    "hotpotqa": "HotpotQA bridge",
+    "hotpotqa_comparison": "HotpotQA comparison",
+    "github": "GitHub",
+}
 BENCHMARK_ORDER = ["hotpotqa", "hotpotqa_comparison", "github"]
 
 
@@ -194,6 +211,24 @@ def render_markdown(agg: dict[tuple[str, str], dict[str, dict[str, Any]]]) -> st
         {bm for bm, _ in agg.keys()},
         key=lambda b: (BENCHMARK_ORDER.index(b) if b in BENCHMARK_ORDER else 99, b),
     )
+    strategies_present = [s for s in STRATEGY_ORDER if any((bm, s) in agg for bm in benchmarks_present)]
+
+    # ---- Accuracy summary matrix (rows = strategies, cols = benchmarks) ----
+    lines.append("## Accuracy summary (5 strategies × 3 benchmarks)")
+    lines.append("")
+    bm_headers = [BENCHMARK_SHORT.get(bm, bm) for bm in benchmarks_present]
+    lines.append("| Strategy | " + " | ".join(bm_headers) + " |")
+    lines.append("| --- | " + " | ".join(["---"] * len(benchmarks_present)) + " |")
+    for st in strategies_present:
+        cells = []
+        for bm in benchmarks_present:
+            if (bm, st) in agg:
+                m = agg[(bm, st)]["accuracy_pct"]
+                cells.append(_fmt_pct(m["mean"], m["std"]))
+            else:
+                cells.append("—")
+        lines.append(f"| {STRATEGY_DISPLAY[st]} | " + " | ".join(cells) + " |")
+    lines.append("")
 
     for bm in benchmarks_present:
         title = BENCHMARK_TITLE.get(bm, bm)
@@ -239,6 +274,7 @@ def render_markdown(agg: dict[tuple[str, str], dict[str, dict[str, Any]]]) -> st
         row("Accuracy", _fmt_pct, "accuracy_pct")
         row("LLM calls / task", _fmt_num, "llm_calls")
         row("Tools executed / task", _fmt_num, "tools_executed")
+        row("Replans / task", _fmt_num, "replans")
         row("Cost / task", _fmt_cost, "cost_usd")
         row("Wall-clock p50", _fmt_secs, "p50_latency_s")
         row("Wall-clock mean", _fmt_secs, "wall_clock_mean_s")

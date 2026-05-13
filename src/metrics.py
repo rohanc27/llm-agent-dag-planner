@@ -40,6 +40,10 @@ class AggregateMetrics:
     # GitHub / etc.). This is the apples-to-apples "real work" metric for
     # cross-strategy comparisons — ``n_tool_calls`` is LLM verbosity.
     n_tools_executed: int = 0
+    # Number of times a replanning strategy re-invoked the planner after a
+    # trigger condition fired. Always 0 for the non-replan strategies. See
+    # :mod:`src.strategies.dag_planner_replan`.
+    n_replans: int = 0
     input_tokens: int = 0
     output_tokens: int = 0
     cost_usd: float = 0.0
