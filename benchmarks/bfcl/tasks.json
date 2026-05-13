@@ -1,0 +1,2597 @@
+[
+  {
+    "id": "parallel_163",
+    "question": "\"In a game of basketball, a player has a 60% chance of making a successful shot. In a particular match, the player attempts 10 shots. What is the probability that the player makes exactly 6 successful shots? Now, consider a different scenario where the player's success rate drops to 50% but the number of attempts remains the same. What is the probability of making exactly 6 successful shots in this scenario? Finally, consider a third scenario where the player's success rate remains at 50% but the number of attempts increases to 15. What is the probability of making exactly 6 successful shots in this third scenario?\"",
+    "functions": [
+      {
+        "name": "calc_binomial_prob",
+        "description": "Calculates the probability of an outcome based on the binomial distribution",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "num_trials": {
+              "type": "integer",
+              "description": "Number of independent experiments."
+            },
+            "num_success": {
+              "type": "integer",
+              "description": "Number of times the event of interest has occurred."
+            },
+            "prob_success": {
+              "type": "number",
+              "description": "Probability of the event of interest on any single experiment."
+            }
+          },
+          "required": [
+            "num_trials",
+            "num_success",
+            "prob_success"
+          ]
+        },
+        "_original_name": "calc_binomial_prob"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "calc_binomial_prob",
+        "_original_function_name": "calc_binomial_prob",
+        "args": {
+          "num_trials": [
+            10
+          ],
+          "num_success": [
+            6
+          ],
+          "prob_success": [
+            0.6
+          ]
+        }
+      },
+      {
+        "function_name": "calc_binomial_prob",
+        "_original_function_name": "calc_binomial_prob",
+        "args": {
+          "num_trials": [
+            10
+          ],
+          "num_success": [
+            6
+          ],
+          "prob_success": [
+            0.5
+          ]
+        }
+      },
+      {
+        "function_name": "calc_binomial_prob",
+        "_original_function_name": "calc_binomial_prob",
+        "args": {
+          "num_trials": [
+            15
+          ],
+          "num_success": [
+            6
+          ],
+          "prob_success": [
+            0.5
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"calc_binomial_prob\", \"_original_function_name\": \"calc_binomial_prob\", \"args\": {\"num_trials\": [10], \"num_success\": [6], \"prob_success\": [0.6]}}, {\"function_name\": \"calc_binomial_prob\", \"_original_function_name\": \"calc_binomial_prob\", \"args\": {\"num_trials\": [10], \"num_success\": [6], \"prob_success\": [0.5]}}, {\"function_name\": \"calc_binomial_prob\", \"_original_function_name\": \"calc_binomial_prob\", \"args\": {\"num_trials\": [15], \"num_success\": [6], \"prob_success\": [0.5]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_28",
+    "question": "What is the temperature right now and for the next three hours in Seattle and Los Angeles?",
+    "functions": [
+      {
+        "name": "get_current_and_future_temperature",
+        "description": "Provides the current temperature and forecasts the temperature for the next few hours at a particular location.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string",
+              "description": "The city that you want to get the temperature for."
+            },
+            "hours": {
+              "type": "integer",
+              "description": "Number of hours for the temperature forecast."
+            }
+          },
+          "required": [
+            "location",
+            "hours"
+          ]
+        },
+        "_original_name": "get_current_and_future_temperature"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "get_current_and_future_temperature",
+        "_original_function_name": "get_current_and_future_temperature",
+        "args": {
+          "location": [
+            "Seattle",
+            "Seattle, Washington",
+            "Seattle, WA"
+          ],
+          "hours": [
+            3
+          ]
+        }
+      },
+      {
+        "function_name": "get_current_and_future_temperature",
+        "_original_function_name": "get_current_and_future_temperature",
+        "args": {
+          "location": [
+            "Los Angeles",
+            "Los Angeles, CA",
+            "LA",
+            "Los Angeles, California",
+            "Los Angeles, CA"
+          ],
+          "hours": [
+            3
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"get_current_and_future_temperature\", \"_original_function_name\": \"get_current_and_future_temperature\", \"args\": {\"location\": [\"Seattle\", \"Seattle, Washington\", \"Seattle, WA\"], \"hours\": [3]}}, {\"function_name\": \"get_current_and_future_temperature\", \"_original_function_name\": \"get_current_and_future_temperature\", \"args\": {\"location\": [\"Los Angeles\", \"Los Angeles, CA\", \"LA\", \"Los Angeles, California\", \"Los Angeles, CA\"], \"hours\": [3]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_6",
+    "question": "Calculate the amount of sales tax to be added on a purchase amount of $30.45 in Chicago, Illinois, $52.33 in Sacramento, California and $11.23 in Portland, Oregon.",
+    "functions": [
+      {
+        "name": "calculate_sales_tax",
+        "description": "Calculate the sales tax for a given purchase amount in a specific city and state.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "purchase_amount": {
+              "type": "number",
+              "description": "The purchase amount."
+            },
+            "city": {
+              "type": "string",
+              "description": "The city where the purchase is made."
+            },
+            "state": {
+              "type": "string",
+              "description": "The state where the purchase is made."
+            }
+          },
+          "required": [
+            "purchase_amount",
+            "city",
+            "state"
+          ]
+        },
+        "_original_name": "calculate_sales_tax"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "calculate_sales_tax",
+        "_original_function_name": "calculate_sales_tax",
+        "args": {
+          "purchase_amount": [
+            30.45
+          ],
+          "city": [
+            "Chicago",
+            "CHI"
+          ],
+          "state": [
+            "IL",
+            "Illinois"
+          ]
+        }
+      },
+      {
+        "function_name": "calculate_sales_tax",
+        "_original_function_name": "calculate_sales_tax",
+        "args": {
+          "purchase_amount": [
+            52.33
+          ],
+          "city": [
+            "Sacramento"
+          ],
+          "state": [
+            "CA",
+            "California"
+          ]
+        }
+      },
+      {
+        "function_name": "calculate_sales_tax",
+        "_original_function_name": "calculate_sales_tax",
+        "args": {
+          "purchase_amount": [
+            11.23
+          ],
+          "city": [
+            "Portland"
+          ],
+          "state": [
+            "OR",
+            "Oregon"
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"calculate_sales_tax\", \"_original_function_name\": \"calculate_sales_tax\", \"args\": {\"purchase_amount\": [30.45], \"city\": [\"Chicago\", \"CHI\"], \"state\": [\"IL\", \"Illinois\"]}}, {\"function_name\": \"calculate_sales_tax\", \"_original_function_name\": \"calculate_sales_tax\", \"args\": {\"purchase_amount\": [52.33], \"city\": [\"Sacramento\"], \"state\": [\"CA\", \"California\"]}}, {\"function_name\": \"calculate_sales_tax\", \"_original_function_name\": \"calculate_sales_tax\", \"args\": {\"purchase_amount\": [11.23], \"city\": [\"Portland\"], \"state\": [\"OR\", \"Oregon\"]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_189",
+    "question": "Can you find me parks in New York, USA that have a Tennis Court and a Picnic Area, then find parks in Los Angeles, USA that have a Playground and Running Track, and finally find parks in Chicago, USA that have a Tennis Court and a Playground?",
+    "functions": [
+      {
+        "name": "parks_find_nearby",
+        "description": "Locate nearby parks based on specific criteria like tennis court availability.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string",
+              "description": "The city and state, e.g. London, UK"
+            },
+            "amenities": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "Tennis Court",
+                  "Picnic Area",
+                  "Playground",
+                  "Running Track"
+                ]
+              },
+              "description": "Preferred amenities in park.",
+              "default": [
+                "Playground"
+              ]
+            }
+          },
+          "required": [
+            "location"
+          ]
+        },
+        "_original_name": "parks.find_nearby"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "parks_find_nearby",
+        "_original_function_name": "parks.find_nearby",
+        "args": {
+          "location": [
+            "New York, USA",
+            "NY, USA",
+            "New York City, USA",
+            "NYC, USA"
+          ],
+          "amenities": [
+            [
+              "Tennis Court",
+              "Picnic Area"
+            ]
+          ]
+        }
+      },
+      {
+        "function_name": "parks_find_nearby",
+        "_original_function_name": "parks.find_nearby",
+        "args": {
+          "location": [
+            "Los Angeles, USA",
+            "LA, USA"
+          ],
+          "amenities": [
+            [
+              "Playground",
+              "Running Track"
+            ]
+          ]
+        }
+      },
+      {
+        "function_name": "parks_find_nearby",
+        "_original_function_name": "parks.find_nearby",
+        "args": {
+          "location": [
+            "Chicago, USA"
+          ],
+          "amenities": [
+            [
+              "Tennis Court",
+              "Playground"
+            ]
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"parks_find_nearby\", \"_original_function_name\": \"parks.find_nearby\", \"args\": {\"location\": [\"New York, USA\", \"NY, USA\", \"New York City, USA\", \"NYC, USA\"], \"amenities\": [[\"Tennis Court\", \"Picnic Area\"]]}}, {\"function_name\": \"parks_find_nearby\", \"_original_function_name\": \"parks.find_nearby\", \"args\": {\"location\": [\"Los Angeles, USA\", \"LA, USA\"], \"amenities\": [[\"Playground\", \"Running Track\"]]}}, {\"function_name\": \"parks_find_nearby\", \"_original_function_name\": \"parks.find_nearby\", \"args\": {\"location\": [\"Chicago, USA\"], \"amenities\": [[\"Tennis Court\", \"Playground\"]]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_70",
+    "question": "What is the combined circumference of four circles, where the first circle has a radius of 5m, the second circle has a radius of 10m, the third circle has a radius of 15m, and the fourth circle has a radius of 20m, and I want the output in meters?",
+    "functions": [
+      {
+        "name": "geometry_circumference",
+        "description": "Calculate the circumference of a circle given the radius.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "radius": {
+              "type": "integer",
+              "description": "The radius of the circle."
+            },
+            "units": {
+              "type": "string",
+              "description": "Units for the output circumference measurement. Default is 'cm'."
+            }
+          },
+          "required": [
+            "radius"
+          ]
+        },
+        "_original_name": "geometry.circumference"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "geometry_circumference",
+        "_original_function_name": "geometry.circumference",
+        "args": {
+          "radius": [
+            5
+          ],
+          "units": [
+            "m",
+            "meters"
+          ]
+        }
+      },
+      {
+        "function_name": "geometry_circumference",
+        "_original_function_name": "geometry.circumference",
+        "args": {
+          "radius": [
+            10
+          ],
+          "units": [
+            "m",
+            "meters",
+            ""
+          ]
+        }
+      },
+      {
+        "function_name": "geometry_circumference",
+        "_original_function_name": "geometry.circumference",
+        "args": {
+          "radius": [
+            15
+          ],
+          "units": [
+            "m",
+            "meters",
+            ""
+          ]
+        }
+      },
+      {
+        "function_name": "geometry_circumference",
+        "_original_function_name": "geometry.circumference",
+        "args": {
+          "radius": [
+            20
+          ],
+          "units": [
+            "m",
+            "meters",
+            ""
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"geometry_circumference\", \"_original_function_name\": \"geometry.circumference\", \"args\": {\"radius\": [5], \"units\": [\"m\", \"meters\"]}}, {\"function_name\": \"geometry_circumference\", \"_original_function_name\": \"geometry.circumference\", \"args\": {\"radius\": [10], \"units\": [\"m\", \"meters\", \"\"]}}, {\"function_name\": \"geometry_circumference\", \"_original_function_name\": \"geometry.circumference\", \"args\": {\"radius\": [15], \"units\": [\"m\", \"meters\", \"\"]}}, {\"function_name\": \"geometry_circumference\", \"_original_function_name\": \"geometry.circumference\", \"args\": {\"radius\": [20], \"units\": [\"m\", \"meters\", \"\"]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_62",
+    "question": "\"Can you help me find the roots of two quadratic equations? The first equation is 3x^2 + 4x + 2 = 0, where 'a' is the coefficient of x^2, 'b' is the coefficient of x, and 'c' is the constant term. The second equation is 5x^2 - 7x + 3 = 0, where 'a' is the coefficient of x^2, 'b' is the coefficient of x, and 'c' is the constant term.\"",
+    "functions": [
+      {
+        "name": "algebra_quadratic_roots",
+        "description": "Find the roots of a quadratic equation ax^2 + bx + c = 0.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "a": {
+              "type": "integer",
+              "description": "Coefficient of x^2."
+            },
+            "b": {
+              "type": "integer",
+              "description": "Coefficient of x."
+            },
+            "c": {
+              "type": "integer",
+              "description": "Constant term."
+            }
+          },
+          "required": [
+            "a",
+            "b",
+            "c"
+          ]
+        },
+        "_original_name": "algebra.quadratic_roots"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "algebra_quadratic_roots",
+        "_original_function_name": "algebra.quadratic_roots",
+        "args": {
+          "a": [
+            3
+          ],
+          "b": [
+            4
+          ],
+          "c": [
+            2
+          ]
+        }
+      },
+      {
+        "function_name": "algebra_quadratic_roots",
+        "_original_function_name": "algebra.quadratic_roots",
+        "args": {
+          "a": [
+            5
+          ],
+          "b": [
+            -7
+          ],
+          "c": [
+            3
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"algebra_quadratic_roots\", \"_original_function_name\": \"algebra.quadratic_roots\", \"args\": {\"a\": [3], \"b\": [4], \"c\": [2]}}, {\"function_name\": \"algebra_quadratic_roots\", \"_original_function_name\": \"algebra.quadratic_roots\", \"args\": {\"a\": [5], \"b\": [-7], \"c\": [3]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_57",
+    "question": "Book a room for 2 adults and a child at the Sheraton Hotel in New York with check-in on May 1, 2022 and check-out on May 5, 2022. Also, Book a room for 1 adult and 2 children at the Marriott in Los Angeles with check-in on June 1, 2022 and check-out on June 10, 2022.",
+    "functions": [
+      {
+        "name": "hotel_booking_book",
+        "description": "Book a hotel room at the specified location for the specified number of adults and children.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "hotel_name": {
+              "type": "string",
+              "description": "The name of the hotel."
+            },
+            "location": {
+              "type": "string",
+              "description": "The city where the hotel is located."
+            },
+            "check_in": {
+              "type": "string",
+              "description": "The check-in date in the format yyyy-mm-dd."
+            },
+            "check_out": {
+              "type": "string",
+              "description": "The check-out date in the format yyyy-mm-dd."
+            },
+            "adults": {
+              "type": "integer",
+              "description": "The number of adults for the booking."
+            },
+            "children": {
+              "type": "integer",
+              "description": "The number of children for the booking."
+            }
+          },
+          "required": [
+            "hotel_name",
+            "location",
+            "check_in",
+            "check_out",
+            "adults",
+            "children"
+          ]
+        },
+        "_original_name": "hotel_booking.book"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "hotel_booking_book",
+        "_original_function_name": "hotel_booking.book",
+        "args": {
+          "hotel_name": [
+            "Sheraton Hotel",
+            "Sheraton"
+          ],
+          "location": [
+            "New York",
+            "New York, NY",
+            "New York City",
+            "NYC"
+          ],
+          "check_in": [
+            "2022-05-01",
+            "05/01/2022",
+            "May 1, 2022"
+          ],
+          "check_out": [
+            "2022-05-05",
+            "05/05/2022",
+            "May 5, 2022"
+          ],
+          "adults": [
+            2
+          ],
+          "children": [
+            1
+          ]
+        }
+      },
+      {
+        "function_name": "hotel_booking_book",
+        "_original_function_name": "hotel_booking.book",
+        "args": {
+          "hotel_name": [
+            "Marriott"
+          ],
+          "location": [
+            "Los Angeles",
+            "Los Angeles, CA",
+            "LA"
+          ],
+          "check_in": [
+            "2022-06-01",
+            "06/01/2022",
+            "June 1, 2022"
+          ],
+          "check_out": [
+            "2022-06-10",
+            "06/10/2022",
+            "June 10, 2022"
+          ],
+          "adults": [
+            1
+          ],
+          "children": [
+            2
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"hotel_booking_book\", \"_original_function_name\": \"hotel_booking.book\", \"args\": {\"hotel_name\": [\"Sheraton Hotel\", \"Sheraton\"], \"location\": [\"New York\", \"New York, NY\", \"New York City\", \"NYC\"], \"check_in\": [\"2022-05-01\", \"05/01/2022\", \"May 1, 2022\"], \"check_out\": [\"2022-05-05\", \"05/05/2022\", \"May 5, 2022\"], \"adults\": [2], \"children\": [1]}}, {\"function_name\": \"hotel_booking_book\", \"_original_function_name\": \"hotel_booking.book\", \"args\": {\"hotel_name\": [\"Marriott\"], \"location\": [\"Los Angeles\", \"Los Angeles, CA\", \"LA\"], \"check_in\": [\"2022-06-01\", \"06/01/2022\", \"June 1, 2022\"], \"check_out\": [\"2022-06-10\", \"06/10/2022\", \"June 10, 2022\"], \"adults\": [1], \"children\": [2]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_35",
+    "question": "Fetch the details of the ancient empires Persian Empire and Mauryan Empire with their religious history and influences.",
+    "functions": [
+      {
+        "name": "ancient_empires_get_religion_info",
+        "description": "Retrieve information about religious history and influences of an ancient empire.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "empire_name": {
+              "type": "string",
+              "description": "The name of the ancient empire."
+            },
+            "include_influences": {
+              "type": "boolean",
+              "default": false,
+              "description": "Specify whether to include details about the religious influences of the empire."
+            }
+          },
+          "required": [
+            "empire_name"
+          ]
+        },
+        "_original_name": "ancient_empires.get_religion_info"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "ancient_empires_get_religion_info",
+        "_original_function_name": "ancient_empires.get_religion_info",
+        "args": {
+          "empire_name": [
+            "Mauryan Empire"
+          ],
+          "include_influences": [
+            true
+          ]
+        }
+      },
+      {
+        "function_name": "ancient_empires_get_religion_info",
+        "_original_function_name": "ancient_empires.get_religion_info",
+        "args": {
+          "empire_name": [
+            "Persian Empire"
+          ],
+          "include_influences": [
+            true
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"ancient_empires_get_religion_info\", \"_original_function_name\": \"ancient_empires.get_religion_info\", \"args\": {\"empire_name\": [\"Mauryan Empire\"], \"include_influences\": [true]}}, {\"function_name\": \"ancient_empires_get_religion_info\", \"_original_function_name\": \"ancient_empires.get_religion_info\", \"args\": {\"empire_name\": [\"Persian Empire\"], \"include_influences\": [true]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_188",
+    "question": "What are the current traffic conditions for a route from New York to Los Angeles using driving as the preferred method of transportation, then from Los Angeles to San Francisco using bicycling as the preferred method of transportation, and finally from San Francisco back to New York using transit as the preferred method of transportation?",
+    "functions": [
+      {
+        "name": "get_traffic_info",
+        "description": "Retrieve current traffic conditions for a specified route.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "start_location": {
+              "type": "string",
+              "description": "The starting point of the route."
+            },
+            "end_location": {
+              "type": "string",
+              "description": "The destination of the route."
+            },
+            "mode": {
+              "type": "string",
+              "enum": [
+                "driving",
+                "walking",
+                "bicycling",
+                "transit"
+              ],
+              "description": "Preferred method of transportation, default to 'driving'."
+            }
+          },
+          "required": [
+            "start_location",
+            "end_location"
+          ]
+        },
+        "_original_name": "get_traffic_info"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "get_traffic_info",
+        "_original_function_name": "get_traffic_info",
+        "args": {
+          "start_location": [
+            "New York",
+            "New York, NY",
+            "NYC"
+          ],
+          "end_location": [
+            "Los Angeles",
+            "Los Angeles, CA",
+            "LA"
+          ],
+          "mode": [
+            "driving",
+            ""
+          ]
+        }
+      },
+      {
+        "function_name": "get_traffic_info",
+        "_original_function_name": "get_traffic_info",
+        "args": {
+          "start_location": [
+            "Los Angeles",
+            "Los Angeles, CA",
+            "LA"
+          ],
+          "end_location": [
+            "San Francisco",
+            "SF"
+          ],
+          "mode": [
+            "bicycling"
+          ]
+        }
+      },
+      {
+        "function_name": "get_traffic_info",
+        "_original_function_name": "get_traffic_info",
+        "args": {
+          "start_location": [
+            "San Francisco",
+            "SF"
+          ],
+          "end_location": [
+            "New York",
+            "New York, NY",
+            "NYC"
+          ],
+          "mode": [
+            "transit"
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"get_traffic_info\", \"_original_function_name\": \"get_traffic_info\", \"args\": {\"start_location\": [\"New York\", \"New York, NY\", \"NYC\"], \"end_location\": [\"Los Angeles\", \"Los Angeles, CA\", \"LA\"], \"mode\": [\"driving\", \"\"]}}, {\"function_name\": \"get_traffic_info\", \"_original_function_name\": \"get_traffic_info\", \"args\": {\"start_location\": [\"Los Angeles\", \"Los Angeles, CA\", \"LA\"], \"end_location\": [\"San Francisco\", \"SF\"], \"mode\": [\"bicycling\"]}}, {\"function_name\": \"get_traffic_info\", \"_original_function_name\": \"get_traffic_info\", \"args\": {\"start_location\": [\"San Francisco\", \"SF\"], \"end_location\": [\"New York\", \"New York, NY\", \"NYC\"], \"mode\": [\"transit\"]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_26",
+    "question": "Find details of lawsuits with case numbers '67813', '71249' filed in the New York District court for type 'Civil' and 'Criminal' cases.",
+    "functions": [
+      {
+        "name": "court_case_find",
+        "description": "Locate details of court cases based on specific parameters like case number and case type.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string",
+              "description": "The city and court where the lawsuit is filed."
+            },
+            "case_number": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The unique case numbers of the lawsuits."
+            },
+            "case_type": {
+              "type": "string",
+              "enum": [
+                "Civil",
+                "Criminal"
+              ],
+              "description": "Type of the court case.",
+              "default": "Civil"
+            }
+          },
+          "required": [
+            "location",
+            "case_number"
+          ]
+        },
+        "_original_name": "court_case.find"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "court_case_find",
+        "_original_function_name": "court_case.find",
+        "args": {
+          "location": [
+            "New York District",
+            "NY District",
+            "New York",
+            "New York, NY",
+            "NY"
+          ],
+          "case_number": [
+            [
+              "67813"
+            ]
+          ],
+          "case_type": [
+            "Civil",
+            ""
+          ]
+        }
+      },
+      {
+        "function_name": "court_case_find",
+        "_original_function_name": "court_case.find",
+        "args": {
+          "location": [
+            "New York District",
+            "NY District",
+            "New York",
+            "New York, NY",
+            "NY"
+          ],
+          "case_number": [
+            [
+              "71249"
+            ]
+          ],
+          "case_type": [
+            "Criminal"
+          ]
+        }
+      },
+      {
+        "function_name": "court_case_find",
+        "_original_function_name": "court_case.find",
+        "args": {
+          "location": [
+            "New York District",
+            "NY District",
+            "New York",
+            "New York, NY",
+            "NY"
+          ],
+          "case_number": [
+            [
+              "67813"
+            ]
+          ],
+          "case_type": [
+            "Criminal"
+          ]
+        }
+      },
+      {
+        "function_name": "court_case_find",
+        "_original_function_name": "court_case.find",
+        "args": {
+          "location": [
+            "New York District",
+            "NY District",
+            "New York",
+            "New York, NY",
+            "NY"
+          ],
+          "case_number": [
+            [
+              "71249"
+            ]
+          ],
+          "case_type": [
+            "Civil",
+            ""
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"court_case_find\", \"_original_function_name\": \"court_case.find\", \"args\": {\"location\": [\"New York District\", \"NY District\", \"New York\", \"New York, NY\", \"NY\"], \"case_number\": [[\"67813\"]], \"case_type\": [\"Civil\", \"\"]}}, {\"function_name\": \"court_case_find\", \"_original_function_name\": \"court_case.find\", \"args\": {\"location\": [\"New York District\", \"NY District\", \"New York\", \"New York, NY\", \"NY\"], \"case_number\": [[\"71249\"]], \"case_type\": [\"Criminal\"]}}, {\"function_name\": \"court_case_find\", \"_original_function_name\": \"court_case.find\", \"args\": {\"location\": [\"New York District\", \"NY District\", \"New York\", \"New York, NY\", \"NY\"], \"case_number\": [[\"67813\"]], \"case_type\": [\"Criminal\"]}}, {\"function_name\": \"court_case_find\", \"_original_function_name\": \"court_case.find\", \"args\": {\"location\": [\"New York District\", \"NY District\", \"New York\", \"New York, NY\", \"NY\"], \"case_number\": [[\"71249\"]], \"case_type\": [\"Civil\", \"\"]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_173",
+    "question": "\"John has decided to invest in two different funds. He invested $5000 in Fund A which has an annual return rate of 7% and he plans to keep his money there for 5 years. On the other hand, he invested $8000 in Fund B with an annual return rate of 5% for a period of 7 years. Can you predict the profit John will make from both Fund A and Fund B?\"",
+    "functions": [
+      {
+        "name": "investment_predictProfit",
+        "description": "Predict the profit for given investment after specified number of years.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "investment_amount": {
+              "type": "integer",
+              "description": "The amount invested in dollars."
+            },
+            "annual_return": {
+              "type": "number",
+              "description": "The annual return rate of the investment."
+            },
+            "years": {
+              "type": "integer",
+              "description": "The time period in years for which the investment is made."
+            }
+          },
+          "required": [
+            "investment_amount",
+            "annual_return",
+            "years"
+          ]
+        },
+        "_original_name": "investment.predictProfit"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "investment_predictProfit",
+        "_original_function_name": "investment.predictProfit",
+        "args": {
+          "investment_amount": [
+            5000
+          ],
+          "annual_return": [
+            0.07
+          ],
+          "years": [
+            5
+          ]
+        }
+      },
+      {
+        "function_name": "investment_predictProfit",
+        "_original_function_name": "investment.predictProfit",
+        "args": {
+          "investment_amount": [
+            8000
+          ],
+          "annual_return": [
+            0.05
+          ],
+          "years": [
+            7
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"investment_predictProfit\", \"_original_function_name\": \"investment.predictProfit\", \"args\": {\"investment_amount\": [5000], \"annual_return\": [0.07], \"years\": [5]}}, {\"function_name\": \"investment_predictProfit\", \"_original_function_name\": \"investment.predictProfit\", \"args\": {\"investment_amount\": [8000], \"annual_return\": [0.05], \"years\": [7]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_139",
+    "question": "Can you use the function 'employee.fetch_data' to fetch the 'Personal Info', 'Job History', 'Payroll', and 'Attendance' data fields for an employee with the unique ID of 12345 from the company named 'Tech Solutions'? And then, can you repeat the same process for another employee with the unique ID of 67890 from the same company?",
+    "functions": [
+      {
+        "name": "employee_fetch_data",
+        "description": "Fetches the detailed data for a specific employee in a given company.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "company_name": {
+              "type": "string",
+              "description": "The name of the company."
+            },
+            "employee_id": {
+              "type": "integer",
+              "description": "The unique ID of the employee."
+            },
+            "data_field": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "Personal Info",
+                  "Job History",
+                  "Payroll",
+                  "Attendance"
+                ]
+              },
+              "description": "Fields of data to be fetched for the employee (Optional).",
+              "default": [
+                "Personal Info"
+              ]
+            }
+          },
+          "required": [
+            "company_name",
+            "employee_id"
+          ]
+        },
+        "_original_name": "employee.fetch_data"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "employee_fetch_data",
+        "_original_function_name": "employee.fetch_data",
+        "args": {
+          "company_name": [
+            "Tech Solutions"
+          ],
+          "employee_id": [
+            12345
+          ],
+          "data_field": [
+            [
+              "Personal Info",
+              "Job History",
+              "Payroll",
+              "Attendance"
+            ]
+          ]
+        }
+      },
+      {
+        "function_name": "employee_fetch_data",
+        "_original_function_name": "employee.fetch_data",
+        "args": {
+          "company_name": [
+            "Tech Solutions"
+          ],
+          "employee_id": [
+            67890
+          ],
+          "data_field": [
+            [
+              "Personal Info",
+              "Job History",
+              "Payroll",
+              "Attendance"
+            ]
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"employee_fetch_data\", \"_original_function_name\": \"employee.fetch_data\", \"args\": {\"company_name\": [\"Tech Solutions\"], \"employee_id\": [12345], \"data_field\": [[\"Personal Info\", \"Job History\", \"Payroll\", \"Attendance\"]]}}, {\"function_name\": \"employee_fetch_data\", \"_original_function_name\": \"employee.fetch_data\", \"args\": {\"company_name\": [\"Tech Solutions\"], \"employee_id\": [67890], \"data_field\": [[\"Personal Info\", \"Job History\", \"Payroll\", \"Attendance\"]]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_22",
+    "question": "What is the status and scheduled trial date for case number XY1234 in Los Angeles County Court, and case number GH5678 in Orange County Court?",
+    "functions": [
+      {
+        "name": "court_info_get_case_status",
+        "description": "Retrieves the status and trial dates for court cases from specified county courts.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "case_number": {
+              "type": "string",
+              "description": "The specific court case number."
+            },
+            "court": {
+              "type": "string",
+              "description": "The county court where the case is filed."
+            },
+            "details": {
+              "type": "string",
+              "enum": [
+                "status",
+                "trial_date"
+              ],
+              "description": "Specific details required about the court case. Defaults to 'status'."
+            }
+          },
+          "required": [
+            "case_number",
+            "court"
+          ]
+        },
+        "_original_name": "court_info.get_case_status"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "court_info_get_case_status",
+        "_original_function_name": "court_info.get_case_status",
+        "args": {
+          "case_number": [
+            "XY1234"
+          ],
+          "court": [
+            "Los Angeles County Court",
+            "Los Angeles",
+            "Los Angeles, CA",
+            "LA"
+          ],
+          "details": [
+            "status",
+            ""
+          ]
+        }
+      },
+      {
+        "function_name": "court_info_get_case_status",
+        "_original_function_name": "court_info.get_case_status",
+        "args": {
+          "case_number": [
+            "GH5678"
+          ],
+          "court": [
+            "Orange County Court",
+            "Orange County",
+            "OC"
+          ],
+          "details": [
+            "status",
+            ""
+          ]
+        }
+      },
+      {
+        "function_name": "court_info_get_case_status",
+        "_original_function_name": "court_info.get_case_status",
+        "args": {
+          "case_number": [
+            "XY1234"
+          ],
+          "court": [
+            "Los Angeles County Court",
+            "Los Angeles",
+            "Los Angeles, CA",
+            "LA"
+          ],
+          "details": [
+            "trial_date"
+          ]
+        }
+      },
+      {
+        "function_name": "court_info_get_case_status",
+        "_original_function_name": "court_info.get_case_status",
+        "args": {
+          "case_number": [
+            "GH5678"
+          ],
+          "court": [
+            "Orange County Court",
+            "Orange County",
+            "OC"
+          ],
+          "details": [
+            "trial_date"
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"court_info_get_case_status\", \"_original_function_name\": \"court_info.get_case_status\", \"args\": {\"case_number\": [\"XY1234\"], \"court\": [\"Los Angeles County Court\", \"Los Angeles\", \"Los Angeles, CA\", \"LA\"], \"details\": [\"status\", \"\"]}}, {\"function_name\": \"court_info_get_case_status\", \"_original_function_name\": \"court_info.get_case_status\", \"args\": {\"case_number\": [\"GH5678\"], \"court\": [\"Orange County Court\", \"Orange County\", \"OC\"], \"details\": [\"status\", \"\"]}}, {\"function_name\": \"court_info_get_case_status\", \"_original_function_name\": \"court_info.get_case_status\", \"args\": {\"case_number\": [\"XY1234\"], \"court\": [\"Los Angeles County Court\", \"Los Angeles\", \"Los Angeles, CA\", \"LA\"], \"details\": [\"trial_date\"]}}, {\"function_name\": \"court_info_get_case_status\", \"_original_function_name\": \"court_info.get_case_status\", \"args\": {\"case_number\": [\"GH5678\"], \"court\": [\"Orange County Court\", \"Orange County\", \"OC\"], \"details\": [\"trial_date\"]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_151",
+    "question": "\"Can you help me calculate the total area of three different triangles? The first triangle has a base of 15 meters and a height of 20 meters. The second triangle has a base of 25 feet and a height of 30 feet. And the third triangle has a base of 35 inches and a height of 40 inches. I would like the area of each triangle in their respective units.\"",
+    "functions": [
+      {
+        "name": "geometry_area_triangle",
+        "description": "Calculate the area of a triangle.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "base": {
+              "type": "integer",
+              "description": "The length of the base of the triangle."
+            },
+            "height": {
+              "type": "integer",
+              "description": "The height of the triangle from the base."
+            },
+            "unit": {
+              "type": "string",
+              "description": "The measurement unit for the area. Defaults to square meters."
+            }
+          },
+          "required": [
+            "base",
+            "height"
+          ]
+        },
+        "_original_name": "geometry.area_triangle"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "geometry_area_triangle",
+        "_original_function_name": "geometry.area_triangle",
+        "args": {
+          "base": [
+            15
+          ],
+          "height": [
+            20
+          ],
+          "unit": [
+            "square meters",
+            "m^2",
+            ""
+          ]
+        }
+      },
+      {
+        "function_name": "geometry_area_triangle",
+        "_original_function_name": "geometry.area_triangle",
+        "args": {
+          "base": [
+            25
+          ],
+          "height": [
+            30
+          ],
+          "unit": [
+            "square feet",
+            "ft^2"
+          ]
+        }
+      },
+      {
+        "function_name": "geometry_area_triangle",
+        "_original_function_name": "geometry.area_triangle",
+        "args": {
+          "base": [
+            35
+          ],
+          "height": [
+            40
+          ],
+          "unit": [
+            "square inches",
+            "in^2"
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"geometry_area_triangle\", \"_original_function_name\": \"geometry.area_triangle\", \"args\": {\"base\": [15], \"height\": [20], \"unit\": [\"square meters\", \"m^2\", \"\"]}}, {\"function_name\": \"geometry_area_triangle\", \"_original_function_name\": \"geometry.area_triangle\", \"args\": {\"base\": [25], \"height\": [30], \"unit\": [\"square feet\", \"ft^2\"]}}, {\"function_name\": \"geometry_area_triangle\", \"_original_function_name\": \"geometry.area_triangle\", \"args\": {\"base\": [35], \"height\": [40], \"unit\": [\"square inches\", \"in^2\"]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_108",
+    "question": "Can you provide a detailed description of the structure and functioning of a neuron cell and then compare it with a less detailed description of a muscle cell in the human body?",
+    "functions": [
+      {
+        "name": "biology_get_cell_info",
+        "description": "Retrieve information about the structure and functioning of a specified type of cell",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "cell_type": {
+              "type": "string",
+              "description": "Type of cell you want information about"
+            },
+            "detailed": {
+              "type": "boolean",
+              "description": "Indicate if you want a detailed description of the cell",
+              "default": "false"
+            }
+          },
+          "required": [
+            "cell_type"
+          ]
+        },
+        "_original_name": "biology.get_cell_info"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "biology_get_cell_info",
+        "_original_function_name": "biology.get_cell_info",
+        "args": {
+          "cell_type": [
+            "neuron"
+          ],
+          "detailed": [
+            true
+          ]
+        }
+      },
+      {
+        "function_name": "biology_get_cell_info",
+        "_original_function_name": "biology.get_cell_info",
+        "args": {
+          "cell_type": [
+            "muscle"
+          ],
+          "detailed": [
+            false,
+            ""
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"biology_get_cell_info\", \"_original_function_name\": \"biology.get_cell_info\", \"args\": {\"cell_type\": [\"neuron\"], \"detailed\": [true]}}, {\"function_name\": \"biology_get_cell_info\", \"_original_function_name\": \"biology.get_cell_info\", \"args\": {\"cell_type\": [\"muscle\"], \"detailed\": [false, \"\"]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_8",
+    "question": "Fetch the population of New York City, NY,  and Los Angeles, CA from US Census Database, and also get the population data for Alaska state and USA",
+    "functions": [
+      {
+        "name": "database_us_census_get_population",
+        "description": "Fetch population data from US Census database.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "area": {
+              "type": "string",
+              "description": "Name of the city, state, or country."
+            },
+            "type": {
+              "type": "string",
+              "description": "Specify whether the area is city/state/country."
+            },
+            "year": {
+              "type": "integer",
+              "description": "Year of the data",
+              "default": 2000
+            }
+          },
+          "required": [
+            "area",
+            "type"
+          ]
+        },
+        "_original_name": "database_us_census.get_population"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "database_us_census_get_population",
+        "_original_function_name": "database_us_census.get_population",
+        "args": {
+          "area": [
+            "New York City",
+            "NY",
+            "New York City, NY",
+            "NYC"
+          ],
+          "type": [
+            "city"
+          ],
+          "year": [
+            "",
+            2000
+          ]
+        }
+      },
+      {
+        "function_name": "database_us_census_get_population",
+        "_original_function_name": "database_us_census.get_population",
+        "args": {
+          "area": [
+            "Los Angeles",
+            "Los Angeles, CA",
+            "CA",
+            "Los Angeles, CA"
+          ],
+          "type": [
+            "city"
+          ],
+          "year": [
+            "",
+            2000
+          ]
+        }
+      },
+      {
+        "function_name": "database_us_census_get_population",
+        "_original_function_name": "database_us_census.get_population",
+        "args": {
+          "area": [
+            "Alaska"
+          ],
+          "type": [
+            "state"
+          ],
+          "year": [
+            "",
+            2000
+          ]
+        }
+      },
+      {
+        "function_name": "database_us_census_get_population",
+        "_original_function_name": "database_us_census.get_population",
+        "args": {
+          "area": [
+            "USA",
+            "United States",
+            "United States of America"
+          ],
+          "type": [
+            "country"
+          ],
+          "year": [
+            "",
+            2000
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"database_us_census_get_population\", \"_original_function_name\": \"database_us_census.get_population\", \"args\": {\"area\": [\"New York City\", \"NY\", \"New York City, NY\", \"NYC\"], \"type\": [\"city\"], \"year\": [\"\", 2000]}}, {\"function_name\": \"database_us_census_get_population\", \"_original_function_name\": \"database_us_census.get_population\", \"args\": {\"area\": [\"Los Angeles\", \"Los Angeles, CA\", \"CA\", \"Los Angeles, CA\"], \"type\": [\"city\"], \"year\": [\"\", 2000]}}, {\"function_name\": \"database_us_census_get_population\", \"_original_function_name\": \"database_us_census.get_population\", \"args\": {\"area\": [\"Alaska\"], \"type\": [\"state\"], \"year\": [\"\", 2000]}}, {\"function_name\": \"database_us_census_get_population\", \"_original_function_name\": \"database_us_census.get_population\", \"args\": {\"area\": [\"USA\", \"United States\", \"United States of America\"], \"type\": [\"country\"], \"year\": [\"\", 2000]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_7",
+    "question": "Find the factorial of 5,10 and 15.",
+    "functions": [
+      {
+        "name": "math_factorial",
+        "description": "Calculate the factorial of a given positive integer.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "number": {
+              "type": "integer",
+              "description": "The number for which factorial needs to be calculated."
+            }
+          },
+          "required": [
+            "number"
+          ]
+        },
+        "_original_name": "math.factorial"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "math_factorial",
+        "_original_function_name": "math.factorial",
+        "args": {
+          "number": [
+            5
+          ]
+        }
+      },
+      {
+        "function_name": "math_factorial",
+        "_original_function_name": "math.factorial",
+        "args": {
+          "number": [
+            10
+          ]
+        }
+      },
+      {
+        "function_name": "math_factorial",
+        "_original_function_name": "math.factorial",
+        "args": {
+          "number": [
+            15
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"math_factorial\", \"_original_function_name\": \"math.factorial\", \"args\": {\"number\": [5]}}, {\"function_name\": \"math_factorial\", \"_original_function_name\": \"math.factorial\", \"args\": {\"number\": [10]}}, {\"function_name\": \"math_factorial\", \"_original_function_name\": \"math.factorial\", \"args\": {\"number\": [15]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_23",
+    "question": "Please calculate the amount of alimony the payor spouse would have to pay to the recipient spouse in California for the next 10 years and 20 years if the payor spouse's monthly gross income is $10,000 and the recipient spouse's monthly gross income is $3,000.",
+    "functions": [
+      {
+        "name": "alimony_calculator_ca_calculate",
+        "description": "Calculate the amount of alimony one spouse would have to pay to the other spouse in the state of California.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "payor_income": {
+              "type": "integer",
+              "description": "The monthly gross income of the payor spouse."
+            },
+            "recipient_income": {
+              "type": "integer",
+              "description": "The monthly gross income of the recipient spouse."
+            },
+            "duration": {
+              "type": "integer",
+              "description": "The duration of the alimony in years."
+            }
+          },
+          "required": [
+            "payor_income",
+            "recipient_income",
+            "duration"
+          ]
+        },
+        "_original_name": "alimony_calculator.ca.calculate"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "alimony_calculator_ca_calculate",
+        "_original_function_name": "alimony_calculator.ca.calculate",
+        "args": {
+          "payor_income": [
+            10000
+          ],
+          "recipient_income": [
+            3000
+          ],
+          "duration": [
+            10
+          ]
+        }
+      },
+      {
+        "function_name": "alimony_calculator_ca_calculate",
+        "_original_function_name": "alimony_calculator.ca.calculate",
+        "args": {
+          "payor_income": [
+            10000
+          ],
+          "recipient_income": [
+            3000
+          ],
+          "duration": [
+            20
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"alimony_calculator_ca_calculate\", \"_original_function_name\": \"alimony_calculator.ca.calculate\", \"args\": {\"payor_income\": [10000], \"recipient_income\": [3000], \"duration\": [10]}}, {\"function_name\": \"alimony_calculator_ca_calculate\", \"_original_function_name\": \"alimony_calculator.ca.calculate\", \"args\": {\"payor_income\": [10000], \"recipient_income\": [3000], \"duration\": [20]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_55",
+    "question": "Find a supermarket in New York City that opens 24 hours and another one in San Diego that offers home delivery.",
+    "functions": [
+      {
+        "name": "grocery_store_find_by_criteria",
+        "description": "Find grocery stores based on specific criteria such as location, hours of operation, or availability of services.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string",
+              "description": "The city where you want to find a grocery store."
+            },
+            "criteria": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "24 hours",
+                  "Home Delivery",
+                  "In-store Pickup"
+                ]
+              },
+              "description": "Specific features or services you're looking for in a grocery store."
+            }
+          },
+          "required": [
+            "location",
+            "criteria"
+          ]
+        },
+        "_original_name": "grocery_store.find_by_criteria"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "grocery_store_find_by_criteria",
+        "_original_function_name": "grocery_store.find_by_criteria",
+        "args": {
+          "location": [
+            "New York City",
+            "NYC"
+          ],
+          "criteria": [
+            [
+              "24 hours"
+            ]
+          ]
+        }
+      },
+      {
+        "function_name": "grocery_store_find_by_criteria",
+        "_original_function_name": "grocery_store.find_by_criteria",
+        "args": {
+          "location": [
+            "SD",
+            "San Diego"
+          ],
+          "criteria": [
+            [
+              "Home Delivery"
+            ]
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"grocery_store_find_by_criteria\", \"_original_function_name\": \"grocery_store.find_by_criteria\", \"args\": {\"location\": [\"New York City\", \"NYC\"], \"criteria\": [[\"24 hours\"]]}}, {\"function_name\": \"grocery_store_find_by_criteria\", \"_original_function_name\": \"grocery_store.find_by_criteria\", \"args\": {\"location\": [\"SD\", \"San Diego\"], \"criteria\": [[\"Home Delivery\"]]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_59",
+    "question": "How much will it cost in dollars if I transfer 15000 Euro to dollars? and how much if I convert 200 pounds to dollars?",
+    "functions": [
+      {
+        "name": "get_conversion_cost",
+        "description": "Convert a value from one currency to another including conversion charges.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "integer",
+              "description": "The amount of money to be converted."
+            },
+            "from_currency": {
+              "type": "string",
+              "description": "The current currency of the amount."
+            },
+            "to_currency": {
+              "type": "string",
+              "description": "The target currency."
+            }
+          },
+          "required": [
+            "amount",
+            "from_currency",
+            "to_currency"
+          ]
+        },
+        "_original_name": "get_conversion_cost"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "get_conversion_cost",
+        "_original_function_name": "get_conversion_cost",
+        "args": {
+          "amount": [
+            15000
+          ],
+          "from_currency": [
+            "Euro",
+            "EUR"
+          ],
+          "to_currency": [
+            "dollars",
+            "USD",
+            "Dollar"
+          ]
+        }
+      },
+      {
+        "function_name": "get_conversion_cost",
+        "_original_function_name": "get_conversion_cost",
+        "args": {
+          "amount": [
+            200
+          ],
+          "from_currency": [
+            "pounds",
+            "GBP"
+          ],
+          "to_currency": [
+            "dollars",
+            "USD"
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"get_conversion_cost\", \"_original_function_name\": \"get_conversion_cost\", \"args\": {\"amount\": [15000], \"from_currency\": [\"Euro\", \"EUR\"], \"to_currency\": [\"dollars\", \"USD\", \"Dollar\"]}}, {\"function_name\": \"get_conversion_cost\", \"_original_function_name\": \"get_conversion_cost\", \"args\": {\"amount\": [200], \"from_currency\": [\"pounds\", \"GBP\"], \"to_currency\": [\"dollars\", \"USD\"]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_129",
+    "question": "You are given two sets of data, the first set is [12, 15, 11, 14, 18, 19, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26] and the second set is [32, 35, 31, 34, 38, 39, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46]. Can you create two histograms using the 'create_histogram' function, one for each data set, with 5 bins each?",
+    "functions": [
+      {
+        "name": "create_histogram",
+        "description": "Create a histogram based on provided data.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              },
+              "description": "The data for which histogram needs to be plotted."
+            },
+            "bins": {
+              "type": "integer",
+              "description": "The number of equal-width bins in the range. Default is 10."
+            }
+          },
+          "required": [
+            "data",
+            "bins"
+          ]
+        },
+        "_original_name": "create_histogram"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "create_histogram",
+        "_original_function_name": "create_histogram",
+        "args": {
+          "data": [
+            [
+              12,
+              15,
+              11,
+              14,
+              18,
+              19,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26
+            ]
+          ],
+          "bins": [
+            5
+          ]
+        }
+      },
+      {
+        "function_name": "create_histogram",
+        "_original_function_name": "create_histogram",
+        "args": {
+          "data": [
+            [
+              32,
+              35,
+              31,
+              34,
+              38,
+              39,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46
+            ]
+          ],
+          "bins": [
+            5
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"create_histogram\", \"_original_function_name\": \"create_histogram\", \"args\": {\"data\": [[12, 15, 11, 14, 18, 19, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]], \"bins\": [5]}}, {\"function_name\": \"create_histogram\", \"_original_function_name\": \"create_histogram\", \"args\": {\"data\": [[32, 35, 31, 34, 38, 39, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46]], \"bins\": [5]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_154",
+    "question": "\"Could you calculate the Body Mass Index (BMI) for four individuals? The first person weighs 75 kilograms and is 180 centimeters tall, the second person weighs 60 kilograms and is 165 centimeters tall, the third person weighs 80 kilograms and is 175 centimeters tall, and the fourth person weighs 90 kilograms and is 185 centimeters tall. Please use the metric system for all calculations.\"",
+    "functions": [
+      {
+        "name": "calculate_bmi",
+        "description": "Calculate the Body Mass Index (BMI) for a person based on their weight and height.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "weight": {
+              "type": "integer",
+              "description": "The weight of the person in kilograms."
+            },
+            "height": {
+              "type": "integer",
+              "description": "The height of the person in centimeters."
+            },
+            "system": {
+              "type": "string",
+              "description": "The system of units to be used, 'metric' or 'imperial'. Default is 'metric'."
+            }
+          },
+          "required": [
+            "weight",
+            "height"
+          ]
+        },
+        "_original_name": "calculate_bmi"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "calculate_bmi",
+        "_original_function_name": "calculate_bmi",
+        "args": {
+          "weight": [
+            75
+          ],
+          "height": [
+            180
+          ],
+          "system": [
+            "metric",
+            ""
+          ]
+        }
+      },
+      {
+        "function_name": "calculate_bmi",
+        "_original_function_name": "calculate_bmi",
+        "args": {
+          "weight": [
+            60
+          ],
+          "height": [
+            165
+          ],
+          "system": [
+            "metric",
+            ""
+          ]
+        }
+      },
+      {
+        "function_name": "calculate_bmi",
+        "_original_function_name": "calculate_bmi",
+        "args": {
+          "weight": [
+            80
+          ],
+          "height": [
+            175
+          ],
+          "system": [
+            "metric",
+            ""
+          ]
+        }
+      },
+      {
+        "function_name": "calculate_bmi",
+        "_original_function_name": "calculate_bmi",
+        "args": {
+          "weight": [
+            90
+          ],
+          "height": [
+            185
+          ],
+          "system": [
+            "metric",
+            ""
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"calculate_bmi\", \"_original_function_name\": \"calculate_bmi\", \"args\": {\"weight\": [75], \"height\": [180], \"system\": [\"metric\", \"\"]}}, {\"function_name\": \"calculate_bmi\", \"_original_function_name\": \"calculate_bmi\", \"args\": {\"weight\": [60], \"height\": [165], \"system\": [\"metric\", \"\"]}}, {\"function_name\": \"calculate_bmi\", \"_original_function_name\": \"calculate_bmi\", \"args\": {\"weight\": [80], \"height\": [175], \"system\": [\"metric\", \"\"]}}, {\"function_name\": \"calculate_bmi\", \"_original_function_name\": \"calculate_bmi\", \"args\": {\"weight\": [90], \"height\": [185], \"system\": [\"metric\", \"\"]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_197",
+    "question": "\"Can you provide me with the details of the lawsuit case with the case number '12345ABC', which was initiated in the year 2018 and filed in the New York court jurisdiction? Also, can you retrieve the same information for another lawsuit case with the case number '67890XYZ', initiated in the year 2019 and filed in the California court jurisdiction?\"",
+    "functions": [
+      {
+        "name": "lawsuit_info",
+        "description": "Retrieves details of a lawsuit given a case number",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "case_number": {
+              "type": "string",
+              "description": "The unique identifier of the lawsuit case"
+            },
+            "year": {
+              "type": "integer",
+              "description": "The year in which the lawsuit case was initiated",
+              "optional": true,
+              "default": 2000
+            },
+            "location": {
+              "type": "string",
+              "description": "The location or court jurisdiction where the case was filed.",
+              "optional": true,
+              "default": "New York"
+            }
+          },
+          "required": [
+            "case_number"
+          ]
+        },
+        "_original_name": "lawsuit_info"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "lawsuit_info",
+        "_original_function_name": "lawsuit_info",
+        "args": {
+          "case_number": [
+            "12345ABC"
+          ],
+          "year": [
+            2018
+          ],
+          "location": [
+            "New York",
+            "New York, NY",
+            "NY",
+            ""
+          ]
+        }
+      },
+      {
+        "function_name": "lawsuit_info",
+        "_original_function_name": "lawsuit_info",
+        "args": {
+          "case_number": [
+            "67890XYZ"
+          ],
+          "year": [
+            2019
+          ],
+          "location": [
+            "California",
+            "CA"
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"lawsuit_info\", \"_original_function_name\": \"lawsuit_info\", \"args\": {\"case_number\": [\"12345ABC\"], \"year\": [2018], \"location\": [\"New York\", \"New York, NY\", \"NY\", \"\"]}}, {\"function_name\": \"lawsuit_info\", \"_original_function_name\": \"lawsuit_info\", \"args\": {\"case_number\": [\"67890XYZ\"], \"year\": [2019], \"location\": [\"California\", \"CA\"]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_143",
+    "question": "You are planning to build three triangular gardens in your backyard. The first garden has a base of 10 meters and a height of 5 meters, the second garden has a base of 15 meters and a height of 7 meters, and the third garden has a base of 20 meters and a height of 10 meters. What is the total area of the three gardens?",
+    "functions": [
+      {
+        "name": "calc_area_triangle",
+        "description": "Calculate the area of a triangle with the formula area = 0.5 * base * height.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "base": {
+              "type": "integer",
+              "description": "The length of the base of the triangle in meters."
+            },
+            "height": {
+              "type": "integer",
+              "description": "The perpendicular height of the triangle from the base to the opposite vertex in meters."
+            }
+          },
+          "required": [
+            "base",
+            "height"
+          ]
+        },
+        "_original_name": "calc_area_triangle"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "calc_area_triangle",
+        "_original_function_name": "calc_area_triangle",
+        "args": {
+          "base": [
+            10
+          ],
+          "height": [
+            5
+          ]
+        }
+      },
+      {
+        "function_name": "calc_area_triangle",
+        "_original_function_name": "calc_area_triangle",
+        "args": {
+          "base": [
+            15
+          ],
+          "height": [
+            7
+          ]
+        }
+      },
+      {
+        "function_name": "calc_area_triangle",
+        "_original_function_name": "calc_area_triangle",
+        "args": {
+          "base": [
+            20
+          ],
+          "height": [
+            10
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"calc_area_triangle\", \"_original_function_name\": \"calc_area_triangle\", \"args\": {\"base\": [10], \"height\": [5]}}, {\"function_name\": \"calc_area_triangle\", \"_original_function_name\": \"calc_area_triangle\", \"args\": {\"base\": [15], \"height\": [7]}}, {\"function_name\": \"calc_area_triangle\", \"_original_function_name\": \"calc_area_triangle\", \"args\": {\"base\": [20], \"height\": [10]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_50",
+    "question": "How to save game progress at stage 7 in easy mode and stage 3 in hard mode?",
+    "functions": [
+      {
+        "name": "game_save_progress",
+        "description": "Save the current state of a player's game, given the stage, level and game mode.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "type": "integer",
+              "description": "The current stage in the game the player has reached."
+            },
+            "mode": {
+              "type": "string",
+              "enum": [
+                "easy",
+                "hard"
+              ],
+              "description": "The game mode. Available modes are easy or hard."
+            },
+            "level": {
+              "type": "string",
+              "default": "user",
+              "description": "The player's level."
+            }
+          },
+          "required": [
+            "stage",
+            "mode"
+          ]
+        },
+        "_original_name": "game.save_progress"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "game_save_progress",
+        "_original_function_name": "game.save_progress",
+        "args": {
+          "stage": [
+            7
+          ],
+          "mode": [
+            "easy"
+          ],
+          "level": [
+            "user",
+            ""
+          ]
+        }
+      },
+      {
+        "function_name": "game_save_progress",
+        "_original_function_name": "game.save_progress",
+        "args": {
+          "stage": [
+            3
+          ],
+          "mode": [
+            "hard"
+          ],
+          "level": [
+            "user",
+            ""
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"game_save_progress\", \"_original_function_name\": \"game.save_progress\", \"args\": {\"stage\": [7], \"mode\": [\"easy\"], \"level\": [\"user\", \"\"]}}, {\"function_name\": \"game_save_progress\", \"_original_function_name\": \"game.save_progress\", \"args\": {\"stage\": [3], \"mode\": [\"hard\"], \"level\": [\"user\", \"\"]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_166",
+    "question": "Can you predict the price of a house with an area of 2500 square feet, 3 rooms, constructed in the year 2000, and located in New York, and then compare it with the price of a similar house but with an area of 3000 square feet, constructed in the year 2005, and located in Los Angeles? Finally, predict the price of a third house with an area of 2000 square feet, 2 rooms, constructed in the year 1995, and located in Chicago.",
+    "functions": [
+      {
+        "name": "predict_house_price",
+        "description": "Predict house price based on area, number of rooms and year of construction.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "area": {
+              "type": "integer",
+              "description": "Area of the house in square feet."
+            },
+            "rooms": {
+              "type": "integer",
+              "description": "Number of rooms in the house."
+            },
+            "year": {
+              "type": "integer",
+              "description": "Year when the house was constructed."
+            },
+            "location": {
+              "type": "string",
+              "description": "The location or city of the house."
+            }
+          },
+          "required": [
+            "area",
+            "rooms",
+            "year",
+            "location"
+          ]
+        },
+        "_original_name": "predict_house_price"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "predict_house_price",
+        "_original_function_name": "predict_house_price",
+        "args": {
+          "area": [
+            2500
+          ],
+          "rooms": [
+            3
+          ],
+          "year": [
+            2000
+          ],
+          "location": [
+            "New York",
+            "New York, NY",
+            "New York City",
+            "NYC",
+            "NY"
+          ]
+        }
+      },
+      {
+        "function_name": "predict_house_price",
+        "_original_function_name": "predict_house_price",
+        "args": {
+          "area": [
+            3000
+          ],
+          "rooms": [
+            3
+          ],
+          "year": [
+            2005
+          ],
+          "location": [
+            "Los Angeles",
+            "Los Angeles, CA",
+            "LA",
+            "Los Angeles, CA",
+            "CA"
+          ]
+        }
+      },
+      {
+        "function_name": "predict_house_price",
+        "_original_function_name": "predict_house_price",
+        "args": {
+          "area": [
+            2000
+          ],
+          "rooms": [
+            2
+          ],
+          "year": [
+            1995
+          ],
+          "location": [
+            "Chicago"
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"predict_house_price\", \"_original_function_name\": \"predict_house_price\", \"args\": {\"area\": [2500], \"rooms\": [3], \"year\": [2000], \"location\": [\"New York\", \"New York, NY\", \"New York City\", \"NYC\", \"NY\"]}}, {\"function_name\": \"predict_house_price\", \"_original_function_name\": \"predict_house_price\", \"args\": {\"area\": [3000], \"rooms\": [3], \"year\": [2005], \"location\": [\"Los Angeles\", \"Los Angeles, CA\", \"LA\", \"Los Angeles, CA\", \"CA\"]}}, {\"function_name\": \"predict_house_price\", \"_original_function_name\": \"predict_house_price\", \"args\": {\"area\": [2000], \"rooms\": [2], \"year\": [1995], \"location\": [\"Chicago\"]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_191",
+    "question": "Can you help me find public libraries in New York, NY that have a Reading Room and Fiction section, and then in Los Angeles, CA that offer Wi-Fi and have a Children Section, and finally in Chicago, IL that have a Cafe and a Reading Room?",
+    "functions": [
+      {
+        "name": "public_library_find_nearby",
+        "description": "Locate nearby public libraries based on specific criteria like English fiction availability and Wi-Fi.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string",
+              "description": "The city and state, e.g. Boston, MA"
+            },
+            "facilities": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "Wi-Fi",
+                  "Reading Room",
+                  "Fiction",
+                  "Children Section",
+                  "Cafe"
+                ]
+              },
+              "description": "Facilities and sections in public library."
+            }
+          },
+          "required": [
+            "location",
+            "facilities"
+          ]
+        },
+        "_original_name": "public_library.find_nearby"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "public_library_find_nearby",
+        "_original_function_name": "public_library.find_nearby",
+        "args": {
+          "location": [
+            "New York, NY",
+            "NY"
+          ],
+          "facilities": [
+            [
+              "Reading Room",
+              "Fiction"
+            ]
+          ]
+        }
+      },
+      {
+        "function_name": "public_library_find_nearby",
+        "_original_function_name": "public_library.find_nearby",
+        "args": {
+          "location": [
+            "Los Angeles, CA",
+            "LA"
+          ],
+          "facilities": [
+            [
+              "Wi-Fi",
+              "Children Section"
+            ]
+          ]
+        }
+      },
+      {
+        "function_name": "public_library_find_nearby",
+        "_original_function_name": "public_library.find_nearby",
+        "args": {
+          "location": [
+            "Chicago, IL",
+            "Chi"
+          ],
+          "facilities": [
+            [
+              "Cafe",
+              "Reading Room"
+            ]
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"public_library_find_nearby\", \"_original_function_name\": \"public_library.find_nearby\", \"args\": {\"location\": [\"New York, NY\", \"NY\"], \"facilities\": [[\"Reading Room\", \"Fiction\"]]}}, {\"function_name\": \"public_library_find_nearby\", \"_original_function_name\": \"public_library.find_nearby\", \"args\": {\"location\": [\"Los Angeles, CA\", \"LA\"], \"facilities\": [[\"Wi-Fi\", \"Children Section\"]]}}, {\"function_name\": \"public_library_find_nearby\", \"_original_function_name\": \"public_library.find_nearby\", \"args\": {\"location\": [\"Chicago, IL\", \"Chi\"], \"facilities\": [[\"Cafe\", \"Reading Room\"]]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_107",
+    "question": "What are the protein sequences encoded by the BRCA1 and BRCA2 genes in Homo sapiens and Pan troglodytes (chimpanzee)?",
+    "functions": [
+      {
+        "name": "get_protein_sequence",
+        "description": "Retrieve the protein sequence encoded by a human gene.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "gene": {
+              "type": "string",
+              "description": "The human gene of interest."
+            },
+            "species": {
+              "type": "string",
+              "description": "The species for which the gene is to be analyzed.",
+              "default": "Homo sapiens"
+            }
+          },
+          "required": [
+            "gene"
+          ]
+        },
+        "_original_name": "get_protein_sequence"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "get_protein_sequence",
+        "_original_function_name": "get_protein_sequence",
+        "args": {
+          "gene": [
+            "BRCA1"
+          ],
+          "species": [
+            "Homo sapiens",
+            ""
+          ]
+        }
+      },
+      {
+        "function_name": "get_protein_sequence",
+        "_original_function_name": "get_protein_sequence",
+        "args": {
+          "gene": [
+            "BRCA2"
+          ],
+          "species": [
+            "Homo sapiens",
+            ""
+          ]
+        }
+      },
+      {
+        "function_name": "get_protein_sequence",
+        "_original_function_name": "get_protein_sequence",
+        "args": {
+          "gene": [
+            "BRCA1"
+          ],
+          "species": [
+            "Pan troglodytes"
+          ]
+        }
+      },
+      {
+        "function_name": "get_protein_sequence",
+        "_original_function_name": "get_protein_sequence",
+        "args": {
+          "gene": [
+            "BRCA2"
+          ],
+          "species": [
+            "Pan troglodytes"
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"get_protein_sequence\", \"_original_function_name\": \"get_protein_sequence\", \"args\": {\"gene\": [\"BRCA1\"], \"species\": [\"Homo sapiens\", \"\"]}}, {\"function_name\": \"get_protein_sequence\", \"_original_function_name\": \"get_protein_sequence\", \"args\": {\"gene\": [\"BRCA2\"], \"species\": [\"Homo sapiens\", \"\"]}}, {\"function_name\": \"get_protein_sequence\", \"_original_function_name\": \"get_protein_sequence\", \"args\": {\"gene\": [\"BRCA1\"], \"species\": [\"Pan troglodytes\"]}}, {\"function_name\": \"get_protein_sequence\", \"_original_function_name\": \"get_protein_sequence\", \"args\": {\"gene\": [\"BRCA2\"], \"species\": [\"Pan troglodytes\"]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_56",
+    "question": "Check the hotel room availability for 'Queens Hotel' in Berlin, Germany from March 10, 2022 to March 20, 2022 and for 'Royal Hotel' in Paris, France from April 5, 2022 to April 15, 2022.",
+    "functions": [
+      {
+        "name": "hotel_booking_check_availability",
+        "description": "Check room availability for a particular hotel for given dates.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "hotel_name": {
+              "type": "string",
+              "description": "The name of the hotel."
+            },
+            "location": {
+              "type": "string",
+              "description": "The location of the hotel."
+            },
+            "check_in_date": {
+              "type": "string",
+              "description": "The check-in date in YYYY-MM-DD format."
+            },
+            "check_out_date": {
+              "type": "string",
+              "description": "The check-out date in YYYY-MM-DD format."
+            }
+          },
+          "required": [
+            "hotel_name",
+            "location",
+            "check_in_date",
+            "check_out_date"
+          ]
+        },
+        "_original_name": "hotel_booking.check_availability"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "hotel_booking_check_availability",
+        "_original_function_name": "hotel_booking.check_availability",
+        "args": {
+          "hotel_name": [
+            "Queens Hotel"
+          ],
+          "location": [
+            "Berlin, Germany"
+          ],
+          "check_in_date": [
+            "2022-03-10",
+            "03/10/2022",
+            "Mar.10,2022"
+          ],
+          "check_out_date": [
+            "2022-03-20",
+            "03/20/2022",
+            "Mar.20,2022"
+          ]
+        }
+      },
+      {
+        "function_name": "hotel_booking_check_availability",
+        "_original_function_name": "hotel_booking.check_availability",
+        "args": {
+          "hotel_name": [
+            "Royal Hotel"
+          ],
+          "location": [
+            "Paris, France"
+          ],
+          "check_in_date": [
+            "2022-04-05",
+            "04/05/2022",
+            "Apr.5,2022"
+          ],
+          "check_out_date": [
+            "2022-04-15",
+            "04/15/2022",
+            "Apr.15,2022"
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"hotel_booking_check_availability\", \"_original_function_name\": \"hotel_booking.check_availability\", \"args\": {\"hotel_name\": [\"Queens Hotel\"], \"location\": [\"Berlin, Germany\"], \"check_in_date\": [\"2022-03-10\", \"03/10/2022\", \"Mar.10,2022\"], \"check_out_date\": [\"2022-03-20\", \"03/20/2022\", \"Mar.20,2022\"]}}, {\"function_name\": \"hotel_booking_check_availability\", \"_original_function_name\": \"hotel_booking.check_availability\", \"args\": {\"hotel_name\": [\"Royal Hotel\"], \"location\": [\"Paris, France\"], \"check_in_date\": [\"2022-04-05\", \"04/05/2022\", \"Apr.5,2022\"], \"check_out_date\": [\"2022-04-15\", \"04/15/2022\", \"Apr.15,2022\"]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  },
+  {
+    "id": "parallel_114",
+    "question": "Can you analyze the DNA sequence \"AGCTTAGCTA\" and \"AGCTTAGGCTA\" using the reference sequence \"AGCTTAGCTA\" to identify any potential 'insertion' mutations, then repeat the same analysis for 'deletion' and 'substitution' mutations?",
+    "functions": [
+      {
+        "name": "analyze_dna_sequence",
+        "description": "Analyzes the DNA sequence based on a reference sequence and return any potential mutations.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "sequence": {
+              "type": "string",
+              "description": "The DNA sequence to be analyzed."
+            },
+            "reference_sequence": {
+              "type": "string",
+              "description": "The reference DNA sequence."
+            },
+            "mutation_type": {
+              "type": "string",
+              "enum": [
+                "insertion",
+                "deletion",
+                "substitution"
+              ],
+              "description": "Type of the mutation to be looked for in the sequence.",
+              "default": "insertion"
+            }
+          },
+          "required": [
+            "sequence",
+            "reference_sequence"
+          ]
+        },
+        "_original_name": "analyze_dna_sequence"
+      }
+    ],
+    "gold_calls": [
+      {
+        "function_name": "analyze_dna_sequence",
+        "_original_function_name": "analyze_dna_sequence",
+        "args": {
+          "sequence": [
+            "AGCTTAGCTA"
+          ],
+          "reference_sequence": [
+            "AGCTTAGCTA"
+          ],
+          "mutation_type": [
+            "insertion",
+            ""
+          ]
+        }
+      },
+      {
+        "function_name": "analyze_dna_sequence",
+        "_original_function_name": "analyze_dna_sequence",
+        "args": {
+          "sequence": [
+            "AGCTTAGGCTA"
+          ],
+          "reference_sequence": [
+            "AGCTTAGCTA"
+          ],
+          "mutation_type": [
+            "insertion",
+            ""
+          ]
+        }
+      },
+      {
+        "function_name": "analyze_dna_sequence",
+        "_original_function_name": "analyze_dna_sequence",
+        "args": {
+          "sequence": [
+            "AGCTTAGCTA"
+          ],
+          "reference_sequence": [
+            "AGCTTAGCTA"
+          ],
+          "mutation_type": [
+            "deletion"
+          ]
+        }
+      },
+      {
+        "function_name": "analyze_dna_sequence",
+        "_original_function_name": "analyze_dna_sequence",
+        "args": {
+          "sequence": [
+            "AGCTTAGGCTA"
+          ],
+          "reference_sequence": [
+            "AGCTTAGCTA"
+          ],
+          "mutation_type": [
+            "deletion"
+          ]
+        }
+      },
+      {
+        "function_name": "analyze_dna_sequence",
+        "_original_function_name": "analyze_dna_sequence",
+        "args": {
+          "sequence": [
+            "AGCTTAGCTA"
+          ],
+          "reference_sequence": [
+            "AGCTTAGCTA"
+          ],
+          "mutation_type": [
+            "substitution"
+          ]
+        }
+      },
+      {
+        "function_name": "analyze_dna_sequence",
+        "_original_function_name": "analyze_dna_sequence",
+        "args": {
+          "sequence": [
+            "AGCTTAGGCTA"
+          ],
+          "reference_sequence": [
+            "AGCTTAGCTA"
+          ],
+          "mutation_type": [
+            "substitution"
+          ]
+        }
+      }
+    ],
+    "answer": "[{\"function_name\": \"analyze_dna_sequence\", \"_original_function_name\": \"analyze_dna_sequence\", \"args\": {\"sequence\": [\"AGCTTAGCTA\"], \"reference_sequence\": [\"AGCTTAGCTA\"], \"mutation_type\": [\"insertion\", \"\"]}}, {\"function_name\": \"analyze_dna_sequence\", \"_original_function_name\": \"analyze_dna_sequence\", \"args\": {\"sequence\": [\"AGCTTAGGCTA\"], \"reference_sequence\": [\"AGCTTAGCTA\"], \"mutation_type\": [\"insertion\", \"\"]}}, {\"function_name\": \"analyze_dna_sequence\", \"_original_function_name\": \"analyze_dna_sequence\", \"args\": {\"sequence\": [\"AGCTTAGCTA\"], \"reference_sequence\": [\"AGCTTAGCTA\"], \"mutation_type\": [\"deletion\"]}}, {\"function_name\": \"analyze_dna_sequence\", \"_original_function_name\": \"analyze_dna_sequence\", \"args\": {\"sequence\": [\"AGCTTAGGCTA\"], \"reference_sequence\": [\"AGCTTAGCTA\"], \"mutation_type\": [\"deletion\"]}}, {\"function_name\": \"analyze_dna_sequence\", \"_original_function_name\": \"analyze_dna_sequence\", \"args\": {\"sequence\": [\"AGCTTAGCTA\"], \"reference_sequence\": [\"AGCTTAGCTA\"], \"mutation_type\": [\"substitution\"]}}, {\"function_name\": \"analyze_dna_sequence\", \"_original_function_name\": \"analyze_dna_sequence\", \"args\": {\"sequence\": [\"AGCTTAGGCTA\"], \"reference_sequence\": [\"AGCTTAGCTA\"], \"mutation_type\": [\"substitution\"]}}]",
+    "answer_type": "bfcl_calls",
+    "category": "bfcl_parallel"
+  }
+]

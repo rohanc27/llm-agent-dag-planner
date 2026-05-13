@@ -260,13 +260,15 @@ BENCHMARK_TITLE = {
     "hotpotqa": "HotpotQA (bridge — adaptive 2-hop)",
     "hotpotqa_comparison": "HotpotQA (comparison — inherently parallel)",
     "github": "GitHub (structurally predictable multi-entity)",
+    "bfcl_parallel": "BFCL v4 parallel (function-call accuracy, AST judge)",
 }
 BENCHMARK_SHORT = {
     "hotpotqa": "HotpotQA bridge",
     "hotpotqa_comparison": "HotpotQA comparison",
     "github": "GitHub",
+    "bfcl_parallel": "BFCL parallel",
 }
-BENCHMARK_ORDER = ["hotpotqa", "hotpotqa_comparison", "github"]
+BENCHMARK_ORDER = ["hotpotqa", "hotpotqa_comparison", "github", "bfcl_parallel"]
 
 
 def render_markdown(agg: dict[tuple[str, str], dict[str, dict[str, Any]]]) -> str:

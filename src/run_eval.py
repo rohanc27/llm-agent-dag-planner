@@ -36,6 +36,7 @@ from rich.console import Console
 from rich.table import Table
 
 from src.judge import judge_answer
+from src.judge_ast import evaluate_bfcl
 from src.llm.base import LLMProvider
 from src.llm.gemini import GeminiProvider
 from src.metrics import AggregateMetrics
@@ -146,17 +147,62 @@ BENCHMARK_PATHS: dict[str, Path] = {
     "hotpotqa": REPO_ROOT / "benchmarks" / "hotpotqa" / "tasks.json",
     "hotpotqa_comparison": REPO_ROOT / "benchmarks" / "hotpotqa" / "tasks_comparison.json",
     "github": REPO_ROOT / "benchmarks" / "github" / "tasks.json",
+    "bfcl_parallel": REPO_ROOT / "benchmarks" / "bfcl" / "tasks.json",
 }
 
 # Each benchmark uses ONLY its own tool set — Wikipedia tools never leak
 # into a GitHub task and vice versa. Strategies receive the per-benchmark
 # slice via the dispatch in run_eval(). The two HotpotQA subsets share
 # the Wikipedia tools.
+#
+# BFCL is special: tools are constructed per-task from the task's
+# ``functions`` field (each BFCL task ships its own function schemas),
+# and execution is mocked. See ``_build_bfcl_tools`` and the
+# ``benchmark == "bfcl_parallel"`` branch in :func:`_run_one_task`.
 TOOLS_FOR_BENCHMARK: dict[str, list[Tool]] = {
     "hotpotqa": WIKIPEDIA_TOOLS,
     "hotpotqa_comparison": WIKIPEDIA_TOOLS,
     "github": GITHUB_TOOLS,
+    "bfcl_parallel": [],  # placeholder — actual tools built per-task
 }
+
+
+def _build_bfcl_tools(
+    functions: list[dict[str, Any]], call_log: list[dict[str, Any]]
+) -> list[Tool]:
+    """Build per-task mock tools for a BFCL parallel task.
+
+    Each tool's ``execute`` records its invocation into ``call_log``
+    (passed by reference from :func:`_run_one_task`) and returns a
+    canned response. The strategy doesn't get real data; for BFCL the
+    correctness signal is "did the model emit the right *set* of
+    function calls?" — checked post-hoc by :func:`evaluate_bfcl`.
+    """
+    tools: list[Tool] = []
+    for fn in functions:
+        name = fn["name"]
+        description = fn.get("description", "")
+        params = fn.get("parameters", {"type": "object"})
+        if not isinstance(params, dict) or params.get("type") != "object":
+            params = {"type": "object", "properties": params if isinstance(params, dict) else {}}
+
+        def _make_executor(fn_name: str):
+            async def _exec(**kwargs: Any) -> dict[str, Any]:
+                call_log.append({"function_name": fn_name, "args": dict(kwargs)})
+                # Canned response — the strategy needs some output to
+                # continue / synthesize, but the content is ignored.
+                return {"status": "ok", "mock": True, "function": fn_name}
+            return _exec
+
+        tools.append(
+            Tool(
+                name=name,
+                description=description,
+                input_schema=params,
+                execute=_make_executor(name),
+            )
+        )
+    return tools
 
 
 # -----------------------------------------------------------------------------
@@ -230,6 +276,14 @@ async def _run_one_task(
             record["answer_type"] = task["answer_type"]
         if "category" in task:
             record["category"] = task["category"]
+
+        # ---- BFCL setup: per-task mock tools + call log ----------------
+        is_bfcl = benchmark == "bfcl_parallel"
+        bfcl_call_log: list[dict[str, Any]] = []
+        if is_bfcl:
+            tools = _build_bfcl_tools(task.get("functions", []), bfcl_call_log)
+            record["predicted_calls"] = bfcl_call_log  # populated by reference
+
         try:
             # Wrap the strategy in a wall-clock timeout so a single stuck
             # Gemini call (e.g. an unresponsive 503) can't hang the whole
@@ -247,13 +301,21 @@ async def _run_one_task(
             record["predicted_answer"] = predicted
             record["metrics"] = _metrics_to_dict(metrics)
 
-            verdict = await judge_answer(
-                question=task["question"],
-                gold=task["answer"],
-                predicted=predicted,
-                llm=llm,
-                answer_type=task.get("answer_type"),
-            )
+            if is_bfcl:
+                # AST judge — no LLM call. Pure structural comparison of
+                # emitted function calls vs gold ground-truth.
+                verdict = evaluate_bfcl(
+                    predicted_calls=bfcl_call_log,
+                    gold_calls=task.get("gold_calls", []),
+                )
+            else:
+                verdict = await judge_answer(
+                    question=task["question"],
+                    gold=task["answer"],
+                    predicted=predicted,
+                    llm=llm,
+                    answer_type=task.get("answer_type"),
+                )
             record["judge_correct"] = bool(verdict.get("correct", False))
             record["judge_rationale"] = verdict.get("rationale", "")
 
