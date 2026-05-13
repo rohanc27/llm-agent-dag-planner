@@ -6,7 +6,7 @@ Each cell is the **percentage of that strategy's failures** falling into the nam
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | dag_planner | 9.5% (8) | 19.0% (16) | — | 31.0% (26) | 38.1% (32) | 2.4% (2) | 84 | 255 |
 | dag_replan_aggressive | 4.5% (3) | 14.9% (10) | — | 4.5% (3) | 70.1% (47) | 6.0% (4) | 67 | 255 |
-| dag_replan_aggressive_no_cot | 8.3% (1) | 16.7% (2) | — | — | 75.0% (9) | — | 12 | 30 |
+| dag_replan_aggressive_no_cot | 7.9% (5) | 20.6% (13) | — | 7.9% (5) | 63.5% (40) | — | 63 | 255 |
 | dag_replan_aggressive_no_diversify | 7.1% (1) | 14.3% (2) | — | 7.1% (1) | 64.3% (9) | 7.1% (1) | 14 | 30 |
 | dag_replan_aggressive_no_emptysynth | 15.8% (3) | 5.3% (1) | — | 21.1% (4) | 57.9% (11) | — | 19 | 30 |
 | dag_replan_aggressive_no_topk | 11.8% (2) | 17.6% (3) | — | — | 64.7% (11) | 5.9% (1) | 17 | 30 |

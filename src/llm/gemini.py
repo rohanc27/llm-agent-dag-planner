@@ -69,6 +69,17 @@ def _is_rate_limit_error(exc: BaseException) -> bool:
     return "429" in msg and "RESOURCE_EXHAUSTED" in msg
 
 
+def _is_transient_server_error(exc: BaseException) -> bool:
+    """True for transient Gemini-side errors that are safe to retry —
+    503 UNAVAILABLE and 500 INTERNAL. These fire when Gemini is
+    overloaded; retrying after a short backoff usually succeeds.
+    """
+    msg = str(exc)
+    return ("503" in msg and "UNAVAILABLE" in msg) or (
+        "500" in msg and "INTERNAL" in msg
+    )
+
+
 def _is_per_day_quota(exc_text: str) -> bool:
     """True if the error is the daily (rolling-24h) free-tier cap."""
     return "PerDay" in exc_text or "RequestsPerDay" in exc_text
@@ -242,11 +253,21 @@ class GeminiProvider(LLMProvider):
                     config=config,
                 )
             except Exception as exc:  # noqa: BLE001
-                if not _is_rate_limit_error(exc):
-                    raise
                 exc_text = str(exc)
-                per_day = _is_per_day_quota(exc_text)
-                max_retries = _RPD_MAX_RETRIES if per_day else _RPM_MAX_RETRIES
+                is_rate_limit = _is_rate_limit_error(exc)
+                is_server_5xx = _is_transient_server_error(exc)
+                if not (is_rate_limit or is_server_5xx):
+                    raise
+                if is_rate_limit:
+                    per_day = _is_per_day_quota(exc_text)
+                    max_retries = (
+                        _RPD_MAX_RETRIES if per_day else _RPM_MAX_RETRIES
+                    )
+                    kind = "PerDay" if per_day else "PerMinute"
+                else:
+                    # 503/500 — exponential backoff, modest retry budget.
+                    max_retries = _RPM_MAX_RETRIES
+                    kind = "5xx"
                 if attempt >= max_retries:
                     raise
                 suggested = _parse_retry_delay_seconds(exc_text)
@@ -255,9 +276,8 @@ class GeminiProvider(LLMProvider):
                 else:
                     delay = _RATE_LIMIT_BACKOFF_BASE * (2 ** attempt)
                 delay = min(delay, _RATE_LIMIT_MAX_DELAY)
-                kind = "PerDay" if per_day else "PerMinute"
                 print(
-                    f"[gemini retry] 429 {kind} quota — sleeping {delay:.1f}s "
+                    f"[gemini retry] {kind} — sleeping {delay:.1f}s "
                     f"(attempt {attempt + 1}/{max_retries})",
                     flush=True,
                 )
