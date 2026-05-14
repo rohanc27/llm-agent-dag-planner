@@ -38,7 +38,8 @@ from rich.table import Table
 from src.judge import judge_answer
 from src.judge_ast import evaluate_bfcl
 from src.llm.base import LLMProvider
-from src.llm.gemini import GeminiProvider
+from src.llm.claude import ClaudeProvider
+from src.llm.gemini import GeminiProvider, set_active_provider as _set_llm_provider
 from src.metrics import AggregateMetrics
 from src.strategies.dag_planner import run_dag_planner
 from src.strategies.dag_planner_replan import run_dag_planner_replan
@@ -249,11 +250,14 @@ async def _run_one_task(
     sem: asyncio.Semaphore,
     console: Console,
     seed: int,
+    llm_provider: str = "gemini",
 ) -> dict[str, Any]:
     """Execute strategy + judge on one task, returning the result record.
 
     ``seed`` is recorded on every row so multi-seed evals can be grouped
     by (strategy, benchmark, seed) when computing confidence intervals.
+    ``llm_provider`` is recorded so cross-LLM comparisons can be sliced
+    without conflating rows from different model families.
     """
     async with sem:
         record: dict[str, Any] = {
@@ -261,6 +265,7 @@ async def _run_one_task(
             "strategy": strategy_name,
             "benchmark": benchmark,
             "seed": seed,
+            "llm": llm_provider,
             "question": task["question"],
             "gold_answer": task["answer"],
             "predicted_answer": "",
@@ -482,10 +487,17 @@ async def run_eval(
     output: Path,
     concurrency: int,
     seed: int,
+    llm_provider: str = "gemini",
 ) -> int:
     load_dotenv(REPO_ROOT / ".env")
+    # Judge always runs on Gemini for apples-to-apples evaluation across
+    # provider choices — we still require GEMINI_API_KEY even when the
+    # strategy runs on Claude.
     if not os.environ.get("GEMINI_API_KEY"):
         print("ERROR: GEMINI_API_KEY is not set.", file=sys.stderr)
+        return 1
+    if llm_provider == "claude" and not os.environ.get("ANTHROPIC_API_KEY"):
+        print("ERROR: ANTHROPIC_API_KEY is not set.", file=sys.stderr)
         return 1
 
     try:
@@ -496,7 +508,12 @@ async def run_eval(
 
     strategy_fn = STRATEGIES[strategy]
     tools = TOOLS_FOR_BENCHMARK[benchmark]
-    llm = GeminiProvider()
+    if llm_provider == "claude":
+        llm = ClaudeProvider()
+        _set_llm_provider("claude")
+    else:
+        llm = GeminiProvider()
+        _set_llm_provider("gemini")
 
     console = Console()
     reuse_note = (
@@ -522,6 +539,7 @@ async def run_eval(
             sem=sem,
             console=console,
             seed=seed,
+            llm_provider=llm_provider,
         )
         for t in tasks_to_run
     ]
@@ -581,6 +599,16 @@ def main(argv: Optional[list[str]] = None) -> int:
             "but tags the seed on each row to group strategy-variance runs."
         ),
     )
+    parser.add_argument(
+        "--llm",
+        choices=["gemini", "claude"],
+        default="gemini",
+        help=(
+            "Which LLM provider to run the strategy on. Judge always runs "
+            "on Gemini for cross-provider apples-to-apples. Claude requires "
+            "ANTHROPIC_API_KEY."
+        ),
+    )
     args = parser.parse_args(argv)
     return asyncio.run(
         run_eval(
@@ -590,6 +618,7 @@ def main(argv: Optional[list[str]] = None) -> int:
             output=args.output,
             concurrency=args.concurrency,
             seed=args.seed,
+            llm_provider=args.llm,
         )
     )
 
