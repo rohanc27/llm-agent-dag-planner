@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-"""Verify Step 9 — GitHub tools work end-to-end and the 25 hand-crafted
+"""Verify GitHub tools work end-to-end and the 25 hand-crafted
 benchmark tasks load cleanly.
 
 Three parts:
@@ -14,7 +14,7 @@ Three parts:
 
 Run:
 
-    python scripts/verify_step9.py
+    python scripts/verify_github_benchmark.py
 """
 
 import asyncio

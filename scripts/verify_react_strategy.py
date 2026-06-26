@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-"""Verify Step 3 — ReAct baseline on one multi-hop question.
+"""Verify ReAct baseline on one multi-hop question.
 
 Runs ReAct end-to-end on:
 
@@ -13,7 +13,7 @@ INFO-level logging from :mod:`src.strategies.react`.
 
 Run:
 
-    python scripts/verify_step3.py
+    python scripts/verify_react_strategy.py
 """
 
 import asyncio

@@ -5,7 +5,7 @@ from __future__ import annotations
 BFCL = Berkeley Function Calling Leaderboard. The ``parallel`` subset
 contains tasks where the model must emit *multiple* function calls in
 parallel from a single user prompt — exactly the pattern DAG-style
-strategies should be best at. See SPEC.md § 3 Step 10.
+strategies should be best at.
 
 Source files (raw JSONL, one task per line):
 

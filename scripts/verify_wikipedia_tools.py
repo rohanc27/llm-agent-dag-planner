@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-"""Verify Step 2 — Wikipedia tools work end-to-end against the live API.
+"""Verify Wikipedia tools work end-to-end against the live API.
 
 Three things checked:
   1. ``wikipedia_search("Albert Einstein")`` returns a non-empty list of
@@ -13,7 +13,7 @@ Three things checked:
 
 Run:
 
-    python scripts/verify_step2.py
+    python scripts/verify_wikipedia_tools.py
 """
 
 import asyncio

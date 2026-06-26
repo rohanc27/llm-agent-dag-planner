@@ -12,7 +12,7 @@ Five async tools wrapping ``https://api.github.com``:
 
 A ``GITHUB_TOKEN`` env var raises the rate limit from 60 req/hr to 5000
 req/hr. Search endpoints have their own narrower limit (10/min unauth,
-30/min auth). See SPEC.md § 3 Step 9.
+30/min auth).
 """
 
 import os

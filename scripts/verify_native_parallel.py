@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-"""Verify Step 7 — native_parallel on the Eiffel Tower question.
+"""Verify native_parallel on the Eiffel Tower question.
 
-Re-uses the Step 3 question so the comparison vs ReAct is apples-to-apples:
+Re-uses the same question so the comparison vs ReAct is apples-to-apples:
 
     "What is the capital of the country where the Eiffel Tower is located?"
 
@@ -11,14 +11,14 @@ Prints the final answer plus the full AggregateMetrics. Also prints the
 so any parallel-execution savings inside a turn are visible (the gap
 between the two numbers is the time we saved by overlapping tool calls).
 
-Step 3 ReAct used ~5 LLM calls / ~4 tool calls on this question. We
+Earlier ReAct runs used ~5 LLM calls / ~4 tool calls on this question. We
 expect native_parallel to land 2-3 LLM calls if Gemini batches the
 search/fetch pair into one turn, but ≥1 LLM call (the synthesis turn)
 is always required.
 
 Run:
 
-    python scripts/verify_step7.py
+    python scripts/verify_native_parallel.py
 """
 
 import asyncio
@@ -102,7 +102,7 @@ async def main() -> int:
         print(
             f"NOTE: n_llm_calls={metrics.n_llm_calls} — not seeing batching savings "
             "vs ReAct on this task. The model may have chosen sequential decomposition; "
-            "explicit DAG planning (Step 8) is the next experimental knob."
+            "explicit DAG planning is the next experimental knob."
         )
     if metrics.discarded_parallel_calls != 0:
         print(

@@ -16,7 +16,7 @@ returned from every LLM invocation.
   ``add_to_wall_clock=False`` to :meth:`add_call` so latencies don't get
   double-counted).
 
-See SPEC.md § 3 Step 3.
+
 """
 
 from dataclasses import dataclass, field

@@ -11,7 +11,7 @@ A planning strategy submits a list of tasks; this module:
   task args with prior outputs at execution time.
 
 The same module is consumed by :mod:`src.strategies.dag_planner` today
-and the LangGraph / ADK variants in Weekend 2 — see SPEC.md § 3 Step 8.
+and the LangGraph / ADK variants in later iteration.
 """
 
 import re

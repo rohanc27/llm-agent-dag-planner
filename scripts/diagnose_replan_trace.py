@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 """Run ``dag_replan_cap2`` on a single hand-picked HotpotQA bridge task
-(the Big Fish theater question — where the diagnostic in Step 8 showed
+(the Big Fish theater question — where the earlier diagnostic showed
 the base DAG planner fails STRUCTURALLY because the initial search for
 "Big Fish musical composer lyricist" doesn't surface Andrew Lippa in
 the top-5). Print every plan attempted, every tool output, and the

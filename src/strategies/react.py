@@ -17,7 +17,7 @@ use two belt-and-suspenders mechanisms:
 
 This matches the original ReAct paper's "one action per step" contract; the
 caveat is a Gemini-API constraint, not a design choice, and is called out in
-the README per SPEC.md § 3 Step 3.
+the README per SPEC.md § 3 
 
 ReAct does not currently use a separate "scratchpad" reasoning channel —
 Gemini's tool-use loop is itself the reasoning trace.
@@ -65,7 +65,7 @@ async def run_react(
         Available tools. The strategy hands their declarative defs to the
         provider and executes whichever the LLM selects.
     llm:
-        Any :class:`LLMProvider`. For Weekend 1 this is
+        Any :class:`LLMProvider`. For later iteration this is
         :class:`~src.llm.gemini.GeminiProvider`.
     system_prompt:
         Override the default ReAct system prompt.

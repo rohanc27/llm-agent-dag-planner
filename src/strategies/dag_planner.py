@@ -27,7 +27,7 @@ Three phases per task:
 Total LLM calls per task: **2** (regardless of plan size). Total
 wall-clock ≈ ``latency(plan) + max(level_latencies) + latency(synth)``.
 
-See SPEC.md § 3 Step 8.
+
 """
 
 import asyncio
@@ -56,7 +56,7 @@ logger = logging.getLogger(__name__)
 # -----------------------------------------------------------------------------
 # Planner-facing ``submit_plan`` function declaration.
 # -----------------------------------------------------------------------------
-# SPEC.md § 3 Step 8 prescribes ``args`` as ``{"type": "object"}``. In
+# The original design prescribes ``args`` as ``{"type": "object"}``. In
 # practice the google-genai SDK strips properties-less object schemas in
 # its native ``Schema`` conversion, and Gemini consistently emits ``{}``
 # for the field. We work around this by declaring ``args`` as a JSON-
@@ -499,7 +499,7 @@ async def run_dag_planner(
     trace:
         Optional dict that, if provided, is populated with diagnostic
         information (``plan_raw``, ``dag``, ``levels``, ``outputs``).
-        Used by :mod:`scripts.verify_step8`; ignored by the eval harness.
+        Used by :mod:`scripts.verify_dag_planner`; ignored by the eval harness.
 
     Returns
     -------

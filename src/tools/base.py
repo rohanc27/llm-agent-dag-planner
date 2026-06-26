@@ -4,7 +4,7 @@ from __future__ import annotations
 
 A :class:`Tool` bundles the *declarative* surface an LLM sees (name,
 description, JSON-Schema for inputs) with the *executable* surface a strategy
-runs (an async callable). See SPEC.md § 3 Step 2.
+runs (an async callable).
 
 Strategies pass ``[t.to_def() for t in tools]`` to the provider so the
 provider never has to know about ``execute``.

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-"""DAG planner with adaptive replanning — Phase A contribution.
+"""DAG planner with adaptive replanning.
 
 This is a thin shell around :mod:`src.strategies.dag_planner` that
 addresses its biggest weakness on HotpotQA bridge: inability to recover

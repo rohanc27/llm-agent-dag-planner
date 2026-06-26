@@ -3,7 +3,7 @@ from __future__ import annotations
 """Download HotpotQA dev (distractor) set, filter to bridge tasks, sample 30.
 
 Idempotent CLI — re-runs deterministic sampling but skips the large raw
-download if it's already on disk. See SPEC.md § 3 Step 4.
+download if it's already on disk.
 
 Run with:
 
@@ -111,7 +111,7 @@ def filter_and_sample(
 ) -> list[dict[str, Any]]:
     """Load raw JSON, keep ``type == task_type``, sample ``n`` with ``seed``.
 
-    Output records use the schema documented in SPEC.md § 3 Step 4.
+    Output records use the schema documented in the docstring above.
     ``task_type`` must be one of ``"bridge"`` or ``"comparison"``.
     """
     if task_type not in TASKS_FILENAMES:

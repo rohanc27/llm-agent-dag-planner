@@ -12,9 +12,9 @@ equivalence (formatting / name / phrasing variation = correct) while still
 penalizing factual errors.
 
 A separate, higher-quality judge model (e.g. Gemini 2.5 Pro) would be a
-reasonable upgrade for the final eval — flagged for Weekend 3.
+reasonable upgrade for the final eval — flagged for later iteration.
 
-See SPEC.md § 3 Step 5.
+
 """
 
 import ast
@@ -25,7 +25,7 @@ from typing import Any, Optional
 from src.llm.base import LLMProvider
 from src.llm.gemini import extract_text
 
-# Hard cap on judge output. Bumped from 512 → 1024 after a Step 6 truncation
+# Hard cap on judge output. Bumped from 512 → 1024 after a an earlier truncation
 # regression: a verbose rationale was being cut mid-string, leaving an
 # unparseable JSON tail. One sentence is still the target — this is headroom.
 _JUDGE_MAX_TOKENS: int = 1024
@@ -68,7 +68,7 @@ JUDGE_SYSTEM_PROMPT: str = (
 # -----------------------------------------------------------------------------
 # Per-answer-type emphasis appended to the system prompt for the GitHub
 # benchmark. None of these override the base rules above — they tighten or
-# loosen scoring along the dimensions documented in the SPEC for Step 9.
+# loosen scoring along the dimensions documented in the SPEC for 
 # -----------------------------------------------------------------------------
 _ANSWER_TYPE_HINTS: dict[str, str] = {
     "count": (

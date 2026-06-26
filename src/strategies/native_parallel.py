@@ -25,7 +25,7 @@ strategy and pass ``add_to_wall_clock=False`` to
 :meth:`AggregateMetrics.add_call`, then assign
 :attr:`AggregateMetrics.total_wall_clock_seconds` at the end. The
 per-call latencies remain in ``metrics.per_call`` for breakdown
-analysis. See SPEC.md § 3 Step 7.
+analysis.
 
 To keep the strategy comparison fair, this loop deliberately reuses
 :data:`src.strategies.react.REACT_SYSTEM_PROMPT` — the only experimental

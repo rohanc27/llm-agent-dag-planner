@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-"""Verify Step 6 — smoke-test the full eval pipeline on 3 tasks.
+"""Smoke-test the full eval pipeline on 3 tasks.
 
 Equivalent to:
 

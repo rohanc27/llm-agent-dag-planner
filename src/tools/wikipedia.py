@@ -10,7 +10,7 @@ Two async functions plus their :class:`~src.tools.base.Tool` wrappers:
 Both hit the public MediaWiki action API at
 ``https://en.wikipedia.org/w/api.php`` (no auth required). Per Wikimedia's
 User-Agent policy we identify ourselves on every request. See SPEC.md § 3
-Step 2.
+
 """
 
 from typing import Any

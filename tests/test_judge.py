@@ -26,7 +26,7 @@ def test_markdown_fenced_json() -> None:
 
 
 def test_python_style_dict_with_escaped_quote() -> None:
-    """Regression for the Step 6 Bonn bug.
+    """Regression for the Bonn judge bug.
 
     The model emitted Python-repr-style output containing an escaped
     single quote inside the rationale (``\\'exceeds\\'``). ``json.loads``

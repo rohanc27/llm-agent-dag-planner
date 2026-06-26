@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-"""Verify Step 8 — DAG planner on the Eiffel Tower question.
+"""Verify DAG planner on the Eiffel Tower question.
 
-Apples-to-apples with the Step 3 / Step 7 verifications. Prints:
+Apples-to-apples with the ReAct and native_parallel verifications. Prints:
 
   * The plan DAG (pretty JSON, as emitted by the planner)
   * Each topological execution level (which tasks fired in parallel)
@@ -15,7 +15,7 @@ mentions "Paris".
 
 Run:
 
-    python scripts/verify_step8.py
+    python scripts/verify_dag_planner.py
 """
 
 import asyncio

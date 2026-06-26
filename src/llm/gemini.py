@@ -2,14 +2,14 @@ from __future__ import annotations
 
 """Gemini 2.5 Flash provider (Google AI Studio).
 
-Primary LLM for Weekends 1 and 2. See SPEC.md § 3 Step 1.
+Primary LLM provider.
 
 Notes on parallel tool-use semantics
 ------------------------------------
 Gemini has **no** native ``disable_parallel_tool_use`` switch — this is an
 open feature request as of late 2025. The ``force_single_tool_call`` flag here
 only injects a system-prompt hint asking for one function per turn; the
-strategies layer (Step 3 ReAct) also discards any extra function_call parts
+strategies layer (earlier milestone ReAct) also discards any extra function_call parts
 post-hoc. Belt and suspenders.
 """
 
@@ -28,31 +28,19 @@ from src.llm.base import CallMetrics, FunctionCall, LLMProvider, ToolDef
 # Active-provider dispatch hook
 # -----------------------------------------------------------------------------
 # Strategy modules import the four response helpers below from this module by
-# name (legacy: Gemini was the only LLM). In Weekend 3 we added Claude. To
-# avoid touching every strategy, the helpers consult a module-level
-# ``_active_provider`` and delegate to :mod:`src.llm.claude` when it's set.
 # ``run_eval`` flips this at startup based on ``--llm``.
 _active_provider: str = "gemini"
 
 
 def set_active_provider(name: str) -> None:
-    """Switch which provider's response decoders the helpers below use.
-
-    Strategies don't see this — it's a side-channel from run_eval so they
-    can keep ``from src.llm.gemini import extract_function_calls`` etc.
-    unchanged.
-    """
-    global _active_provider
-    if name not in ("gemini", "claude"):
+    """Set the active LLM provider helper dispatch."""
+    if name != "gemini":
         raise ValueError(f"unknown provider {name!r}")
-    _active_provider = name
+
+    global _active_provider
+    _active_provider = "gemini"
 
 
-def _delegate_claude() -> Any:
-    """Lazy import to avoid loading anthropic when running on Gemini."""
-    from src.llm import claude as _claude_mod
-
-    return _claude_mod
 
 # -----------------------------------------------------------------------------
 # Gemini 2.5 Flash — Google AI Studio paid-tier pricing as of May 2026.
@@ -184,8 +172,6 @@ def extract_function_calls(response: Any) -> list[FunctionCall]:
     Each entry carries the tool ``name`` and a plain-dict ``args`` payload
     (the SDK's ``MapComposite`` is converted to a regular ``dict``).
     """
-    if _active_provider == "claude":
-        return _delegate_claude().extract_function_calls(response)
     out: list[FunctionCall] = []
     try:
         parts = response.candidates[0].content.parts or []
@@ -202,8 +188,6 @@ def extract_function_calls(response: Any) -> list[FunctionCall]:
 
 def extract_text(response: Any) -> str:
     """Concatenate every text part on the first candidate's content."""
-    if _active_provider == "claude":
-        return _delegate_claude().extract_text(response)
     try:
         parts = response.candidates[0].content.parts or []
     except (AttributeError, IndexError, TypeError):
@@ -218,8 +202,6 @@ def assistant_turn_from_response(response: Any) -> dict[str, Any]:
     the round-trip into the next call. :func:`_to_gemini_contents` translates
     ``assistant`` → ``model`` and forwards Parts directly.
     """
-    if _active_provider == "claude":
-        return _delegate_claude().assistant_turn_from_response(response)
     try:
         parts = list(response.candidates[0].content.parts or [])
     except (AttributeError, IndexError, TypeError):
@@ -234,8 +216,6 @@ def function_response_message(name: str, result: Any) -> dict[str, Any]:
     wrapped as ``{"result": ...}`` so callers can pass strings, lists, or
     dicts uniformly.
     """
-    if _active_provider == "claude":
-        return _delegate_claude().function_response_message(name, result)
     payload: dict[str, Any] = result if isinstance(result, dict) else {"result": result}
     part = types.Part.from_function_response(name=name, response=payload)
     return {"role": "user", "content": [part]}

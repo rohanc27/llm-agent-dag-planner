@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-"""Verify Step 5 — the judge's semantic-equivalence behavior on 13 cases.
+"""Verify the judge's semantic-equivalence behavior on 13 cases.
 
 Cases 1-9 are HotpotQA-shaped (no ``answer_type`` — the judge runs in
 its original mode). Cases 10-13 are GitHub-shaped, exercising the four
-``answer_type`` modes added for Step 9.
+``answer_type`` modes added for GitHub answer types.
 
   1. exact match                         → expect correct=True
   2. semantic match                      → expect correct=True
@@ -25,7 +25,7 @@ FAIL otherwise.
 
 Run:
 
-    python scripts/verify_step5.py
+    python scripts/verify_judge.py
 """
 
 import asyncio
@@ -107,7 +107,7 @@ CASES: list[dict] = [
         "predicted": "exceeds 500,000",
         "expected": False,
     },
-    # ---- GitHub answer_type cases (Step 9) --------------------------------
+    # ---- GitHub answer_type cases (GitHub answer types. --------------------------------
     {
         "label": "answer_type=count, exact",
         "question": "How many open issues does twentyhq/twenty have?",

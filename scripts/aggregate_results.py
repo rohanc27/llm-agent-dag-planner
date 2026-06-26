@@ -160,7 +160,7 @@ def _aggregate(
     """
     # Dedupe by (strategy, benchmark, seed, task_id): keep the LATEST row.
     # Early dev iterations re-ran some cells (e.g. dag_planner/hotpotqa/seed=42
-    # was re-run after Step-8 bug fixes; verify_step6 also appended 3 tasks
+    # was re-run after DAG planner bug fixes; earlier eval runs appended 3 extra tasks
     # to react/hotpotqa/seed=42). The canonical accuracy is the most recent
     # full-run row for each task.
     latest_by_cell_task: dict[tuple[str, str, int, str], dict[str, Any]] = {}

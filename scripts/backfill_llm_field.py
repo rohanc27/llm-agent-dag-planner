@@ -2,8 +2,7 @@ from __future__ import annotations
 
 """Backfill ``llm`` field on existing ``results/results.json`` rows.
 
-Weekend 3 added a ``--llm {gemini,claude}`` flag and stamps every new
-record with its provider. Every pre-Weekend-3 row was generated with
+record with its provider. Every existing row was generated with
 Gemini — this script idempotently fills in ``llm="gemini"`` on any row
 missing the field, so cross-LLM slicing in ``aggregate_results.py``
 groups uniformly.

@@ -3,8 +3,7 @@ from __future__ import annotations
 """Provider-agnostic LLM interface.
 
 Strategies (ReAct, native parallel, DAG planner) call providers exclusively
-through :class:`LLMProvider`, so swapping Gemini for Claude in Weekend 3 is a
-one-line wiring change. See SPEC.md § 3 Step 1.
+one-line wiring change.
 
 The ``Response`` type is intentionally provider-native — each strategy decodes
 function-call blocks using helpers in the concrete provider module. Only the
@@ -19,7 +18,7 @@ from typing import Any, Optional, TypedDict
 class ToolDef(TypedDict):
     """Provider-agnostic tool definition.
 
-    The real :class:`src.tools.base.Tool` dataclass (Step 2) will carry the
+    The real :class:`src.tools.base.Tool` dataclass  will carry the
     same three fields plus an ``execute`` callable. Providers only need the
     declarative part to pass to the model.
     """
@@ -85,7 +84,6 @@ class LLMProvider(ABC):
             Optional system prompt.
         force_single_tool_call:
             Best-effort request for one function call per turn. Some providers
-            (Claude) support this natively; others (Gemini) only via a system
             hint, so strategies must also discard extras post-hoc.
         max_tokens:
             Output token cap.

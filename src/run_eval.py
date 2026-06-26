@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-"""End-to-end eval harness — Weekend 1 milestone.
+"""End-to-end eval harness — later iteration milestone.
 
 CLI:
 
@@ -17,7 +17,7 @@ Per-task records are *appended* to the output JSON (default
 ``results/results.json``), so successive invocations build up the
 strategy × benchmark comparison matrix.
 
-See SPEC.md § 3 Step 6.
+
 """
 
 import argparse
@@ -38,7 +38,6 @@ from rich.table import Table
 from src.judge import judge_answer
 from src.judge_ast import evaluate_bfcl
 from src.llm.base import LLMProvider
-from src.llm.claude import ClaudeProvider
 from src.llm.gemini import GeminiProvider, set_active_provider as _set_llm_provider
 from src.metrics import AggregateMetrics
 from src.strategies.dag_planner import run_dag_planner
@@ -62,14 +61,14 @@ STRATEGIES: dict[str, StrategyFn] = {
     # budget / trigger / search_topk so the eval harness can keep calling
     # strategies with ``(question, tools, llm)``.
     #
-    # Phase A — initial configs with the syntactic-failure trigger.
+    # Initial configs with the syntactic-failure trigger.
     "dag_replan_cap2": partial(
         run_dag_planner_replan, max_replans=2, trigger="any_failure"
     ),
     "dag_replan_cap5": partial(
         run_dag_planner_replan, max_replans=5, trigger="any_failure"
     ),
-    # Phase A extension — refusal-detection trigger (catches semantic
+    # Refusal-detection trigger (catches semantic
     # failures the any_failure trigger misses) and fan-out retrieval
     # (search_topk=3 = fetch top-3 search results in parallel).
     "dag_replan_cap2_empty": partial(
@@ -84,8 +83,8 @@ STRATEGIES: dict[str, StrategyFn] = {
     "dag_replan_cap5_empty_top3": partial(
         run_dag_planner_replan, max_replans=5, trigger="empty_synth", search_topk=3
     ),
-    # Phase A second extension — all three new ablations stacked on top of
-    # the best Phase A configuration: diversified replan prompt with rich
+    # All three new ablations stacked on top of
+    # the best stable configuration: diversified replan prompt with rich
     # prior-attempt context, and chain-of-thought synthesis.
     "dag_replan_aggressive": partial(
         run_dag_planner_replan,
@@ -95,7 +94,7 @@ STRATEGIES: dict[str, StrategyFn] = {
         diversify_replan=True,
         cot_synth=True,
     ),
-    # Phase A polish — the most-aggressive variant. ``any_or_empty`` trigger
+    # Most-aggressive variant. ``any_or_empty`` trigger
     # catches both in-DAG syntactic failures AND post-synth refusals;
     # max_replans bumped to 8; top-K bumped to 5.
     "dag_replan_max": partial(
@@ -106,7 +105,7 @@ STRATEGIES: dict[str, StrategyFn] = {
         diversify_replan=True,
         cot_synth=True,
     ),
-    # Phase A polish — leave-one-out ablations of ``dag_replan_aggressive``.
+    # Leave-one-out ablations of ``dag_replan_aggressive``.
     # Each starts from aggressive (cap=5, empty_synth, top-3, diversify=T,
     # cot=T) and disables exactly one component to measure its
     # contribution.
@@ -492,12 +491,9 @@ async def run_eval(
     load_dotenv(REPO_ROOT / ".env")
     # Judge always runs on Gemini for apples-to-apples evaluation across
     # provider choices — we still require GEMINI_API_KEY even when the
-    # strategy runs on Claude.
     if not os.environ.get("GEMINI_API_KEY"):
         print("ERROR: GEMINI_API_KEY is not set.", file=sys.stderr)
         return 1
-    if llm_provider == "claude" and not os.environ.get("ANTHROPIC_API_KEY"):
-        print("ERROR: ANTHROPIC_API_KEY is not set.", file=sys.stderr)
         return 1
 
     try:
@@ -508,12 +504,8 @@ async def run_eval(
 
     strategy_fn = STRATEGIES[strategy]
     tools = TOOLS_FOR_BENCHMARK[benchmark]
-    if llm_provider == "claude":
-        llm = ClaudeProvider()
-        _set_llm_provider("claude")
-    else:
-        llm = GeminiProvider()
-        _set_llm_provider("gemini")
+    llm = GeminiProvider()
+    _set_llm_provider("gemini")
 
     console = Console()
     reuse_note = (
@@ -601,12 +593,10 @@ def main(argv: Optional[list[str]] = None) -> int:
     )
     parser.add_argument(
         "--llm",
-        choices=["gemini", "claude"],
+        choices=["gemini"],
         default="gemini",
         help=(
             "Which LLM provider to run the strategy on. Judge always runs "
-            "on Gemini for cross-provider apples-to-apples. Claude requires "
-            "ANTHROPIC_API_KEY."
         ),
     )
     args = parser.parse_args(argv)

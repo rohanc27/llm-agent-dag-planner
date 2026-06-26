@@ -4,7 +4,7 @@ from __future__ import annotations
 in :mod:`src.strategies.dag_planner_replan`).
 
 No API calls — uses the pure ``_replan_user_message_diversified`` helper
-with synthetic history modelled on the actual Phase A traces. Three
+with synthetic history modelled on actual failure traces. Three
 scenarios cover the failure modes the diversification machinery is
 meant to catch.
 

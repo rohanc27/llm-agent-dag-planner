@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-"""Verify Step 1 (Gemini provider) end-to-end against Google AI Studio.
+"""Verify the Gemini provider end-to-end against Google AI Studio.
 
 Two calls:
   1. No tools — "What is 2+2? Reply with just the number."
@@ -10,7 +10,7 @@ Two calls:
 
 Run:
 
-    python scripts/verify_step1.py
+    python scripts/verify_gemini_provider.py
 
 Requires ``GEMINI_API_KEY`` in ``.env`` (or the environment).
 """
